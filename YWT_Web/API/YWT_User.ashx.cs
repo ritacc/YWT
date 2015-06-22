@@ -46,14 +46,20 @@ namespace YWT.API
                 case "alertpwd":
                     context.Response.Write(AlertPwd(q0, q1, q2));
                     break;
+                case "edit":
+                    context.Response.Write(UpdateUserInfo(q0));
+                    break;
                 //case "alertpaypwd":
                 //    context.Response.Write(AlertPayPwd(q0, q1, q2));    //userid,   oldpwd,   newpwd
                 //    break;
+               
+
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
             }
         }
+
         #region 注册 登录 修改密码
         /// <summary>
         /// 注册
@@ -105,6 +111,43 @@ namespace YWT.API
                 }
             }
 
+            return _result.ToJSON2();
+        }
+
+        public string UpdateUserInfo(string json)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                YWTUserOR userOR = json.ParseJSON<YWTUserOR>();
+                if (userOR == null)
+                {
+                    _result.Status = false;
+                    _result.ReturnMsg = "参数错误。";
+                }
+                else
+                {
+                    int mResultType = 0;
+                    string mResultMessage = "";
+                    new YWTUserBLL().UpdateUserInfo(userOR, out   mResultType, out   mResultMessage);
+                    if (mResultType == 0)
+                    {
+                        _result.Status = true;
+                        _result.ReturnMsg = "成功。";
+                    }
+                    else
+                    {
+                        _result.Status = false;
+                        _result.ReturnMsg = mResultMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.Status = false;
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("HDL_User.ashx/UpdateSupplier", ex.ToString());
+            }
             return _result.ToJSON2();
         }
 
@@ -167,6 +210,7 @@ namespace YWT.API
         }
         #endregion 
 
+       
         public bool IsReusable
         {
             get

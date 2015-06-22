@@ -11,9 +11,16 @@ namespace YWT.BLL.User
     { 
         #region 注册 登录 修改密码
 
-        public void Insert(YWTUserOR sNRUser, out int mResultType, out string mResultMessage)
+        public void Insert(YWTUserOR YWTUser, out int mResultType, out string mResultMessage)
         {
-            new YWTUserDA().InsertUpdate(sNRUser, "ADD", out   mResultType, out   mResultMessage);
+            new YWTUserDA().InsertUpdate(YWTUser, "ADD", out   mResultType, out   mResultMessage);
+        }
+        /// <summary>
+        /// 更新
+        /// </summary>
+        public void UpdateUserInfo(YWTUserOR YWTUser, out int mResultType, out string mResultMessage)
+        {
+            new YWTUserDA().InsertUpdate(YWTUser, "EDIT", out   mResultType, out   mResultMessage);
         }
 
         public void AlertPwd(string userid, string oldpwd, string newpwd, out int mResultType, out string mResultMessage)
@@ -39,5 +46,7 @@ namespace YWT.BLL.User
 
         
         #endregion
+        
+       
     }
 }

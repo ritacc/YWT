@@ -42,9 +42,11 @@
             border-bottom: 1px solid #e8e8e8;
             color:#292929;
             line-height:24px;
+            font-size: 12px;
         }
         .listTable td
         {
+            
             padding: 0 2px;
         }
     </style>
@@ -53,6 +55,7 @@
     <form id="form1" runat="server">
     <div>
     <table class="listTable" cellspacing="0" rules="all" border="1"  style="width:100%;border-collapse:collapse;">
+        <tr><td colspan="2" style=" line-height:0px;">&nbsp;</td></tr>
         <%=sb.ToString()%>
      </table>
     </div>

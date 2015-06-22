@@ -27,9 +27,15 @@ namespace YWT.Interface
             ListPara = bll.SelectPara();
             if (ListAction != null)
             {
-                
+
+                string oldTitle = string.Empty;
                 foreach (InterfaceActionOR _action in ListAction)
                 {
+                    if (oldTitle != _action.IFile)
+                    {
+                        oldTitle = _action.IFile;
+                        sb.AppendFormat("<tr><td  colspan='2' style='border-top: 2px solid #00BFFF;font-weight:bold; font-size:14px;'>{0}</td><tr>", _action.IFile);
+                    }
                     sb.AppendFormat("<tr><td  style=' width:40%;'>{0}?action={1}{2}</td><td>{3}</td><tr>", _action.IFile, _action.IACTION, getdPara(_action.Inerface_ID), _action.IDescription);
                     AddPara(_action.Inerface_ID);
                 }

@@ -6,6 +6,7 @@ using YWT.Model.Coordinate;
 using System.Data.SqlClient;
 using System.Data;
 using CBSCS.DBUtility;
+using YWT.Model.User;
 
 namespace YWT.DAL.Coordinate
 {
@@ -38,30 +39,35 @@ namespace YWT.DAL.Coordinate
         }
 
         /// <summary>
-        /// 根据供应商 查询坐标
+        /// 查询运维商下面所有运维人员
         /// </summary>
-        /// <param name="m_id"></param>
+        /// <param name="UserID"></param>
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-        //public List<CoordinateUserOR> GetCoordinate(string m_id, out int mResultType, out string mResultMessage)
-        //{
-        //    SqlParameter[] parameters = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@SupplierORUserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "SupplierORUserID", DataRowVersion.Default, m_id)
-        //    };
-        //    DataSet ds = DbHelperSQL.ExecuteProcedure("sp_SNRCoordinate_GetCoordinate", parameters, out   mResultType, out   mResultMessage);
-        //    if (mResultType == 0)
-        //    {
-        //        List<CoordinateUserOR> _list = new List<CoordinateUserOR>();
-        //        foreach (DataRow _row in ds.Tables[0].Rows)
-        //        {
-        //            _list.Add(new CoordinateUserOR(_row));
-        //        }
-        //        return _list;
-        //    }
-        //    return null;
-        //}
+        public List<YWTUserPostionInfoOR> GetSupplierAllUserPostionInfo(string UserID, out int mResultType, out string mResultMessage)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, UserID),
+                new SqlParameter("@SearchType", SqlDbType.Int, 8, ParameterDirection.Input, false, 0, 0, "SearchType", DataRowVersion.Default, 1)
+			};
+            DataSet ds = DbHelperSQL.ExecuteProcedure("sp_YWTUser_GetPostionInfo", parameters, out   mResultType, out   mResultMessage);
+            if (mResultType == 0)
+            {
+                List<YWTUserPostionInfoOR> _lis = new List<YWTUserPostionInfoOR>();
+
+                if (ds != null)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        _lis.Add(new YWTUserPostionInfoOR(row));
+                    }
+                }
+                return _lis;
+            }
+            return null;
+        }
 
     }
 }

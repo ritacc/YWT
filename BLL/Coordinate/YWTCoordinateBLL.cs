@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using YWT.DAL.Coordinate;
 using YWT.Model.Coordinate;
+using YWT.Model.User;
 
 namespace YWT.BLL.Coordinate
 {
@@ -21,6 +22,18 @@ namespace YWT.BLL.Coordinate
         {
             new YWTCoordinateDA().Insert(sNRCoordinate, out   mResultType, out   mResultMessage);
         }
-
+        #region 查询定位
+        /// <summary>
+        /// 查询运维商下面所有运维人员
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public List<YWTUserPostionInfoOR> GetSupplierAllUserPostionInfo(string UserID, out int mResultType, out string mResultMessage)
+        {
+            return new YWTCoordinateDA().GetSupplierAllUserPostionInfo(UserID, out   mResultType, out   mResultMessage);
+        }
+        #endregion
     }
 }

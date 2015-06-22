@@ -6,6 +6,8 @@ using YWT.Common;
 using YWT.Model.Common;
 using YWT.BLL.Coordinate;
 using YWT.Model.Coordinate;
+using YWT.Model.User;
+using YWT.BLL.User;
 
 namespace YWT.API
 {
@@ -35,6 +37,9 @@ namespace YWT.API
                 case "sl"://仅供IOS原生态调用（高德）
                     context.Response.Write(setLocation(q0, q1, q2));
                     break;
+                case "getuersubxy"://查询运维商下面所有运维人员
+                    context.Response.Write(GetSupplierAllUserPostionInfo(q0));
+                    break;
                 case "sj": //保存坐标数据，json
                     context.Response.Write(setLocation(q0));
                     break;
@@ -46,6 +51,37 @@ namespace YWT.API
                     break;
             }
         }
+        #region 查询定位
+        public string GetSupplierAllUserPostionInfo(string userid)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = "";
+                List<YWTUserPostionInfoOR> _UserObj = new YWTCoordinateBLL().GetSupplierAllUserPostionInfo(userid, out mResultType, out mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ResultObject = _UserObj;
+                    _result.ReturnMsg = "成功。";
+                }
+                else
+                {
+                    _result.Status = false;
+                    _result.ReturnMsg = mResultMessage;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _result.Status = false;
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("HDL_User.ashx/GetPostionInfo", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        #endregion
 
         /// <summary>
         /// 获取
