@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DES.cs" />
     <Compile Include="JSONExtension.cs" />
     <Compile Include="PageValidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

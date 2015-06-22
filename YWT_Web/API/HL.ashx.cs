@@ -99,19 +99,19 @@ namespace YWT.API
             {
                 try
                 {
-                    Double x = Convert.ToDouble(lng);
-                    Double y = Convert.ToDouble(lat);
+                    Double xx = Convert.ToDouble(lng);
+                    Double yy = Convert.ToDouble(lat);
                     //var xx = (x + 0.01185).ToString(); //查资料推荐修正的经度
                     //var yy = (y + 0.00328).ToString(); //查资料推荐修正的纬度
-                    var xx = (x + 0.01155).ToString(); //实际调整修正的经度 jerry
-                    var yy = (y + 0.00310).ToString(); //实际调整修正的纬度 jerry                     
+                    //var xx = (x + 0.01155).ToString(); //实际调整修正的经度 jerry
+                    //var yy = (y + 0.00310).ToString(); //实际调整修正的纬度 jerry                     
 
                     YWTCoordinateOR m = new YWTCoordinateOR();
                     m.CarID = "";
                     m.CreateDateTime = DateTime.Now;
                     m.ID = Guid.NewGuid().ToString();
-                    m.longitude = xx;
-                    m.latitude = yy;
+                    m.longitude = xx.ToString();
+                    m.latitude = yy.ToString();
                     
                     m.UserID = UserID ?? "";
                    
