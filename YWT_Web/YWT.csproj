@@ -54,6 +54,7 @@
     <Content Include="eventslog\1.txt" />
     <Content Include="Interface\Interface.aspx" />
     <Content Include="Interface\Interface.sql" />
+    <Content Include="Record\Record.txt" />
     <Content Include="ref\CBSCS.DBUtility.dll" />
     <Content Include="ref\IBatisNet.Common.dll" />
     <Content Include="ref\IBatisNet.DataMapper.dll" />
