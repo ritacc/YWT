@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coordinate\YWTCoordinateDA.cs" />
+    <Compile Include="File\UPFileDA.cs" />
     <Compile Include="InterfaceDA.cs" />
     <Compile Include="User\YWTSupplierDA.cs" />
     <Compile Include="User\YWTUserDA.cs" />

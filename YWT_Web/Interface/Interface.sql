@@ -67,4 +67,16 @@ INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_
 
 
 
+GO
+/*
+	YWT_UPFile.ashx 上传文件
+*/
+DECLARE @Inerface_ID	BIGINT		
+        ,@IFile			VARCHAR(50)='YWT_UPFile'
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'userimg','上传用户头像文件。')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'用户ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'userID:操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'from',N'来源：IOS')
+
 
