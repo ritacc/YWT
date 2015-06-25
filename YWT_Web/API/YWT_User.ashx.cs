@@ -92,11 +92,12 @@ namespace YWT.API
                     int mResultType = 0;
                     string mResultMessage = "";
 
-                    bll.Insert(m, out mResultType, out mResultMessage);
+                    YWTUserOR OBJ = bll.Insert(m, out mResultType, out mResultMessage);
                     if (mResultType == 0)
                     {
                         _result.Status = true;
                         _result.ReturnMsg = "Success";
+                        _result.ResultObject = OBJ;
                     }
                     else
                     {

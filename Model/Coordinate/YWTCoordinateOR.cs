@@ -48,14 +48,12 @@ namespace YWT.Model.Coordinate
 		/// 
 		/// </summary>
         public string manufacturer { get; set; }
-        /// <summary>
-        /// 高德地图转换为百度经纬后
-        /// </summary>
-        //public string gaodeLongitude { get; set; }
-        ///// <summary>
-        ///// 高德地图转换为百度经纬后
-        ///// </summary>
-        //public string gaodeLatitude { get; set; }
+
+       /// <summary>
+       /// 自动ID
+       /// </summary>
+        public long UserAutoID { get; set; }
+
 		/// <summary>
 		/// SNRCoordinate构造函数
 		/// </summary>
@@ -65,8 +63,7 @@ namespace YWT.Model.Coordinate
             IMEI = "";
             OS = "";
             manufacturer = "";
-            //gaodeLongitude = "";
-            //gaodeLatitude = "";
+             
 		}
 
 		/// <summary>

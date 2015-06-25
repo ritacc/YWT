@@ -13,7 +13,7 @@ namespace YWT.DAL.User
     public class YWTUserDA
     {
         #region 注册 登录 修改密码
-        public void InsertUpdate(YWTUserOR YWTUser, string RecordStatus, out int mResultType, out string mResultMessage)
+        public YWTUserOR InsertUpdate(YWTUserOR YWTUser, string RecordStatus, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -32,7 +32,13 @@ namespace YWT.DAL.User
                 
                 new SqlParameter("@SupplierID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "SupplierID", DataRowVersion.Default, YWTUser.SupplierID)
 			};
-            DbHelperSQL.ExecuteProcedureNonQuery("sp_YWTUser_Save", parameters, out   mResultType, out   mResultMessage);
+            DataSet ds = DbHelperSQL.ExecuteProcedure("sp_YWTUser_Save", parameters, out   mResultType, out   mResultMessage);
+            if (mResultType == 0)
+            {
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    return new YWTUserOR(ds.Tables[0].Rows[0]);
+            }
+            return null;
         }
 
         public YWTUserOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, int LoginType, out int mResultType, out string mResultMessage)

@@ -10,10 +10,9 @@ namespace YWT.BLL.User
     public class YWTUserBLL
     { 
         #region 注册 登录 修改密码
-
-        public void Insert(YWTUserOR YWTUser, out int mResultType, out string mResultMessage)
+        public YWTUserOR Insert(YWTUserOR YWTUser, out int mResultType, out string mResultMessage)
         {
-            new YWTUserDA().InsertUpdate(YWTUser, "ADD", out   mResultType, out   mResultMessage);
+           return new YWTUserDA().InsertUpdate(YWTUser, "ADD", out   mResultType, out   mResultMessage);
         }
         /// <summary>
         /// 更新

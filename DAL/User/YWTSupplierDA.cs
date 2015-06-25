@@ -37,7 +37,7 @@ namespace YWT.DAL.User
         }
 
         #endregion
-        #region 插入
+        
         /// <summary>
         /// 插入
         /// </summary>
@@ -57,7 +57,7 @@ namespace YWT.DAL.User
 			};
             DbHelperSQL.ExecuteProcedureNonQuery("SP_YWTSupplier_Save", parameters, out   mResultType, out   mResultMessage);
         }
-        #endregion
+       
 
       
         #endregion

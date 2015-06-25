@@ -148,8 +148,16 @@ namespace YWT.API
                     m.ID = Guid.NewGuid().ToString();
                     m.longitude = xx.ToString();
                     m.latitude = yy.ToString();
-                    
-                    m.UserID = UserID ?? "";
+
+                    long UserAutoID = 0;
+                    if (long.TryParse(UserID, out UserAutoID))
+                    {
+                        m.UserAutoID = UserAutoID;
+                    }
+                    else
+                    {
+                        m.UserID = UserID ?? "";
+                    }
                    
                     int mResultType = 0;
                     string mResultMessage = "";
