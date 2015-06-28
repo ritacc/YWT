@@ -41,7 +41,7 @@ namespace YWT.DAL.User
             return null;
         }
 
-        public YWTUserOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, int LoginType, out int mResultType, out string mResultMessage)
+        public YWTUserSupplierNameOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, int LoginType, out int mResultType, out string mResultMessage)
         {
 
             SqlParameter[] parameters = new SqlParameter[]
@@ -57,7 +57,7 @@ namespace YWT.DAL.User
             if (mResultType == 0)
             {
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                    return new YWTUserOR(ds.Tables[0].Rows[0]);
+                    return new YWTUserSupplierNameOR(ds.Tables[0].Rows[0]);
             }
             return null;
         }

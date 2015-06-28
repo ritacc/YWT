@@ -51,7 +51,7 @@ namespace YWT.API
                             int mResultType = 0;
                             string mResultMessage = "";
                             new UPFileBLL().UPFile_Save(action.ToLower(), q0, Creator, _result.ReturnMsg, out mResultType, out mResultMessage);
-                            _result.Status = true;
+                            
                             if (mResultType != 0)
                             {
                                 _result.Status = false;
@@ -82,31 +82,38 @@ namespace YWT.API
         {
             AjaxContentOR _result = new AjaxContentOR();
             string savePath = "";
-            string path = _context.Server.MapPath("~/");
-
-            path += string.Format("/Upload/Order/{0}/{1}/{2}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"), DateTime.Now.ToString("yyyy-MM-dd"));
-            savePath = string.Format("/Upload/Order/{0}/{1}/{2}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"), DateTime.Now.ToString("yyyy-MM-dd"));
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-
-
-            string fileName = Path.GetFileName(_context.Request.Files[0].FileName);
-            string end = fileName.Substring(fileName.Length - 4).ToLower();
-
-            string newPath = Guid.NewGuid().ToString();
-            if (_context.Request.Files["filename"] != null)
+            try
             {
-                _context.Request.Files["filename"].SaveAs(path + "\\" + newPath + end);
-            }
-            else if (_context.Request.Files.Count > 0)
-            {
-                _context.Request.Files[0].SaveAs(path + "\\" + newPath + end);
-            }
-            _result.Status = true;
-            _result.ReturnMsg = savePath + "/" + newPath + end;
+                string path = _context.Server.MapPath("~/");
 
+                path += string.Format("/Upload/Order/{0}/{1}/{2}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"), DateTime.Now.ToString("yyyy-MM-dd"));
+                savePath = string.Format("/Upload/Order/{0}/{1}/{2}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"), DateTime.Now.ToString("yyyy-MM-dd"));
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+
+                string fileName = Path.GetFileName(_context.Request.Files[0].FileName);
+                string end = fileName.Substring(fileName.Length - 4).ToLower();
+
+                string newPath = Guid.NewGuid().ToString();
+                if (_context.Request.Files["filename"] != null)
+                {
+                    _context.Request.Files["filename"].SaveAs(path + "\\" + newPath + end);
+                }
+                else if (_context.Request.Files.Count > 0)
+                {
+                    _context.Request.Files[0].SaveAs(path + "\\" + newPath + end);
+                }
+                _result.Status = true;
+                _result.ReturnMsg = savePath + "/" + newPath + end;
+            }
+            catch (Exception ex)
+            {
+                _result.Status = false ;
+                _result.ReturnMsg = ex.Message;
+            }
             return _result;
         }
 

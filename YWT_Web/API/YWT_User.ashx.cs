@@ -130,6 +130,7 @@ namespace YWT.API
                 {
                     int mResultType = 0;
                     string mResultMessage = "";
+                    
                     new YWTUserBLL().UpdateUserInfo(userOR, out   mResultType, out   mResultMessage);
                     if (mResultType == 0)
                     {
@@ -167,7 +168,7 @@ namespace YWT.API
 
             int mResultType = 0;
             string mResultMessage = string.Empty;
-            YWTUserOR _user = new YWTUserBLL().LoginCheck(UserName, DES.Encrypt(password), IMEI, OS, Manufacturer, out   mResultType, out   mResultMessage);
+            YWTUserSupplierNameOR _user = new YWTUserBLL().LoginCheck(UserName, DES.Encrypt(password), IMEI, OS, Manufacturer, out   mResultType, out   mResultMessage);
             if (!(mResultType == 0))
             {
                 _result.ReturnMsg = mResultMessage;

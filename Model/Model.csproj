@@ -45,9 +45,11 @@
     <Compile Include="Interface\InterfaceActionOR.cs" />
     <Compile Include="Interface\InterfacePara.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\YWTUserInfoOR.cs" />
     <Compile Include="User\YWTSupplierOR.cs" />
     <Compile Include="User\YWTUserOR.cs" />
     <Compile Include="User\YWTUserPostionInfoOR.cs" />
+    <Compile Include="User\YWTUserSupplierNameOR.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

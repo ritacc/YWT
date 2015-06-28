@@ -1,0 +1,18 @@
+﻿
+ YWTUser_ID  用户ID，与注册的ID一样
+ UserName   姓名
+ User_Sex   性别
+ 所在地-三个分开方便后续查询，但显示三个合在一起来
+ Location_Province 所在地-省
+ Location_City 所在地-市
+ Location_County 所在地-区
+
+ Birthday	出生年月日
+ User_Address 详细地址
+ Email		Email
+ HighestEducation 最高学历
+ Finish_School 毕业学院
+ SpecialtyName 专业名称
+ GraduationData 毕业时间
+ SkillDescription 技能描述
+ Specialty 专长

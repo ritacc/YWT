@@ -8,8 +8,6 @@ namespace YWT.Model.User
 {
     public class YWTUserOR
     {
-      
-
             /// <summary>
             /// 
             /// </summary>
@@ -97,6 +95,8 @@ namespace YWT.Model.User
             /// </summary>
             public string PayPassword { get; set; }
 
+          
+
             /// <summary>
             /// SNRUser构造函数
             /// </summary>
@@ -119,7 +119,7 @@ namespace YWT.Model.User
                 manufacturer = "";
                 //对应供应商编号
                 SupplierID = "";
-
+                 
                 //UserImg = "";
             }
 
@@ -159,6 +159,7 @@ namespace YWT.Model.User
                     LastLoginTime = Convert.ToDateTime(row["LastLoginTime"]);
                 // 对应供应商编号
                 SupplierID = row["SupplierID"].ToString().Trim();
+                
 
                 UserImg = row["UserImg"].ToString();
                 if (string.IsNullOrEmpty(UserImg))
