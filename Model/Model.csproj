@@ -45,6 +45,8 @@
     <Compile Include="Interface\InterfaceActionOR.cs" />
     <Compile Include="Interface\InterfacePara.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\YWTSupplierUserOR.cs" />
+    <Compile Include="User\YWTUserDetailOR.cs" />
     <Compile Include="User\YWTUserInfoOR.cs" />
     <Compile Include="User\YWTSupplierOR.cs" />
     <Compile Include="User\YWTUserOR.cs" />

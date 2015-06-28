@@ -45,7 +45,62 @@ namespace YWT.BLL.User
 
         
         #endregion
-        
-       
+
+        #region 供应商用户管理
+
+        /// <summary>
+        /// 供应商用户管理 添加
+        /// </summary>
+        /// <param name="_user"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public bool SuplierAddUser(YWTUserDetailOR _user, out int mResultType, out string mResultMessage)
+        {
+            return new YWTUserDA().SuplierAddUser(_user,"ADD", out   mResultType, out   mResultMessage);
+        }
+
+        /// <summary>
+        /// 供应商用户管理 更新
+        /// </summary>
+        /// <param name="_user"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public bool SuplierUpdateUser(YWTUserDetailOR _user, out int mResultType, out string mResultMessage)
+        {
+            return new YWTUserDA().SuplierAddUser(_user, "EDIT", out   mResultType, out   mResultMessage);
+        }
+
+        /// <summary>
+        /// 查询运维商用户详细信息
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <param name="Create_User"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public YWTUserDetailOR GetADetail(string UserID, string Create_User, out int mResultType, out string mResultMessage)
+        {
+            return new YWTUserDA().GetADetail(UserID, Create_User, out  mResultType, out  mResultMessage);
+        }
+
+        /// <summary>
+        /// 获取运维商用户
+        /// </summary>
+        /// <param name="startNum"></param>
+        /// <param name="EndNum"></param>
+        /// <param name="UserID"></param>
+        /// <param name="Create_User"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public List<YWTSupplierUserOR> GetSupplierUser(int startNum, int EndNum,   string Create_User, out int mResultType, out string mResultMessage)
+        {
+            return new YWTUserDA().GetSupplierUser(startNum, EndNum,   Create_User, out  mResultType, out  mResultMessage);
+        }
+
+        #endregion
+
     }
 }

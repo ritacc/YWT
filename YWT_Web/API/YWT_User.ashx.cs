@@ -44,14 +44,24 @@ namespace YWT.API
                     context.Response.Write(login(q0, q1, q2, q3, q4));//UserName,   password,   IMEI,   OS,   Manufacturer
                     break;
                 case "alertpwd":
-                    context.Response.Write(AlertPwd(q0, q1, q2));
+                    context.Response.Write(AlertPwd(q0,q1, q2));
                     break;
                 case "edit":
                     context.Response.Write(UpdateUserInfo(q0));
                     break;
-                //case "alertpaypwd":
-                //    context.Response.Write(AlertPayPwd(q0, q1, q2));    //userid,   oldpwd,   newpwd
-                //    break;
+                case "addsupuser": //添加供应商用户
+                    context.Response.Write(AddSupplierUser(q0,"add"));
+                    break;
+                case "editsupuser": //修改供应商用户
+                    context.Response.Write(AddSupplierUser(q0, "edit"));
+                    break;
+                case "getsupuser": //获取供应商下面的用户用户信息
+                    context.Response.Write(GetSupplierUsers(q0, "0")); 
+                    break;
+                case "getasupuser": //获取供应商下面一个用户数据
+                    context.Response.Write(GetASupplierUsers(q0, q1)); 
+                    break;
+                
                
 
                 default:
@@ -212,7 +222,99 @@ namespace YWT.API
         }
         #endregion 
 
-       
+        #region 供应商用户管理
+        /// <summary>
+        /// 添加供应商用户
+        /// </summary>
+        /// <param name="josnval"></param>
+        /// <returns></returns>
+        public string AddSupplierUser(string josnval,string type)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            YWTUserDetailOR userOR = josnval.ParseJSON<YWTUserDetailOR>();
+            if (userOR == null)
+            {
+                _result.Status = false;
+                _result.ReturnMsg = "参数错误。";
+            } 
+             
+            int mResultType = 0;
+            string mResultMessage = string.Empty;
+            if (type == "add")
+            {
+                new YWTUserBLL().SuplierAddUser(userOR, out mResultType, out mResultMessage);
+            }
+            else if (type == "edit")
+            {
+                new YWTUserBLL().SuplierUpdateUser(userOR, out mResultType, out mResultMessage);
+            }
+            if (!(mResultType == 0))
+            {
+                _result.ReturnMsg = mResultMessage;
+            }
+            else
+            {
+                _result.Status = true;
+                _result.ReturnMsg = "Success";
+            }
+            return _result.ToJSON2();
+        }
+
+        /// <summary>
+        /// 查询供应商下面的用户 一个用户详细信息
+        /// </summary>
+        /// <param name="StartNum"></param>
+        /// <param name="UserID"></param>
+        /// <param name="Create_User"></param>
+        /// <returns></returns>
+        public string GetSupplierUsers(  string Create_User, string StartNum)
+        {
+            //开始数量，操作用户ID
+            AjaxContentOR _result = new AjaxContentOR();
+            int mResultType = 0;
+            string mResultMessage = string.Empty;
+            var result = new YWTUserBLL().GetSupplierUser(0, 200,   Create_User, out mResultType, out mResultMessage);
+            if (!(mResultType == 0))
+            {
+                _result.ReturnMsg = mResultMessage;
+            }
+            else
+            {
+                _result.Status = true;
+                _result.ReturnMsg = "Success";
+                _result.ResultObject = result;
+            }
+            return _result.ToJSON2();
+        }
+
+        /// <summary>
+        ///  查询供应商下面的用户
+        /// </summary>
+        /// <param name="UserID">查询用户ID</param>
+        /// <param name="Create_User">操作用户ID</param>
+        /// <returns></returns>
+        public string GetASupplierUsers(string UserID, string Create_User) //
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            int mResultType = 0;
+            string mResultMessage = string.Empty;
+            var result = new YWTUserBLL().GetADetail(UserID, Create_User, out mResultType, out mResultMessage);
+            if (!(mResultType == 0))
+            {
+                _result.ReturnMsg = mResultMessage;
+            }
+            else
+            {
+                _result.Status = true;
+                _result.ReturnMsg = "Success";
+                _result.ResultObject = result;
+            }
+            return _result.ToJSON2();
+        }
+        
+
+        #endregion
+
         public bool IsReusable
         {
             get

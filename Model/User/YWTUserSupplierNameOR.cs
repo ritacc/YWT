@@ -12,7 +12,8 @@ namespace YWT.Model.User
        /// 所属运维商
        /// </summary>
        public string Company { get; set; }
-       public YWTUserSupplierNameOR(DataRow row)
+
+       public YWTUserSupplierNameOR(DataRow row):base(row)
        {
            Company = row["Company"].ToString().Trim();
        }

@@ -27,13 +27,15 @@ namespace YWT.Common
         #region 数字字符串检查
         public static bool IsPhone(string inputData)
         {
-            Match m = RegPhone.Match(inputData);
-            return m.Success;
+            //Match m = RegPhone.Match(inputData);
+            //return m.Success;
+            return true;
         }
         public static bool IsMobile(string inputData)
         {
-            Match m = RegMobile.Match(inputData);
-            return m.Success;
+            //Match m = RegMobile.Match(inputData);
+            //return m.Success;
+            return true;
         }
         /// <summary>
         /// 检查Request查询字符串的键值，是否是数字，最大长度限制

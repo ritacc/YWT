@@ -71,14 +71,14 @@ namespace YWT.API
                     if (mResultType == 0)
                     {
                         _result.Status = true;
-                        _result.ReturnMsg = "参数错误";
+                        _result.ReturnMsg = "";
                     }
                     else
                     {
                         _result.Status = false;
                         _result.ReturnMsg = mResultMessage;
                     }
-                    _result.ResultObject = _obj;
+                    _result.ResultObject = _obj.ID;
                 }
             }
             catch (Exception ex)
