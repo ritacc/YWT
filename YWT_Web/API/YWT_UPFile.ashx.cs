@@ -71,10 +71,8 @@ namespace YWT.API
                 _result.ReturnMsg = ex.Message.ToString();
                 Utils.WriteLog("HDL_UPFile.ashx/UpdateSupplier", ex.ToString());
             }
-
             context.Response.ContentType = "text/plain";
             context.Response.Write(_result.ToJSON2());
-
         }
 
 

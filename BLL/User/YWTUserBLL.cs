@@ -101,6 +101,20 @@ namespace YWT.BLL.User
         }
 
         #endregion
+        #region 认证
+        /// <summary>
+        /// 查询认证文件
+        /// </summary>
+        /// <param name="Create_User"></param>
+        /// <param name="CertifyType"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public List<UserCertifyTypeOR> GetCertifyFile(string Create_User, string CertifyType, out int mResultType, out string mResultMessage)
+        {
+            return new YWTUserDA().GetCertifyFile(Create_User, CertifyType, out   mResultType, out   mResultMessage);
+        }
 
+        #endregion
     }
 }

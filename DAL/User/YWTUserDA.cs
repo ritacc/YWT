@@ -189,7 +189,40 @@ namespace YWT.DAL.User
             return null;
         }
         #endregion
-        
 
+        #region 认证
+        /// <summary>
+        /// 查询认证文件
+        /// </summary>
+        /// <param name="Create_User"></param>
+        /// <param name="CertifyType"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public List<UserCertifyTypeOR> GetCertifyFile(string Create_User, string CertifyType, out int mResultType, out string mResultMessage)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User),
+                new SqlParameter("@CertifyType", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "CertifyType", DataRowVersion.Default, CertifyType)
+			};
+
+            DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTUser_GetCertifyFile", parameters, out   mResultType, out   mResultMessage);
+            if (mResultType == 0)
+            {
+                if (ds != null && ds.Tables.Count == 1)
+                {
+                    List<UserCertifyTypeOR> _list = new List<UserCertifyTypeOR>();
+                    foreach (DataRow _row in ds.Tables[0].Rows)
+                    {
+                        _list.Add(new UserCertifyTypeOR(_row));// 详细信息                         
+                    }
+                    return _list;
+                }
+            }
+            return null;
+        }
+
+        #endregion
     }
 }

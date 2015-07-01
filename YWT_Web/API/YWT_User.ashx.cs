@@ -61,9 +61,10 @@ namespace YWT.API
                 case "getasupuser": //获取供应商下面一个用户数据
                     context.Response.Write(GetASupplierUsers(q0, q1)); 
                     break;
-                
-               
-
+                //获取文件
+                case "getcertifyfile":
+                    context.Response.Write(GetCertifyFile(q0, q1)); 
+                    break;
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
@@ -315,6 +316,34 @@ namespace YWT.API
 
         #endregion
 
+        #region 认证
+        
+        /// <summary>
+        /// 获取谁证文件
+        /// </summary>
+        /// <param name="Create_User">操作用户ID</param>
+        /// <param name="CertifyType"> 谁证类型 P个人， E 运维商</param>
+        /// <returns></returns>
+        public string GetCertifyFile(string Create_User, string CertifyType) //
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            int mResultType = 0;
+            string mResultMessage = string.Empty;
+            var result = new YWTUserBLL().GetCertifyFile(Create_User, CertifyType, out mResultType, out mResultMessage);
+            if (!(mResultType == 0))
+            {
+                _result.ReturnMsg = mResultMessage;
+            }
+            else
+            {
+                _result.Status = true;
+                _result.ReturnMsg = "Success";
+                _result.ResultObject = result;
+            }
+            return _result.ToJSON2();
+        }
+        //提交
+        #endregion
         public bool IsReusable
         {
             get
