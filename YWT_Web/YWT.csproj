@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="eventslog\1.txt" />
+    <Content Include="Index.aspx" />
     <Content Include="Interface\Interface.aspx" />
     <Content Include="Interface\Interface.sql" />
     <Content Include="SQL\YWT_Dict.sql" />
@@ -89,6 +90,13 @@
     </Compile>
     <Compile Include="API\YWT_UserInfo.ashx.cs">
       <DependentUpon>YWT_UserInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Interface\Interface.aspx.cs">
       <DependentUpon>Interface.aspx</DependentUpon>
