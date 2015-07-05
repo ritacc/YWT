@@ -6,28 +6,14 @@ using YWT.Model.Common;
 using System.IO;
 using YWT.Common;
 using YWT.BLL.File;
-
-namespace YWT.API
+namespace YWT.API  
 {
-    /*
-    GO
-    --YWT_UPFile 运维商信息
-
-    DECLARE @Inerface_ID	BIGINT		
-            ,@IFile			VARCHAR(50)='YWT_UPFile'
-    INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'userimg','上传用户头像文件。')
-    SET @Inerface_ID=@@IDENTITY 
-    INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'用户ID')
-    INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'userID:操作人ID')
-    INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'from',N'来源：IOS')
-    
- 
-    */
     /// <summary>
-    /// YWT_UPFile 的摘要说明
+    /// YWT_OrderFile 的摘要说明
     /// </summary>
-    public class YWT_UPFile : IHttpHandler
+    public class YWT_OrderFile : IHttpHandler
     {
+
         HttpContext _context;
         public void ProcessRequest(HttpContext context)
         {
@@ -37,8 +23,8 @@ namespace YWT.API
             try
             {
                 string from = context.Request.QueryString["from"];
-                string action = context.Request["action"];  //运单下单时，不传此参数。 签收单 uporderqsd   ，费用单时使用 uporderfyd  userimg 用户头像
-                string q0 = context.Request["q0"].TrimDangerousCharacter(); //用户ID
+                string action = context.Request["action"];  //运维下单时，不传此参数。 daodafile : 到达目的地文件  wanchenfile: 完成文件
+                string q0 = context.Request["q0"].TrimDangerousCharacter(); //运维单ID
                 string Creator = context.Request["q1"].TrimDangerousCharacter();//操作人ID。
 
                 if (context.Request.Files.Count > 0)
@@ -46,12 +32,11 @@ namespace YWT.API
                     _result = UpFile();
                     if (_result.Status)
                     {
-                        if (!string.IsNullOrEmpty(action))
+                        if (!string.IsNullOrEmpty(action) && action != "orderfile") //为空或orderfile 不执行直接保存
                         {
                             int mResultType = 0;
                             string mResultMessage = "";
                             new UPFileBLL().UPFile_Save(action.ToLower(), q0, Creator, _result.ReturnMsg, out mResultType, out mResultMessage);
-                            
                             if (mResultType != 0)
                             {
                                 _result.Status = false;
@@ -69,7 +54,7 @@ namespace YWT.API
             catch (Exception ex)
             {
                 _result.ReturnMsg = ex.Message.ToString();
-                Utils.WriteLog("HDL_UPFile.ashx/UpdateSupplier", ex.ToString());
+                Utils.WriteLog("YWT_OrderFile.ashx/ProcessRequest", ex.ToString());
             }
             context.Response.ContentType = "text/plain";
             context.Response.Write(_result.ToJSON2());
@@ -109,13 +94,11 @@ namespace YWT.API
             }
             catch (Exception ex)
             {
-                _result.Status = false ;
+                _result.Status = false;
                 _result.ReturnMsg = ex.Message;
             }
             return _result;
         }
-
-
 
         public bool IsReusable
         {

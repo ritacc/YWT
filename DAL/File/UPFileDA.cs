@@ -19,16 +19,16 @@ namespace YWT.DAL.File
         /// <param name="ImagePath"></param>
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
-        public void UPFile_Save(string action, string ElementID, string Creator, string ImagePath, out int mResultType, out string mResultMessage)
+        public void UPFile_Save(string OrderFileType, string OrderID, string Creator, string ImagePath, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@ACTION", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "ACTION", DataRowVersion.Default,action),
-                new SqlParameter("@ElementID", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "ElementID", DataRowVersion.Default, ElementID),
+                new SqlParameter("@OrderFileType", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "ACTION", DataRowVersion.Default,OrderFileType),
+                new SqlParameter("@ElementID", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "ElementID", DataRowVersion.Default, OrderID),
                 new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, Creator),
                 new SqlParameter("@ImagePath", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default, ImagePath),
             };
-            DbHelperSQL.ExecuteProcedureNonQuery("sp_UPFile_Save", parameters, out   mResultType, out   mResultMessage);
+            DbHelperSQL.ExecuteProcedureNonQuery("SP_YWTOrder_File_Save", parameters, out   mResultType, out   mResultMessage);
         }
     }
 }

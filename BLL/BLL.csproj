@@ -43,6 +43,7 @@
     <Compile Include="Coordinate\YWTCoordinateBLL.cs" />
     <Compile Include="File\UPFileBLL.cs" />
     <Compile Include="InterfaceBLL.cs" />
+    <Compile Include="Order\YWTOrderBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\YWTUserInfoBLL.cs" />
     <Compile Include="User\YWTSupplierBLL.cs" />
@@ -58,6 +59,7 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
