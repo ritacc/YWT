@@ -96,7 +96,7 @@ INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDa
 INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'101',N'恢复',N'',GETDATE(),GETDATE())
 INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'102',N'删除',N'',GETDATE(),GETDATE())
 
-SET @Dict_Type_Code=N'orderFileType' 
+SET @Dict_Type_Code=N'orderFileType'
 
 INSERT INTO YWT_Dict_Type (Dict_Type_Code,Dict_Type_Text,Dict_Type_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'运维单文件类型',N'',GETDATE(),GETDATE())
 
