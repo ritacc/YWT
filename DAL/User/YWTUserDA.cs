@@ -90,6 +90,7 @@ namespace YWT.DAL.User
         public bool SuplierAddUser(YWTUserDetailOR _user, string Create_User, out int mResultType, out string mResultMessage)
         {
             YWTUserOR YWTUser = _user.User;
+            YWTUser.ID = string.IsNullOrEmpty(YWTUser.ID) ? Guid.NewGuid().ToString() : YWTUser.ID;
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "ID", DataRowVersion.Default, YWTUser.ID),
@@ -100,9 +101,7 @@ namespace YWT.DAL.User
                 
                 new SqlParameter("@Active", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "Active", DataRowVersion.Default, YWTUser.Active),
                 new SqlParameter("@UserType", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "UserType", DataRowVersion.Default, YWTUser.UserType),
-                new SqlParameter("@IMEI", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "IMEI", DataRowVersion.Default, YWTUser.IMEI),
-                new SqlParameter("@OS", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "OS", DataRowVersion.Default, YWTUser.OS),
-                new SqlParameter("@manufacturer", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "manufacturer", DataRowVersion.Default, YWTUser.manufacturer),
+               
                 new SqlParameter("@RecordStatus", SqlDbType.VarChar, 10, ParameterDirection.Input, false, 0, 0, "RecordStatus", DataRowVersion.Default, "ADD"),                
                 
                 new SqlParameter("@SupplierID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "SupplierID", DataRowVersion.Default, YWTUser.SupplierID)
@@ -111,6 +110,8 @@ namespace YWT.DAL.User
             _cmds.Add(new CommandInfo("sp_YWTUser_Save_ForSupplier", parameters));
 
             YWTUserInfoOR userInfo = _user.UserInfo;
+            //userInfo.YWTUser_ID = string.IsNullOrEmpty(userInfo.YWTUser_ID) ? Guid.NewGuid().ToString() : userInfo.YWTUser_ID;
+            userInfo.YWTUser_ID = YWTUser.ID;
             SqlParameter[] parametersInfo = new SqlParameter[]
 			{
                 new SqlParameter("@YWTUser_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "YWTUser_ID", DataRowVersion.Default, userInfo.YWTUser_ID),
@@ -131,7 +132,7 @@ namespace YWT.DAL.User
                 
                 new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, userInfo.Create_User)
 			};
-            _cmds.Add(new CommandInfo("SP_YWTUserInfo_Save_ForSupplier", parameters));
+            _cmds.Add(new CommandInfo("SP_YWTUserInfo_Save_ForSupplier", parametersInfo));
 
             return DbHelperSQL.ExecuteProcedures(_cmds, out   mResultType, out   mResultMessage) > -1;
         }

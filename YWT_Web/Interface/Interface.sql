@@ -101,11 +101,11 @@ GO
 */
 DECLARE @Inerface_ID	BIGINT		
         ,@IFile			VARCHAR(50)='YWT_OrderFile.ashx'
-INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'<daodafile或wanchenfile>','运维下单时<orderfile>，不传此参数。 daodafile : 到达目的地文件  wanchenfile: 完成文件 ')
-SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维单ID')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'userID:操作人ID')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'from',N'来源：IOS 或Android')
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'xx','此接口不需要action 上传后返回文件路径。 返回后再提交其它数据。')
+--SET @Inerface_ID=@@IDENTITY 
+--INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维单ID')
+--INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'userID:操作人ID')
+--INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'from',N'来源：IOS 或Android')
 
 GO
 /*

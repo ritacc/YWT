@@ -22,28 +22,28 @@ namespace YWT.API
             context.Response.ContentType = "text/plain";
             try
             {
-                string from = context.Request.QueryString["from"];
-                string action = context.Request["action"];  //运维下单时，不传此参数。 daodafile : 到达目的地文件  wanchenfile: 完成文件
-                string q0 = context.Request["q0"].TrimDangerousCharacter(); //运维单ID
-                string Creator = context.Request["q1"].TrimDangerousCharacter();//操作人ID。
+                //string from = context.Request.QueryString["from"];
+                //string action = context.Request["action"];  //运维下单时，不传此参数。 daodafile : 到达目的地文件  wanchenfile: 完成文件
+                //string q0 = context.Request["q0"].TrimDangerousCharacter(); //运维单ID
+                //string Creator = context.Request["q1"].TrimDangerousCharacter();//操作人ID。
 
                 if (context.Request.Files.Count > 0)
                 {
                     _result = UpFile();
-                    if (_result.Status)
-                    {
-                        if (!string.IsNullOrEmpty(action) && action != "orderfile") //为空或orderfile 不执行直接保存
-                        {
-                            int mResultType = 0;
-                            string mResultMessage = "";
-                            new UPFileBLL().UPFile_Save(action.ToLower(), q0, Creator, _result.ReturnMsg, out mResultType, out mResultMessage);
-                            if (mResultType != 0)
-                            {
-                                _result.Status = false;
-                                _result.ReturnMsg = mResultMessage;
-                            }
-                        }
-                    }
+                    //if (_result.Status)
+                    //{
+                    //    if (!string.IsNullOrEmpty(action) && action != "orderfile") //为空或orderfile 不执行直接保存
+                    //    {
+                    //        int mResultType = 0;
+                    //        string mResultMessage = "";
+                    //        new UPFileBLL().UPFile_Save(action.ToLower(), q0, Creator, _result.ReturnMsg, out mResultType, out mResultMessage);
+                    //        if (mResultType != 0)
+                    //        {
+                    //            _result.Status = false;
+                    //            _result.ReturnMsg = mResultMessage;
+                    //        }
+                    //    }
+                    //}
                 }
                 else
                 {
