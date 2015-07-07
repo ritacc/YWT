@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
  
 using YWT.Common;
 using YWT.Model.User;
+using YWT.Model.Order;
  
 namespace YWT
 {
@@ -14,8 +15,12 @@ namespace YWT
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            List<OrderTaskUserOR> _list = new List<OrderTaskUserOR>();
+            _list.Add(new OrderTaskUserOR() { UserID="afafafeee" });
+            _list.Add(new OrderTaskUserOR() { UserID = "gggggg" });
+
             YWTSupplierOR obj = new YWT.Model.User.YWTSupplierOR();
-            this.txt.Text = obj.ToJSON2();
+            this.txt.Text = _list.ToJSON2();
         }
     }
 }

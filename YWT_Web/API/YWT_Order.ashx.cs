@@ -52,9 +52,14 @@ namespace YWT.API
                 case "getitem":
                     context.Response.Write(GetItem(q0, q1));    //运维单ID,用户ID
                     break;
-                case "saveorderflow"://保存订单流程
+                case "saveorderflow"://保存订单流程 30 90 二个状态使用此接口进行提交。
                     context.Response.Write(SaveOrderFlow(q0, q1, q2, q3, q4, q5, q6)); //  Order_ID,   Order_Status,   Create_User,  x1,  x2,  position, remark
                     break;
+                case "designateuser"://指派用户
+                    context.Response.Write(DesignateUser()); //  Order_ID,   Order_Status,   Create_User,  x1,  x2,  position, remark
+                    break; 
+                    //处理评价状态
+
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
@@ -169,11 +174,48 @@ namespace YWT.API
         #endregion
 
         #region 流程处理
+        /// <summary>
+        /// 保存流程状态
+        /// </summary>
+        /// <param name="Order_ID"></param>
+        /// <param name="Order_Status"></param>
+        /// <param name="Create_User"></param>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        /// <param name="position"></param>
+        /// <param name="remark"></param>
+        /// <returns></returns>
         public string SaveOrderFlow(string Order_ID, string Order_Status, string Create_User, string x1, string x2, string position, string remark)
         {
             AjaxContentOR _result = new AjaxContentOR();
             try
             {                
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                //new OrderAdminBLL().UpdateOrderFlow(Order_ID, Order_Status, Create_User, x1, x2, position, remark, out mResultType, out mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("HDL_Order.ashx/SaveOrderFlow", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        //[{"UserID":"afafafeee"},{"UserID":"gggggg"}]
+        public string DesignateUser(string OrderID,string josnUsers,string Create_User) //指源用户 用户ID，指派用户ID    
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
                 int mResultType = 0;
                 string mResultMessage = string.Empty;
                 //new OrderAdminBLL().UpdateOrderFlow(Order_ID, Order_Status, Create_User, x1, x2, position, remark, out mResultType, out mResultMessage);
