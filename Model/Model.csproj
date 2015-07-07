@@ -47,6 +47,8 @@
     <Compile Include="Order\OrderFileOR.cs" />
     <Compile Include="Order\OrderFlowOR.cs" />
     <Compile Include="Order\OrderPlatformApplyOR.cs" />
+    <Compile Include="Order\OrderStatus.cs" />
+    <Compile Include="Order\OrderStatusItem.cs" />
     <Compile Include="Order\OrderTaskUserOR.cs" />
     <Compile Include="Order\YWTOrderAdminOR.cs" />
     <Compile Include="Order\YWTOrderForListOR.cs" />
