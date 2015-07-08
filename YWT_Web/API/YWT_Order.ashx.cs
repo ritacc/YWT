@@ -56,15 +56,15 @@ namespace YWT.API
                     context.Response.Write(SaveOrderFlow(q0, q1, q2, q3, q4, q5, q6)); //  Order_ID,   Order_Status,   Create_User,  x1,  x2,  position, remark
                     break;
                 case "designateuser"://指派用户
-                    context.Response.Write(DesignateUser()); //  Order_ID,   Order_Status,   Create_User,  x1,  x2,  position, remark
+                    context.Response.Write(DesignateUser(q0,q1,q2)); //  Order_ID,   Order_Status,   Create_User,  x1,  x2,  position, remark
                     break; 
                     //处理评价状态
-
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
             }
         }
+
         #region 添加 列表 一条详细
         /// <summary>
         /// 添加运单
@@ -192,7 +192,7 @@ namespace YWT.API
             {                
                 int mResultType = 0;
                 string mResultMessage = string.Empty;
-                //new OrderAdminBLL().UpdateOrderFlow(Order_ID, Order_Status, Create_User, x1, x2, position, remark, out mResultType, out mResultMessage);
+                new YWTOrderBLL().UpdateOrderFlow(Order_ID, Order_Status, Create_User, x1, x2, position, remark, out mResultType, out mResultMessage);
                 if (mResultType == 0)
                 {
                     _result.Status = true;
@@ -206,37 +206,54 @@ namespace YWT.API
             catch (Exception ex)
             {
                 _result.ReturnMsg = ex.Message.ToString();
-                Utils.WriteLog("HDL_Order.ashx/SaveOrderFlow", ex.ToString());
+                Utils.WriteLog("YWT_Order.ashx/SaveOrderFlow", ex.ToString());
             }
             return _result.ToJSON2();
         }
-        //[{"UserID":"afafafeee"},{"UserID":"gggggg"}]
-        public string DesignateUser(string OrderID,string josnUsers,string Create_User) //指源用户 用户ID，指派用户ID    
+        
+        /// <summary>
+        /// 运单分配运维人员
+        /// </summary>
+        /// <param name="josnUsers">[{"UserID":"afafafeee"},{"UserID":"gggggg"}] 人员数组</param>
+        /// <param name="OrderID">运单ID</param>
+        /// <param name="Create_User">操作人员</param>
+        /// <returns></returns>
+        public string DesignateUser(string josnUsers, string OrderID, string Create_User) //指源用户 用户ID，指派用户ID    
         {
             AjaxContentOR _result = new AjaxContentOR();
             try
             {
-                int mResultType = 0;
-                string mResultMessage = string.Empty;
-                //new OrderAdminBLL().UpdateOrderFlow(Order_ID, Order_Status, Create_User, x1, x2, position, remark, out mResultType, out mResultMessage);
-                if (mResultType == 0)
+                List<OrderTaskUserOR> _lsitOrder = josnUsers.ParseJSON<List<OrderTaskUserOR>>();
+                if (_lsitOrder == null)
                 {
-                    _result.Status = true;
-                    _result.ReturnMsg = "Success";
+                    _result.Status = false;
+                    _result.ReturnMsg = "解析参数出错。";
                 }
                 else
                 {
-                    _result.ReturnMsg = mResultMessage;
+                    int mResultType = 0;
+                    string mResultMessage = string.Empty;
+                    new YWTOrderBLL().DesignateUser(_lsitOrder, OrderID, Create_User, out mResultType, out mResultMessage);
+                    if (mResultType == 0)
+                    {
+                        _result.Status = true;
+                        _result.ReturnMsg = "Success";
+                    }
+                    else
+                    {
+                        _result.ReturnMsg = mResultMessage;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 _result.ReturnMsg = ex.Message.ToString();
-                Utils.WriteLog("HDL_Order.ashx/SaveOrderFlow", ex.ToString());
+                Utils.WriteLog("YWT_Order.ashx/DesignateUser", ex.ToString());
             }
             return _result.ToJSON2();
         }
         #endregion
+
         public bool IsReusable
         {
             get

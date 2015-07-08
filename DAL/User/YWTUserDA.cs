@@ -177,7 +177,7 @@ namespace YWT.DAL.User
             DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTUser_GetSupplierUser", parameters, out   mResultType, out   mResultMessage);
             if (mResultType == 0)
             {
-                if (ds != null && ds.Tables.Count == 2)
+                if (ds != null && ds.Tables.Count == 1)
                 {
                     List<YWTSupplierUserOR> _list = new List<YWTSupplierUserOR>();
                     foreach (DataRow _row in ds.Tables[0].Rows)

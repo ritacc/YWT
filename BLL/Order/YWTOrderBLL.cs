@@ -9,6 +9,7 @@ namespace YWT.BLL.Order
 {
     public class YWTOrderBLL
     {
+        #region 基础操作
         /// <summary>
         /// 保存运维单
         /// </summary>
@@ -34,7 +35,7 @@ namespace YWT.BLL.Order
             return new YWTOrderDA().GetOrderList(StatusType, Create_User, StartIndex, endIndex, out   mResultType, out  mResultMessage);
         }
 
-           /// <summary>
+        /// <summary>
         /// 查询一个运维单详细
         /// </summary>
         /// <param name="Order_ID"></param>
@@ -46,5 +47,24 @@ namespace YWT.BLL.Order
         {
             return new YWTOrderDA().GetOrderItem(Order_ID, Create_User, out   mResultType, out  mResultMessage);
         }
+        #endregion
+        #region 流程操作
+        public void DesignateUser(List<OrderTaskUserOR> _lsitOrder, string Order_ID, string Create_User, out  int mResultType, out string mResultMessage)
+        {
+            new YWTOrderDA().DesignateUser(_lsitOrder, Order_ID, Create_User, out  mResultType, out  mResultMessage);
+        }
+        /// <summary>
+        /// 更新订单流程
+        /// </summary>
+        /// <param name="Order_ID"></param>
+        /// <param name="Order_Status"></param>
+        /// <param name="Create_User"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        public void UpdateOrderFlow(string Order_ID, string Order_Status, string Create_User, string Longitude, string Latitude, string LocationCity, string remark, out int mResultType, out string mResultMessage)
+        {
+            new YWTOrderDA().UpdateOrderFlow(Order_ID, Order_Status, Create_User, Longitude, Latitude, LocationCity, remark, out   mResultType, out   mResultMessage);
+        }
+        #endregion
     }
 }

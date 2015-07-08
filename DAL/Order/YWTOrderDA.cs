@@ -15,7 +15,7 @@ namespace YWT.DAL.Order
     public class YWTOrderDA
     {
 
-
+        #region 基础操作
         /// <summary>
         /// 插入
         /// </summary>
@@ -147,8 +147,44 @@ namespace YWT.DAL.Order
             }
             return null;
         }
+        #endregion
 
+        #region 流程操作 
+        public void DesignateUser(List<OrderTaskUserOR> _lsitOrder, string Order_ID, string Create_User, out  int mResultType, out string mResultMessage)
+        {
+            string sqlOrdermain = @"sp_SNROrder_Save";
+            List<CommandInfo> _cmds = new List<CommandInfo>();
+            foreach (OrderTaskUserOR _item in _lsitOrder)
+            {  
+                SqlParameter[] parameters = new SqlParameter[]
+			    {
+                    new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),                
+                    new SqlParameter("@OrderTitle", SqlDbType.NVarChar, 200, ParameterDirection.Input, false, 0, 0, "OrderTitle", DataRowVersion.Default, _item.UserID)
+			    };               
+                _cmds.Add(new CommandInfo(sqlOrdermain, parameters));
+            }
+            //提交状态
+            DbHelperSQL.ExecuteProcedures(_cmds, out   mResultType, out   mResultMessage);
+        }
 
+        public void UpdateOrderFlow(string Order_ID, string Order_Status, string Create_User, string Longitude, string Latitude, string LocationCity, string remark
+            , out int mResultType, out string mResultMessage)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
+                new SqlParameter("@Order_Status", SqlDbType.Int, 30, ParameterDirection.Input, false, 0, 0, "Order_Status", DataRowVersion.Default, Order_Status),
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default,Create_User),
+                new SqlParameter("@Longitude", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Longitude", DataRowVersion.Default,Longitude),
+                new SqlParameter("@Latitude", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Latitude", DataRowVersion.Default,Latitude),
+                new SqlParameter("@LocationCity", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "LocationCity", DataRowVersion.Default,LocationCity),
+                new SqlParameter("@FlowRemark", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "FlowRemark", DataRowVersion.Default,remark)
+                
+			};
+            DbHelperSQL.ExecuteProcedureNonQuery("sp_SNROrder_Flow_Save", parameters, out   mResultType, out   mResultMessage);
+        }
+
+        #endregion
     }
 }
 
