@@ -10,17 +10,18 @@ namespace YWT.BLL.File
     {
 
         /// <summary>
-        /// 保存图片，更新用户头像、运维单等。
+        /// 更新用户头像、用户资质认证。
         /// </summary>
-        /// <param name="OrderFileType"></param>
-        /// <param name="OrderID"></param>
+        /// <param name="User_ID"></param>
+        /// <param name="FileType"></param>
+        /// <param name="FileName"></param>
+        /// <param name="CertifyType"></param>
         /// <param name="Creator"></param>
-        /// <param name="ImagePath"></param>
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
-        public void UPFile_Save(string OrderFileType, string OrderID, string Creator, string ImagePath, out int mResultType, out string mResultMessage)
+        public void UPFile_Save(string User_ID, string FileType, string FileName , string Creator, out int mResultType, out string mResultMessage)
         {
-            new UPFileDA().UPFile_Save(OrderFileType, OrderID, Creator, ImagePath, out   mResultType, out   mResultMessage);
+            new UPFileDA().UPFile_Save(User_ID, FileType, FileName, Creator, out   mResultType, out   mResultMessage);
         }
     }
 }

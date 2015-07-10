@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using YWT.Common;
 
 namespace YWT.Model.User
 {
@@ -30,6 +31,18 @@ namespace YWT.Model.User
             /// 真实姓名
             /// </summary>
             public string RealName { get; set; }
+
+            public string RealNameChar { get; set; }
+            /// <summary>
+            /// 真实姓名首字母
+            /// </summary>
+            public string GetRealNameChar {
+                get
+                {
+                    return GetStringSpell.getSpell(RealName);
+                }
+            }
+
             /// <summary>
             /// 加入日期
             /// </summary>
@@ -139,6 +152,7 @@ namespace YWT.Model.User
                 Mobile = row["Mobile"].ToString().Trim();
                 // 真实姓名
                 RealName = row["RealName"].ToString().Trim();
+                RealNameChar = row["RealNameChar"].ToString().Trim();
                 // 加入日期
                 if (row["JoinDateTime"] != DBNull.Value)
                     JoinDateTime = Convert.ToDateTime(row["JoinDateTime"]);

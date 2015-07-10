@@ -15,12 +15,14 @@ namespace YWT
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string result = GetStringSpell.getSpell("不想加");
+
             List<OrderTaskUserOR> _list = new List<OrderTaskUserOR>();
             _list.Add(new OrderTaskUserOR() { UserID="afafafeee" });
             _list.Add(new OrderTaskUserOR() { UserID = "gggggg" });
 
             YWTSupplierOR obj = new YWT.Model.User.YWTSupplierOR();
-            this.txt.Text = _list.ToJSON2();
+            this.txt.Text = result;// _list.ToJSON2();
         }
     }
 }

@@ -64,7 +64,12 @@
     <Compile Include="User\YWTUserPostionInfoOR.cs" />
     <Compile Include="User\YWTUserSupplierNameOR.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{175FA04E-86C8-43A0-B0F3-903589BBC541}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

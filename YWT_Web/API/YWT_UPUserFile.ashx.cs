@@ -24,8 +24,8 @@ namespace YWT.API
             try
             {
                 string from = context.Request.QueryString["from"];
-                string action = context.Request["action"];  //运单下单时，不传此参数。 签收单 uporderqsd   ，费用单时使用 uporderfyd  userimg 用户头像
-                string q0 = context.Request["q0"].TrimDangerousCharacter(); //用户ID
+                string action = context.Request["action"];  //getcertifyfile中所定义、  userimg 用户头像
+                string userid = context.Request["q0"].TrimDangerousCharacter(); //用户ID
                 string Creator = context.Request["q1"].TrimDangerousCharacter();//操作人ID。
 
                 if (context.Request.Files.Count > 0)
@@ -37,8 +37,7 @@ namespace YWT.API
                         {
                             int mResultType = 0;
                             string mResultMessage = "";
-                            new UPFileBLL().UPFile_Save(action.ToLower(), q0, Creator, _result.ReturnMsg, out mResultType, out mResultMessage);
-
+                            new UPFileBLL().UPFile_Save(userid, action.ToLower(), _result.ReturnMsg, Creator, out mResultType, out mResultMessage);
                             if (mResultType != 0)
                             {
                                 _result.Status = false;
