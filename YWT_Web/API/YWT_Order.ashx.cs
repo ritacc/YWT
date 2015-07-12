@@ -53,12 +53,19 @@ namespace YWT.API
                     context.Response.Write(GetItem(q0, q1));    //运维单ID,用户ID
                     break;
                 case "saveorderflow"://保存订单流程 30 90 二个状态使用此接口进行提交。
-                    context.Response.Write(SaveOrderFlow(q0, q1, q2, q3, q4, q5, q6)); //  Order_ID,   Order_Status,   Create_User,  x1,  x2,  position, remark
+                    context.Response.Write(SaveOrderFlow(q0, q1, q2, q3, q4, q5, q6,q7)); //  Order_ID,   Order_Status,   Create_User, fileJosn,  x1,  x2,  position, remark
                     break;
-                case "designateuser"://指派用户
-                    context.Response.Write(DesignateUser(q0,q1,q2)); //  Order_ID,   Order_Status,   Create_User,  x1,  x2,  position, remark
+                case "designateuser"://指派运维人员
+                    context.Response.Write(DesignateUser(q0,q1,q2)); // 选择的用户 selectUser Json，Order_ID,   Create_User
+                    break;
+                case "orderassess"://运维单评价
+                    context.Response.Write(OrderAssess(q0)); // Json
+                    break;
+                //外单
+                case "orderplatformapply"://申请运维单
+                    context.Response.Write(OrderPlatformApply(q0)); // Json
                     break; 
-                    //处理评价状态
+                    
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
@@ -180,19 +187,21 @@ namespace YWT.API
         /// <param name="Order_ID"></param>
         /// <param name="Order_Status"></param>
         /// <param name="Create_User"></param>
+        /// <param name="fileJosn"></param>
         /// <param name="x1"></param>
         /// <param name="x2"></param>
         /// <param name="position"></param>
         /// <param name="remark"></param>
         /// <returns></returns>
-        public string SaveOrderFlow(string Order_ID, string Order_Status, string Create_User, string x1, string x2, string position, string remark)
+        public string SaveOrderFlow(string Order_ID, string Order_Status, string Create_User, string x1, string x2, string position, string remark, string fileJosn)
         {
             AjaxContentOR _result = new AjaxContentOR();
+            List<OrderFileOR> _lsitFiles = fileJosn.ParseJSON<List<OrderFileOR>>();
             try
-            {                
+            {
                 int mResultType = 0;
                 string mResultMessage = string.Empty;
-                new YWTOrderBLL().UpdateOrderFlow(Order_ID, Order_Status, Create_User, x1, x2, position, remark, out mResultType, out mResultMessage);
+                new YWTOrderBLL().UpdateOrderFlow(Order_ID, Order_Status, Create_User, _lsitFiles, x1, x2, position, remark, out mResultType, out mResultMessage);
                 if (mResultType == 0)
                 {
                     _result.Status = true;
@@ -252,8 +261,93 @@ namespace YWT.API
             }
             return _result.ToJSON2();
         }
+
+
+        /// <summary>
+        /// 运维单评价
+        /// </summary>
+        /// <param name="josnAssess"></param>
+        /// <returns></returns>
+        public string OrderAssess(string josnAssess) 
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                OrderAssessOR _assess = josnAssess.ParseJSON<OrderAssessOR>();
+                if (_assess == null)
+                {
+                    _result.Status = false;
+                    _result.ReturnMsg = "解析参数出错。";
+                }
+                else
+                {
+                    int mResultType = 0;
+                    string mResultMessage = string.Empty;
+                    //_assess.Creator = Create_User;
+                    new YWTOrderBLL().OrderAssess(_assess, out mResultType, out mResultMessage);
+                    if (mResultType == 0)
+                    {
+                        _result.Status = true;
+                        _result.ReturnMsg = "Success";
+                    }
+                    else
+                    {
+                        _result.ReturnMsg = mResultMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/DesignateUser", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }        
         #endregion
 
+        #region 外单接口处理
+        /// <summary>
+        /// 申请运维单
+        /// </summary>
+        /// <param name="josnAssess"></param>
+        /// <returns></returns>
+        public string OrderPlatformApply(string josnApply)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                OrderPlatformApplyOR _assess = josnApply.ParseJSON<OrderPlatformApplyOR>();
+                if (_assess == null)
+                {
+                    _result.Status = false;
+                    _result.ReturnMsg = "解析参数出错。";
+                }
+                else
+                {
+                    int mResultType = 0;
+                    string mResultMessage = string.Empty;
+                    new YWTOrderBLL().OrderPlatformApply(_assess, out mResultType, out mResultMessage);
+                    if (mResultType == 0)
+                    {
+                        _result.Status = true;
+                        _result.ReturnMsg = "Success";
+                    }
+                    else
+                    {
+                        _result.ReturnMsg = mResultMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/OrderPlatformApply", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+
+        #endregion
         public bool IsReusable
         {
             get

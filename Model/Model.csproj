@@ -44,6 +44,7 @@
     <Compile Include="Coordinate\YWTCoordinateOR.cs" />
     <Compile Include="Interface\InterfaceActionOR.cs" />
     <Compile Include="Interface\InterfacePara.cs" />
+    <Compile Include="Order\OrderAssessOR.cs" />
     <Compile Include="Order\OrderFileOR.cs" />
     <Compile Include="Order\OrderFlowOR.cs" />
     <Compile Include="Order\OrderPlatformApplyOR.cs" />

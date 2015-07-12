@@ -61,9 +61,37 @@ namespace YWT.BLL.Order
         /// <param name="Create_User"></param>
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
-        public void UpdateOrderFlow(string Order_ID, string Order_Status, string Create_User, string Longitude, string Latitude, string LocationCity, string remark, out int mResultType, out string mResultMessage)
+        public void UpdateOrderFlow(string Order_ID, string Order_Status, string Create_User
+            ,List<OrderFileOR> _lsitFiles ,string Longitude, string Latitude, string LocationCity, string remark, out int mResultType, out string mResultMessage)
         {
-            new YWTOrderDA().UpdateOrderFlow(Order_ID, Order_Status, Create_User, Longitude, Latitude, LocationCity, remark, out   mResultType, out   mResultMessage);
+            new YWTOrderDA().UpdateOrderFlow(Order_ID, Order_Status, Create_User, _lsitFiles
+                , Longitude, Latitude, LocationCity, remark, out   mResultType, out   mResultMessage);
+        }
+
+        /// <summary>
+        /// 订单回复
+        /// </summary>
+        /// <param name="orderAssess"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        public void OrderAssess(OrderAssessOR orderAssess, out int mResultType, out string mResultMessage)
+        {
+            new YWTOrderDA().OrderAssess(orderAssess, out  mResultType, out  mResultMessage);
+        }
+
+        
+        #endregion
+
+        #region 外单
+        /// <summary>
+        /// 第三方人员  申请运维单
+        /// </summary>
+        /// <param name="orderPlatformApply"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        public void OrderPlatformApply(OrderPlatformApplyOR orderPlatformApply, out int mResultType, out string mResultMessage)
+        {
+            new YWTOrderDA().OrderPlatformApply(orderPlatformApply, out  mResultType, out  mResultMessage);
         }
         #endregion
     }

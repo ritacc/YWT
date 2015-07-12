@@ -26,11 +26,19 @@ namespace YWT.Model.Order
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime Create_Date { get; set; }
+		public DateTime Apply_Date { get; set; }
 		/// <summary>
-		/// 
+		/// 申请描述
 		/// </summary>
-		public string Create_User { get; set; }
+		public string Apply_Content { get; set; }
+		/// <summary>
+		/// 联系人
+		/// </summary>
+		public string ContactMan { get; set; }
+		/// <summary>
+		/// 联系电话
+		/// </summary>
+		public string ContactMobile { get; set; }
 		/// <summary>
 		/// OrderPlatformApply构造函数
 		/// </summary>
@@ -52,10 +60,14 @@ namespace YWT.Model.Order
 			// 申请人ID
 			Apply_UserID=row["Apply_UserID"].ToString().Trim();
 			// 
-			if(row["Create_Date"]!= DBNull.Value)
-                Create_Date=Convert.ToDateTime(row["Create_Date"]);
-			// 
-			Create_User=row["Create_User"].ToString().Trim();
+			if(row["Apply_Date"]!= DBNull.Value)
+                Apply_Date=Convert.ToDateTime(row["Apply_Date"]);
+			// 申请描述
+			Apply_Content=row["Apply_Content"].ToString().Trim();
+			// 联系人
+			ContactMan=row["ContactMan"].ToString().Trim();
+			// 联系电话
+			ContactMobile=row["ContactMobile"].ToString().Trim();
 		}
     }
 }

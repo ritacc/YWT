@@ -61,7 +61,7 @@ namespace YWT.Model.User
 		/// <summary>
 		/// 毕业时间
 		/// </summary>
-		public DateTime GraduationData { get; set; }
+		public DateTime? GraduationData { get; set; }
 		/// <summary>
 		/// 技能描述
 		/// </summary>

@@ -37,7 +37,7 @@ INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_
 --运维商用户管理
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'addsupuser',N'添加供应商用户')
 SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据 :可以管理人员类型：运维人员 10 调度人员： 40
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据 :可以管理人员类型：运维人员 20 调度人员： 40
 添加字段:人员类型、手机号、用户名、姓名、性别、出生年月、邮箱、学历、是否可用  不显示字段：ID')
 
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'editsupuser',N'修改供应商用户信息 ')
@@ -69,7 +69,7 @@ DECLARE @Inerface_ID	BIGINT
 		,@IFile			VARCHAR(50)='YWT_Supplier.ashx'
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'addupdate','注册时保存运维商数据，注册后保存运维商数据。')
 SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维商Josn数据')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维商Josn数据 {Company ContactMan  Mobile}')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'userID:当前操作人ID')
 
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'get','查询运维商数据。')
@@ -134,6 +134,33 @@ INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'getitem',N
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维单ID。')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'userID:操作人ID')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'saveorderflow',N'保存订单流程 30 90 等状态使用此接口直接进行提交')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Order_ID,运维单ID。')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'Order_Status: 提交状态,30,90等')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'Create_User: 操作ID。')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q3',N'x1 提交时坐标')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q4',N'y。提交时坐标')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q5',N'x,y解析出的详细地址。')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q6',N'备注：可以提交一些内容。')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q7',N'json文件，可以上传多个文件，需要先使用上传接口，再提交。如:[{"FileName":"/Upload/....png"},{"FileName":"/Upload/....png"}]')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'designateuser',N'指派运维人员')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'json，选择的运维人员如:[{"UserID":"800F50A2-6477-4DAE-A6E9-AA445782F789"},{"UserID":"67C3360C-BBB4-4DF1-8372-89A4AB79F907"}]')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'Order_Status: OrderID,运维单ID ')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'Create_User: 操作ID。')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'orderassess',N'运维单评价')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'json，{Assess_Type: 内单: 0 外单与状态相同 Order_ID、YW_Result：运维完成结果（完成、未完成）Score：运维得分（1-5）AssessContent：评价内容},Create_User: 操作ID。')
+
+--外单
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'orderplatformapply',N'第三方人 申请运维单')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'json，{Order_ID,Apply_UserID,Apply_Content: 申请内容,ContactMan:联系人,ContactMobile:联系电话}')
+
 
 GO
 /*

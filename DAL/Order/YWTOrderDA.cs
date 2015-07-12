@@ -150,27 +150,79 @@ namespace YWT.DAL.Order
         #endregion
 
         #region 流程操作 
+        /// <summary>
+        /// 指派运维人员
+        /// </summary>
+        /// <param name="_lsitOrder"></param>
+        /// <param name="Order_ID"></param>
+        /// <param name="Create_User"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
         public void DesignateUser(List<OrderTaskUserOR> _lsitOrder, string Order_ID, string Create_User, out  int mResultType, out string mResultMessage)
         {
-            string sqlOrdermain = @"sp_SNROrder_Save";
+            string sqlOrdermain = @"sp_YWTOrder_TaskUser_Save";
             List<CommandInfo> _cmds = new List<CommandInfo>();
             foreach (OrderTaskUserOR _item in _lsitOrder)
             {  
                 SqlParameter[] parameters = new SqlParameter[]
 			    {
-                    new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),                
-                    new SqlParameter("@OrderTitle", SqlDbType.NVarChar, 200, ParameterDirection.Input, false, 0, 0, "OrderTitle", DataRowVersion.Default, _item.UserID)
+                    new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
+                    new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, _item.UserID),
+                    new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)
 			    };               
                 _cmds.Add(new CommandInfo(sqlOrdermain, parameters));
             }
-            //提交状态
+            //保存流程状态
+            SqlParameter[] parametersFlow = new SqlParameter[]
+			{
+                new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
+                new SqlParameter("@Order_Status", SqlDbType.Int, 30, ParameterDirection.Input, false, 0, 0, "Order_Status", DataRowVersion.Default, 20),
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default,Create_User),
+                new SqlParameter("@Longitude", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Longitude", DataRowVersion.Default,""),
+                new SqlParameter("@Latitude", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Latitude", DataRowVersion.Default,""),
+                new SqlParameter("@LocationCity", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "LocationCity", DataRowVersion.Default,""),
+                new SqlParameter("@FlowRemark", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "FlowRemark", DataRowVersion.Default,"")
+                
+			};
+            _cmds.Add(new CommandInfo("SP_YWTOrder_Flow_Save", parametersFlow));            
             DbHelperSQL.ExecuteProcedures(_cmds, out   mResultType, out   mResultMessage);
         }
 
-        public void UpdateOrderFlow(string Order_ID, string Order_Status, string Create_User, string Longitude, string Latitude, string LocationCity, string remark
-            , out int mResultType, out string mResultMessage)
+        /// <summary>
+        /// 保存订单流程
+        /// </summary>
+        /// <param name="Order_ID"></param>
+        /// <param name="Order_Status"></param>
+        /// <param name="Create_User"></param>
+        /// <param name="Longitude"></param>
+        /// <param name="Latitude"></param>
+        /// <param name="LocationCity"></param>
+        /// <param name="remark"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        public void UpdateOrderFlow(string Order_ID, string Order_Status, string Create_User
+           , List<OrderFileOR> _lsitFiles, string Longitude, string Latitude, string LocationCity, string remark, out int mResultType, out string mResultMessage)
         {
-            SqlParameter[] parameters = new SqlParameter[]
+           
+            List<CommandInfo> _cmds = new List<CommandInfo>();
+            //并以上传多张图片
+            if (_lsitFiles != null && _lsitFiles.Count > 0)
+            {
+                string sqlprod = @"SP_YWTOrder_File_Save";
+                foreach (var item in _lsitFiles)
+                {
+                    SqlParameter[] parameterFiles = new SqlParameter[]
+			        {
+                        new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
+                        new SqlParameter("@OrderFileType", SqlDbType.Int, 50, ParameterDirection.Input, false, 0, 0, "OrderFileType", DataRowVersion.Default, Order_Status),
+                        new SqlParameter("@ImagePath", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default,item.FileName),
+                        new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default,Create_User)
+			        };
+                    _cmds.Add(new CommandInfo() { CommandText = sqlprod, Parameters = parameterFiles });
+                }
+            }
+            
+            SqlParameter[] _parameters = new SqlParameter[]
 			{
                 new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
                 new SqlParameter("@Order_Status", SqlDbType.Int, 30, ParameterDirection.Input, false, 0, 0, "Order_Status", DataRowVersion.Default, Order_Status),
@@ -181,9 +233,57 @@ namespace YWT.DAL.Order
                 new SqlParameter("@FlowRemark", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "FlowRemark", DataRowVersion.Default,remark)
                 
 			};
-            DbHelperSQL.ExecuteProcedureNonQuery("sp_SNROrder_Flow_Save", parameters, out   mResultType, out   mResultMessage);
+            _cmds.Add(new CommandInfo() { CommandText = "SP_YWTOrder_Flow_Save", Parameters = _parameters });
+            DbHelperSQL.ExecuteProcedures(_cmds, out   mResultType, out   mResultMessage);
         }
 
+        /// <summary>
+        /// 评价运维单
+        /// </summary>
+        /// <param name="orderAssess"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        public void OrderAssess(OrderAssessOR orderAssess, out int mResultType, out string mResultMessage)
+        {
+            string sql = @"SP_YWTOrder_Assess_Save";
+            SqlParameter[] parameters = new SqlParameter[]
+			{   
+                new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, orderAssess.Order_ID),
+                new SqlParameter("@YW_Result", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "YW_Result", DataRowVersion.Default, orderAssess.YW_Result),
+                new SqlParameter("@Score", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "Score", DataRowVersion.Default, orderAssess.Score),
+                new SqlParameter("@AssessContent", SqlDbType.NVarChar, 1000, ParameterDirection.Input, false, 0, 0, "AssessContent", DataRowVersion.Default, orderAssess.AssessContent),                
+                new SqlParameter("@IsAddIntegral", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "IsAddIntegral", DataRowVersion.Default, orderAssess.IsAddIntegral),
+                new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, orderAssess.Creator)                
+			};
+            DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+        }
+         
+
+       
+
+        #endregion
+
+        #region 外单
+        /// <summary>
+        /// 第三方人员 申请运维单
+        /// </summary>
+        /// <param name="orderPlatformApply"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        public void OrderPlatformApply(OrderPlatformApplyOR orderPlatformApply, out int mResultType, out string mResultMessage)
+        {
+            string sql = @"SP_YWTOrder_Platform_Apply";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                
+                new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, orderPlatformApply.Order_ID),
+                new SqlParameter("@Apply_UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Apply_UserID", DataRowVersion.Default, orderPlatformApply.Apply_UserID),                
+                new SqlParameter("@Apply_Content", SqlDbType.NVarChar, 600, ParameterDirection.Input, false, 0, 0, "Apply_Content", DataRowVersion.Default, orderPlatformApply.Apply_Content),
+                new SqlParameter("@ContactMan", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "ContactMan", DataRowVersion.Default, orderPlatformApply.ContactMan),
+                new SqlParameter("@ContactMobile", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "ContactMobile", DataRowVersion.Default, orderPlatformApply.ContactMobile)
+			};
+            DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+        }
         #endregion
     }
 }

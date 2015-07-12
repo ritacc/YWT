@@ -24,7 +24,7 @@ namespace YWT.Model.Order
 		/// </summary>
 		public string FileType { get; set; }
 		/// <summary>
-		/// 文件名
+		/// 文件名及存储路径
 		/// </summary>
 		public string FileName { get; set; }
 		/// <summary>

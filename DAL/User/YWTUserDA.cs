@@ -160,7 +160,11 @@ namespace YWT.DAL.User
                 if (ds != null && ds.Tables.Count == 2)
                 {
                     YWTUserOR _User = new YWTUserOR(ds.Tables[0].Rows[0]);
-                    YWTUserInfoOR _UserInfo = new YWTUserInfoOR(ds.Tables[0].Rows[0]);// 详细信息
+                    YWTUserInfoOR _UserInfo = null;
+                    if (ds.Tables[1].Rows.Count > 0)
+                    {
+                        _UserInfo = new YWTUserInfoOR(ds.Tables[1].Rows[0]);// 详细信息
+                    }
                     return new YWTUserDetailOR() { User=_User, UserInfo=_UserInfo };
                 }
             }
