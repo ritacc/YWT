@@ -284,6 +284,11 @@ namespace YWT.DAL.Order
 			};
             DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
         }
+
+        //查询运维单 SP_YWTOrder_Platform_Search
+        //查询一条运维单
+
+
         #endregion
     }
 }
