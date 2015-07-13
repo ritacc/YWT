@@ -51,10 +51,13 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="down\Index.aspx" />
+    <Content Include="down\ywt.png" />
     <Content Include="eventslog\1.txt" />
     <Content Include="Index.aspx" />
     <Content Include="Interface\Interface.aspx" />
     <Content Include="Interface\Interface.sql" />
+    <Content Include="IOS\ios.plist" />
     <Content Include="SQL\YWT_Dict.sql" />
     <Content Include="Record\Record.txt" />
     <Content Include="ref\CBSCS.DBUtility.dll" />
@@ -86,6 +89,13 @@
     </Compile>
     <Compile Include="API\YWT_UserInfo.ashx.cs">
       <DependentUpon>YWT_UserInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="down\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="down\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -166,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="API\YWT_OrderFile.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="down\ywt.ipa" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
