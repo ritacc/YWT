@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using YWT.Model.Order;
 
 namespace YWT.Model.OrderPlatform
 {
@@ -129,7 +130,19 @@ namespace YWT.Model.OrderPlatform
         /// 下一个状态名称
         /// </summary>
         public string Next_Status_Name { get; set; }
-
+        /// <summary>
+        /// 是否已经申请
+        /// </summary>
+        public int IsHaveApplay { get; set; }
+        /// <summary>
+        /// 申请人数
+        /// </summary>
+        public int ApplyUserNumber { get; set; }
+        /// <summary>
+        /// 是否为创建的运维商、及期调度人员
+        /// </summary>
+        public int ISSupplier { get; set; }
+        #endregion
         #region 运维商信用相关信息
         /// <summary>
         /// 星级
@@ -149,7 +162,7 @@ namespace YWT.Model.OrderPlatform
         public string Company { get; set; }
         #endregion
 
-        #endregion
+        public List<YWTOrderPlatformApplyUserOR> ApplyUsers { get; set; }
 
         public YWTOrderPlatform_ForItemOR(DataRow row)
         {
@@ -225,10 +238,23 @@ namespace YWT.Model.OrderPlatform
             {
                 ScoreAvg = Convert.ToInt32(row["ScoreAvg"]);
             }
+            if (row["IsHaveApplay"] != DBNull.Value)
+            {
+                IsHaveApplay = Convert.ToInt32(row["IsHaveApplay"]);
+            }
+            if (row["ApplyUserNumber"] != DBNull.Value)
+            {
+                ApplyUserNumber = Convert.ToInt32(row["ApplyUserNumber"]);
+            }
+            if (row["ISSupplier"] != DBNull.Value)
+            {
+                ISSupplier = Convert.ToInt32(row["ISSupplier"]);
+            }
+
             Company = row["Company"].ToString();
         }
 
-        
+
 
     }
 }

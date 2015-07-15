@@ -10,7 +10,7 @@ namespace YWT.Model.Order
     /// 平台运维单 详细信息，包括运维商信用信息
     /// 用于列表
     /// </summary>
-    public class YWTOrderPlatform_ForListOR  
+    public class YWTOrderPlatform_ForListOR
     {
         #region 运维单
         /// <summary>
@@ -30,10 +30,7 @@ namespace YWT.Model.Order
         /// 运单类型
         /// </summary>
         public string OrderType { get; set; }
-        /// <summary>
-        /// 工作任务
-        /// </summary>
-        public string OrderTask { get; set; }
+
         /// <summary>
         /// 工作时长
         /// </summary>
@@ -65,27 +62,13 @@ namespace YWT.Model.Order
         /// <summary>
         /// 状态 0新建 1生效 2...
         /// </summary>
-        public int Status { get; set; }
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string Remark { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string SupplierID { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Creator { get; set; }
+        public int Status { get; set; } 
+
         /// <summary>
         /// 
         /// </summary>
         public DateTime CreateDateTime { get; set; }
-        /// <summary>
-        /// 客户简称
-        /// </summary>
-        public string CustomerShort { get; set; }
+
         /// <summary>
         /// 联系人
         /// </summary>
@@ -105,14 +88,8 @@ namespace YWT.Model.Order
         /// <summary>
         /// 需求人数
         /// </summary>
-        public int PersonNum { get; set; }
-        /// <summary>
-        /// 能力要求
-        /// </summary>
-        public string AbilityRequest { get; set; }
-        #endregion
-
-        #region 扩展属性
+        public int PersonNum { get; set; } 
+        #endregion 
         /// <summary>
         /// 状态名称
         /// </summary>
@@ -122,35 +99,12 @@ namespace YWT.Model.Order
         /// </summary>
         public string OrderType_Name { get; set; }
 
-        /// <summary>
-        /// 下一个状态
-        /// </summary>
-        public int Next_Status { get; set; }
-        /// <summary>
-        /// 下一个状态名称
-        /// </summary>
-        public string Next_Status_Name { get; set; }
 
-        #region 运维商信用相关信息
-        /// <summary>
-        /// 星级
-        /// </summary>
-        public int Stars { get; set; }
-        /// <summary>
-        /// 完成订单数量
-        /// </summary>
-        public int OrderFinishNum { get; set; }
-        /// <summary>
-        /// 平均平价
-        /// </summary>
-        public int ScoreAvg { get; set; }
         /// <summary>
         /// 公司名称
         /// </summary>
         public string Company { get; set; }
-        #endregion
 
-        #endregion
 
         public YWTOrderPlatform_ForListOR(DataRow row)
         {
@@ -164,8 +118,8 @@ namespace YWT.Model.Order
             OrderTitle = row["OrderTitle"].ToString().Trim();
             // 运单类型
             OrderType = row["OrderType"].ToString().Trim();
-            // 工作任务
-            OrderTask = row["OrderTask"].ToString().Trim();
+
+
             // 工作时长
             if (row["TaskTimeLen"] != DBNull.Value)
                 TaskTimeLen = Convert.ToDecimal(row["TaskTimeLen"]);
@@ -182,17 +136,11 @@ namespace YWT.Model.Order
             // 状态 0新建 1生效 2...
             if (row["Status"] != DBNull.Value)
                 Status = Convert.ToInt32(row["Status"]);
-            // 备注
-            Remark = row["Remark"].ToString().Trim();
-            // 
-            SupplierID = row["SupplierID"].ToString().Trim();
-            // 
-            Creator = row["Creator"].ToString().Trim();
+
             // 
             if (row["CreateDateTime"] != DBNull.Value)
                 CreateDateTime = Convert.ToDateTime(row["CreateDateTime"]);
-            // 客户简称
-            CustomerShort = row["CustomerShort"].ToString().Trim();
+
             // 联系人
             ContactMan = row["ContactMan"].ToString().Trim();
             // 联系电话
@@ -206,30 +154,14 @@ namespace YWT.Model.Order
             // 需求人数
             if (row["PersonNum"] != DBNull.Value)
                 PersonNum = Convert.ToInt32(row["PersonNum"]);
-            // 能力要求
-            AbilityRequest = row["AbilityRequest"].ToString().Trim();
-            #endregion
 
+            #endregion
             Status_Name = row["Status_Name"].ToString();
             OrderType_Name = row["OrderType_Name"].ToString();
-
-            if (row["Stars"] != DBNull.Value)
-            {
-                Stars = Convert.ToInt32(row["Stars"]);
-            }
-
-            if (row["OrderFinishNum"] != DBNull.Value)
-            {
-                OrderFinishNum = Convert.ToInt32(row["OrderFinishNum"]);
-            }
-            if (row["ScoreAvg"] != DBNull.Value)
-            {
-                ScoreAvg = Convert.ToInt32(row["ScoreAvg"]);
-            }
             Company = row["Company"].ToString();
         }
 
-        
+
 
     }
 }

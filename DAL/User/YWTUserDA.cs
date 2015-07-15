@@ -98,7 +98,7 @@ namespace YWT.DAL.User
                 new SqlParameter("@UserName", SqlDbType.VarChar, 32, ParameterDirection.Input, false, 0, 0, "UserName", DataRowVersion.Default, YWTUser.UserName),
                 new SqlParameter("@PassWord", SqlDbType.VarChar, 32, ParameterDirection.Input, false, 0, 0, "PassWord", DataRowVersion.Default, YWTUser.PassWord),
                 new SqlParameter("@Mobile", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "Mobile", DataRowVersion.Default, YWTUser.Mobile),
-                new SqlParameter("@RealName", SqlDbType.VarChar, 16, ParameterDirection.Input, false, 0, 0, "RealName", DataRowVersion.Default, YWTUser.RealName),
+                new SqlParameter("@RealName", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "RealName", DataRowVersion.Default, YWTUser.RealName),
                 new SqlParameter("@RealNameChar", SqlDbType.VarChar, 1, ParameterDirection.Input, false, 0, 0, "RealNameChar", DataRowVersion.Default, YWTUser.GetRealNameChar),
 
                 new SqlParameter("@Active", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "Active", DataRowVersion.Default, YWTUser.Active),

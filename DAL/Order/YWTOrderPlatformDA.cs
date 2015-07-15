@@ -70,6 +70,14 @@ namespace YWT.DAL.Order
                 {
                     DataRow _row = ds.Tables[0].Rows[0];
                     result = new YWTOrderPlatform_ForItemOR(_row);
+
+
+                    List<YWTOrderPlatformApplyUserOR> _list = new List<YWTOrderPlatformApplyUserOR>();
+                    foreach (DataRow _rowuser in ds.Tables[0].Rows)
+                    {
+                        _list.Add(new YWTOrderPlatformApplyUserOR(_rowuser));
+                    }
+                    result.ApplyUsers = _list;
                 }
                 return result;
             }

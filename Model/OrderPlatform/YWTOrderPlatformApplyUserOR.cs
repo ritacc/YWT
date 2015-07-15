@@ -25,13 +25,51 @@ namespace YWT.Model.Order
         /// 平均平价
         /// </summary>
         public int ScoreAvg { get; set; }
-        /// <summary>
-        /// 公司名称
-        /// </summary>
-        public string Company { get; set; }
+        
         #endregion
 
-        public YWTOrderPlatformApplyUserOR(DataRow row)            
+        /// <summary>
+        /// 申请内容
+        /// </summary>
+        public string Apply_Content { get; set; }
+        /// <summary>
+        /// 申请时间
+        /// </summary>
+        public DateTime Apply_Date { get; set; }
+        /// <summary>
+        /// 联系人
+        /// </summary>
+        public string ContactMan { get; set; }
+        /// <summary>
+        /// 联系电话
+        /// </summary>
+        public string ContactMobile { get; set; }
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        public string RealName { get; set; }
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string UserImg { get; set; }
+        /// <summary>
+        /// 生日
+        /// </summary>
+        public DateTime Birthday { get; set; }
+        /// <summary>
+        /// 毕业学院
+        /// </summary>
+        public string Finish_School { get; set; }
+        /// <summary>
+        /// 学历
+        /// </summary>
+        public string HighestEducation { get; set; }
+        /// <summary>
+        /// 毕业时间
+        /// </summary>
+        public string GraduationData { get; set; }
+
+        public YWTOrderPlatformApplyUserOR(DataRow row)
         {
             if (row["Stars"] != DBNull.Value)
             {
@@ -46,7 +84,18 @@ namespace YWT.Model.Order
             {
                 ScoreAvg = Convert.ToInt32(row["ScoreAvg"]);
             }
-            Company = row["Company"].ToString();
+           
+
+             Apply_Content = row[""].ToString();
+             Apply_Date =Convert.ToDateTime( row["Apply_Date"].ToString());
+             ContactMan = row["ContactMan"].ToString();
+             ContactMobile = row["ContactMobile"].ToString();
+             RealName = row["RealName"].ToString();
+             UserImg = row["UserImg"].ToString();
+             Birthday =Convert.ToDateTime( row["Birthday"]);
+             Finish_School = row["Finish_School"].ToString();
+             HighestEducation = row["HighestEducation"].ToString();
+             GraduationData = row["GraduationData"].ToString();
         }
     }
 }
