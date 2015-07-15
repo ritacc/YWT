@@ -37,7 +37,7 @@ namespace YWT.API
                 case "sl"://仅供IOS原生态调用（高德）
                     context.Response.Write(setLocation(q0, q1, q2));
                     break;
-                case "getuersubxy"://查询运维商下面所有运维人员
+                case "getsubxy"://查询运维商下面所有运维人员
                     context.Response.Write(GetSupplierAllUserPostionInfo(q0));
                     break;
                 case "sj": //保存坐标数据，json
@@ -47,7 +47,7 @@ namespace YWT.API
                 //    context.Response.Write(GetCoordinate(q0));
                 //    break;
                 default:
-                    context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常" }).ToJSON2());
+                    context.Response.Write((new AjaxContentOR() { ReturnMsg = "no_action" }).ToJSON2());
                     break;
             }
         }

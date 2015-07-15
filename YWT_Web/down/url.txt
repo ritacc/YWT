@@ -3,6 +3,6 @@
 
 itms-services://?action=download-manifest&url=https://git.oschina.net/heige000/songner/raw/master/ios.plist
 
-itms-services://?action=download-manifest&url=https://wwww.ritacc.net/IOS/ios.plist
+itms-services://?action=download-manifest&url=http://wwww.ritacc.net/IOS/ios.plist
 
 https://git.oschina.net/ritacc/ios.git

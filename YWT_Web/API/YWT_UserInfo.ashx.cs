@@ -44,7 +44,7 @@ namespace YWT.API
                     context.Response.Write(GetUserInfo(q0));
                     break;
                 default:
-                    context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常" }).ToJSON2());
+                    context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
             }
         }

@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="down\Index.aspx" />
+    <Content Include="down\url.txt" />
     <Content Include="down\ywt.png" />
     <Content Include="eventslog\1.txt" />
     <Content Include="Index.aspx" />
