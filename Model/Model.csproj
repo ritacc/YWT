@@ -55,6 +55,8 @@
     <Compile Include="Order\YWTOrderForListOR.cs" />
     <Compile Include="Order\YWTOrderOR.cs" />
     <Compile Include="Order\YWTOrderDetaillOR.cs" />
+    <Compile Include="Order\YWTOrderPlatformApplyUserOR.cs" />
+    <Compile Include="Order\YWTOrderPlatformOR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserCertifyTypeOR.cs" />
     <Compile Include="User\YWTSupplierUserOR.cs" />
