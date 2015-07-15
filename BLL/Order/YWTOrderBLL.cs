@@ -82,17 +82,6 @@ namespace YWT.BLL.Order
         
         #endregion
 
-        #region 外单
-        /// <summary>
-        /// 第三方人员  申请运维单
-        /// </summary>
-        /// <param name="orderPlatformApply"></param>
-        /// <param name="mResultType"></param>
-        /// <param name="mResultMessage"></param>
-        public void OrderPlatformApply(OrderPlatformApplyOR orderPlatformApply, out int mResultType, out string mResultMessage)
-        {
-            new YWTOrderDA().OrderPlatformApply(orderPlatformApply, out  mResultType, out  mResultMessage);
-        }
-        #endregion
+       
     }
 }

@@ -137,10 +137,7 @@ namespace YWT.API
                 {
                     Double xx = Convert.ToDouble(lng);
                     Double yy = Convert.ToDouble(lat);
-                    //var xx = (x + 0.01185).ToString(); //查资料推荐修正的经度
-                    //var yy = (y + 0.00328).ToString(); //查资料推荐修正的纬度
-                    //var xx = (x + 0.01155).ToString(); //实际调整修正的经度 jerry
-                    //var yy = (y + 0.00310).ToString(); //实际调整修正的纬度 jerry                     
+                                        
 
                     YWTCoordinateOR m = new YWTCoordinateOR();
                     m.CarID = "";
@@ -163,20 +160,18 @@ namespace YWT.API
                     string mResultMessage = "";
                      new YWTCoordinateBLL().Insert(m, out mResultType, out mResultMessage);
 
-                    //_result.ReturnMsg = "";// GetAddress(lng, lat);
+                    
                 }
                 catch (Exception err)
                 {
                     Utils.WriteLog("HDL_SaveLocation.ashx.setLocation", err.ToString());
                 }
-            }
-            //return (new AjaxContentOR() { Status = true, ReturnMsg = _result.ReturnMsg }).ToJSON2();
+            } 
             return "{\"Status\":true}";
         }
 
         private string setLocation(string json)
-        {
-            //AjaxContentOR _result = new AjaxContentOR();
+        { 
             try
             {
                 YWTCoordinateOR _obj = json.ParseJSON<YWTCoordinateOR>();

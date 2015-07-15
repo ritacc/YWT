@@ -316,7 +316,7 @@ namespace YWT.API
             AjaxContentOR _result = new AjaxContentOR();
             try
             {
-                OrderPlatformApplyOR _assess = josnApply.ParseJSON<OrderPlatformApplyOR>();
+                YWTOrderPlatformApplyOR _assess = josnApply.ParseJSON<YWTOrderPlatformApplyOR>();
                 if (_assess == null)
                 {
                     _result.Status = false;
@@ -326,7 +326,7 @@ namespace YWT.API
                 {
                     int mResultType = 0;
                     string mResultMessage = string.Empty;
-                    new YWTOrderBLL().OrderPlatformApply(_assess, out mResultType, out mResultMessage);
+                    new YWTOrderPlatformBLL().OrderPlatformApply(_assess, out mResultType, out mResultMessage);
                     if (mResultType == 0)
                     {
                         _result.Status = true;

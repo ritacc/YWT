@@ -6,28 +6,13 @@ using System.Data;
 
 namespace YWT.Model.Order
 {
-    public class YWTOrderPlatformOR : YWTOrderOR
+    /// <summary>
+    /// 申请运维单的用户
+    /// 主要显示给运维商，查看申请人的详细信息
+    /// </summary>
+    public class YWTOrderPlatformApplyUserOR
     {
-        #region 扩展属性
-        /// <summary>
-        /// 状态名称
-        /// </summary>
-        public string Status_Name { get; set; }
-        /// <summary>
-        /// 订单类型名称
-        /// </summary>
-        public string OrderType_Name { get; set; }
-
-        /// <summary>
-        /// 下一个状态
-        /// </summary>
-        public int Next_Status { get; set; }
-        /// <summary>
-        /// 下一个状态名称
-        /// </summary>
-        public string Next_Status_Name { get; set; }
-
-        #region 运维商信用相关信息
+        #region 申请运维人员 信用相关信息
         /// <summary>
         /// 星级
         /// </summary>
@@ -46,14 +31,8 @@ namespace YWT.Model.Order
         public string Company { get; set; }
         #endregion
 
-        #endregion
-
-        public YWTOrderPlatformOR(DataRow row)
-            : base(row)
+        public YWTOrderPlatformApplyUserOR(DataRow row)            
         {
-            Status_Name = row["Status_Name"].ToString();
-            OrderType_Name = row["OrderType_Name"].ToString();
-
             if (row["Stars"] != DBNull.Value)
             {
                 Stars = Convert.ToInt32(row["Stars"]);
@@ -69,8 +48,5 @@ namespace YWT.Model.Order
             }
             Company = row["Company"].ToString();
         }
-
-        
-
     }
 }

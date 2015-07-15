@@ -6,11 +6,10 @@ using System.Data;
 namespace YWT.Model.Order
 {
     /// <summary>
-    /// 
+    /// 第三方人员，申请运维商发布的运维单
     /// </summary>
-    public class OrderPlatformApplyOR
+    public class YWTOrderPlatformApplyOR
     {
-       
 		/// <summary>
 		/// 
 		/// </summary>
@@ -42,7 +41,7 @@ namespace YWT.Model.Order
 		/// <summary>
 		/// OrderPlatformApply构造函数
 		/// </summary>
-		public OrderPlatformApplyOR()
+		public YWTOrderPlatformApplyOR()
 		{
 
 		}
@@ -50,7 +49,7 @@ namespace YWT.Model.Order
 		/// <summary>
 		/// OrderPlatformApply构造函数
 		/// </summary>
-		public OrderPlatformApplyOR(DataRow row)
+        public YWTOrderPlatformApplyOR(DataRow row)
 		{
 			// 
 			if(row["Platform_Apply_ID"]!= DBNull.Value)

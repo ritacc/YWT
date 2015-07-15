@@ -44,10 +44,11 @@
     <Compile Include="Coordinate\YWTCoordinateOR.cs" />
     <Compile Include="Interface\InterfaceActionOR.cs" />
     <Compile Include="Interface\InterfacePara.cs" />
+    <Compile Include="OrderPlatform\YWTOrderPlatform_ForItemOR.cs" />
     <Compile Include="Order\OrderAssessOR.cs" />
     <Compile Include="Order\OrderFileOR.cs" />
     <Compile Include="Order\OrderFlowOR.cs" />
-    <Compile Include="Order\OrderPlatformApplyOR.cs" />
+    <Compile Include="OrderPlatform\YWTOrderPlatformApplyOR.cs" />
     <Compile Include="Order\OrderStatus.cs" />
     <Compile Include="Order\OrderStatusItem.cs" />
     <Compile Include="Order\OrderTaskUserOR.cs" />
@@ -55,8 +56,8 @@
     <Compile Include="Order\YWTOrderForListOR.cs" />
     <Compile Include="Order\YWTOrderOR.cs" />
     <Compile Include="Order\YWTOrderDetaillOR.cs" />
-    <Compile Include="Order\YWTOrderPlatformApplyUserOR.cs" />
-    <Compile Include="Order\YWTOrderPlatformOR.cs" />
+    <Compile Include="OrderPlatform\YWTOrderPlatformApplyUserOR.cs" />
+    <Compile Include="OrderPlatform\YWTOrderPlatform_ForListOR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserCertifyTypeOR.cs" />
     <Compile Include="User\YWTSupplierUserOR.cs" />

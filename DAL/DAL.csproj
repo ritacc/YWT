@@ -53,6 +53,7 @@
     <Compile Include="File\UPFileDA.cs" />
     <Compile Include="InterfaceDA.cs" />
     <Compile Include="Order\YWTOrderDA.cs" />
+    <Compile Include="Order\YWTOrderPlatformDA.cs" />
     <Compile Include="SysDB\AccessSqlserverDA.cs" />
     <Compile Include="User\YWTUserInfoDA.cs" />
     <Compile Include="User\YWTSupplierDA.cs" />
