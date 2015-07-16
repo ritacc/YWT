@@ -69,6 +69,12 @@ namespace YWT.Model.Order
         /// </summary>
         public string GraduationData { get; set; }
 
+        /// <summary>
+        /// 申请用户ID
+        /// </summary>
+        public string Platform_Apply_ID { get; set; }
+
+
         public YWTOrderPlatformApplyUserOR(DataRow row)
         {
             if (row["Stars"] != DBNull.Value)
@@ -96,6 +102,7 @@ namespace YWT.Model.Order
              Finish_School = row["Finish_School"].ToString();
              HighestEducation = row["HighestEducation"].ToString();
              GraduationData = row["GraduationData"].ToString();
+             Platform_Apply_ID = row["Platform_Apply_ID"].ToString();
         }
     }
 }

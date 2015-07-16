@@ -105,11 +105,66 @@ namespace YWT.DAL.Order
         }
 
         
+       /// <summary>
+        /// 选定运给人员 
+        /// 第三方人员申请后，运维商选定人员
+       /// </summary>
+       /// <param name="orderID"></param>
+       /// <param name="Platform_Apply_ID"></param>
+       /// <param name="Create_User"></param>
+       /// <param name="mResultType"></param>
+       /// <param name="mResultMessage"></param>
+        public void OrderPlatformSelectApplyUser(string orderID, string Platform_Apply_ID, string Create_User, out int mResultType, out string mResultMessage)
+       {
+           string sql = @"SP_YWTOrder_Platform_SelectApplyUser";
+           SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, orderID),
+                new SqlParameter("@Platform_Apply_ID", SqlDbType.BigInt, 10, ParameterDirection.Input, false, 0, 0, "Platform_Apply_ID", DataRowVersion.Default, Platform_Apply_ID),
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)
+			};
+           DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+       }
 
-        //选定运给人员
 
-        //评价
+       /// <summary>
+       /// 第三方人员申请成功运维单
+       /// </summary>
+       /// <param name="StartIndex"></param>
+       /// <param name="endIndex"></param>
+       /// <param name="Create_User"></param>
+       /// <param name="mResultType"></param>
+       /// <param name="mResultMessage"></param>
+       /// <returns></returns>
+        public List<YWTOrderPlatform_ForListOR> PlatformOrderList_ApplySuccess_Search(int StartIndex, int endIndex, string Create_User, out int mResultType, out string mResultMessage)
+        {
+            string sql = @"SP_YWTOrder_Platform_ApplySuccess_Search";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@StartIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),               
+                new SqlParameter("@endIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "ContactMobile", DataRowVersion.Default, endIndex),
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)                
+			};
+            DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                List<YWTOrderPlatform_ForListOR> _list = new List<YWTOrderPlatform_ForListOR>();
+                foreach (DataRow _row in ds.Tables[0].Rows)
+                {
+                    _list.Add(new YWTOrderPlatform_ForListOR(_row));
+                }
+                return _list;
+            }
+            return null;
+        }
 
+       //到场-完成运维单
+
+       //评价运维商
+       
+       //评价运维人员
+
+       //结束
 
 
         

@@ -69,7 +69,7 @@ namespace YWT.BLL.Order
         }
 
         /// <summary>
-        /// 订单回复
+        /// 订单评价
         /// </summary>
         /// <param name="orderAssess"></param>
         /// <param name="mResultType"></param>
