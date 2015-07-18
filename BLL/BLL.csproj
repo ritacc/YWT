@@ -46,6 +46,8 @@
     <Compile Include="Order\YWTOrderBLL.cs" />
     <Compile Include="Order\YWTOrderPlatformBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pub\YWTSetupBLL.cs" />
+    <Compile Include="Pub\YWTVerifyCodeBLL.cs" />
     <Compile Include="SysDB\AccessSqlserverBLL.cs" />
     <Compile Include="User\YWTUserInfoBLL.cs" />
     <Compile Include="User\YWTSupplierBLL.cs" />

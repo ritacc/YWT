@@ -1,0 +1,28 @@
+---------------New Log---------------
+-----时间: 2015-7-18 10:21:44
+-----来源: HDL_User.ashx/UpdateSupplier
+------URL: http://localhost:610/API/YWT_User.ashx?action=edit&q0={"User":{"Creator":"686e6c29-d2d6-4f27-a752-a06a5f41048c","UserType":"20","UserName":"13751068766", "RealName":"�ÿ���" "Mobile":"13751068766"},"UserInfo":{"User_Sex":"1","Location_Province":"2","Location_City":"3","Location_County":"4", "User_Address":"5", "Birthday":"\/Date(-62135596800000)\/", "Email":"dfdf", "HighestEducation":"gl", "Finish_School":"7", "SpecialtyName":"8", "GraduationData":"\/Date(-62135596800000)\/", "SkillDescription":"9", "Specialty":"10"}}
+-----内容: System.Runtime.Serialization.SerializationException: 反序列化对象 属于类型 YWT.Model.User.YWTUserOR 时出现错误。遇到意外字符“"”。 ---> System.Xml.XmlException: 遇到意外字符“"”。
+   在 System.Xml.XmlExceptionHelper.ThrowXmlException(XmlDictionaryReader reader, XmlException exception)
+   在 System.Runtime.Serialization.Json.XmlJsonReader.Read()
+   在 System.Xml.XmlBaseReader.Skip()
+   在 System.Runtime.Serialization.XmlObjectSerializerReadContext.SkipUnknownElement(XmlReaderDelegator xmlReader)
+   在 System.Runtime.Serialization.XmlObjectSerializerReadContext.HandleMemberNotFound(XmlReaderDelegator xmlReader, ExtensionDataObject extensionData, Int32 memberIndex)
+   在 System.Runtime.Serialization.Json.XmlObjectSerializerReadContextComplexJson.GetJsonMemberIndex(XmlReaderDelegator xmlReader, XmlDictionaryString[] memberNames, Int32 memberIndex, ExtensionDataObject extensionData)
+   在 ReadYWTUserORFromJson(XmlReaderDelegator , XmlObjectSerializerReadContextComplexJson , XmlDictionaryString , XmlDictionaryString[] )
+   在 System.Runtime.Serialization.Json.JsonClassDataContract.ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+   在 System.Runtime.Serialization.Json.JsonDataContract.ReadJsonValue(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+   在 System.Runtime.Serialization.Json.XmlObjectSerializerReadContextComplexJson.ReadDataContractValue(DataContract dataContract, XmlReaderDelegator reader)
+   在 System.Runtime.Serialization.XmlObjectSerializerReadContext.InternalDeserialize(XmlReaderDelegator reader, String name, String ns, Type declaredType, DataContract& dataContract)
+   在 System.Runtime.Serialization.XmlObjectSerializerReadContextComplex.InternalDeserialize(XmlReaderDelegator xmlReader, Type declaredType, DataContract dataContract, String name, String ns)
+   在 System.Runtime.Serialization.Json.DataContractJsonSerializer.InternalReadObject(XmlReaderDelegator xmlReader, Boolean verifyObjectName)
+   在 System.Runtime.Serialization.XmlObjectSerializer.InternalReadObject(XmlReaderDelegator reader, Boolean verifyObjectName, DataContractResolver dataContractResolver)
+   在 System.Runtime.Serialization.XmlObjectSerializer.ReadObjectHandleExceptions(XmlReaderDelegator reader, Boolean verifyObjectName, DataContractResolver dataContractResolver)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Runtime.Serialization.XmlObjectSerializer.ReadObjectHandleExceptions(XmlReaderDelegator reader, Boolean verifyObjectName, DataContractResolver dataContractResolver)
+   在 System.Runtime.Serialization.Json.DataContractJsonSerializer.ReadObject(XmlDictionaryReader reader)
+   在 System.Runtime.Serialization.Json.DataContractJsonSerializer.ReadObject(Stream stream)
+   在 YWT.Common.JSONExtension.ParseJSON[T](String str) 位置 E:\ritacc\YWT\Project\YWT\Common\JSONExtension.cs:行号 60
+   在 YWT.API.YWT_User.UpdateUserInfo(String json) 位置 E:\ritacc\YWT\Project\YWT\YWT_Web\API\YWT_User.ashx.cs:行号 134
+-----IP: 127.0.0.1
+

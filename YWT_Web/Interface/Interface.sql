@@ -191,3 +191,34 @@ INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'get','根据ID查询一个运维人员用据。用于修改，查看。')
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维ID')
+
+
+GO
+/*
+VerifyCode.ashx	运维用户相关	
+*/
+DECLARE @Inerface_ID	BIGINT		
+		,@IFile			VARCHAR(50)='VerifyCode.ashx'
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'sendverifycode','发送验证码')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'手机号码')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'IMEI') 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'checkverifycode','验证是否正确。')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'手机号码')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'IMEI')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'验证码')
+
+GO
+
+/*
+YWT_Setup.ashx	运维用户相关	
+*/
+DECLARE @Inerface_ID	BIGINT		
+		,@IFile			VARCHAR(50)='YWT_Setup.ashx'
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'setup','安装统计接口，添加安装记录')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'IMEI')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'OS') 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'Manufacturer') 
