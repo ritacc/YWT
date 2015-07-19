@@ -49,12 +49,13 @@ namespace YWT.DAL.Order
         }
 
         /// <summary>
-        /// 查询一条平台运维单
+        /// 查询一条平台运维单 
+        /// 运单主体\申请人员列表
         /// </summary>
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-       public YWTOrderPlatform_ForItemOR PlatformOrderItemSearch(string Order_ID, string Create_User, int endIndex, out int mResultType, out string mResultMessage)
+       public YWTOrderPlatform_ForItemOR PlatformOrderItemSearch(string Order_ID, string Create_User,   out int mResultType, out string mResultMessage)
         {
             string sql = @"SP_YWTOrder_Platform_Item_Search";
             SqlParameter[] parameters = new SqlParameter[]
@@ -70,8 +71,7 @@ namespace YWT.DAL.Order
                 {
                     DataRow _row = ds.Tables[0].Rows[0];
                     result = new YWTOrderPlatform_ForItemOR(_row);
-
-
+                    
                     List<YWTOrderPlatformApplyUserOR> _list = new List<YWTOrderPlatformApplyUserOR>();
                     foreach (DataRow _rowuser in ds.Tables[0].Rows)
                     {
@@ -158,15 +158,69 @@ namespace YWT.DAL.Order
             return null;
         }
 
+        /// <summary>
+        /// 第三方人员申请运维单记录查询
+        /// </summary>
+        /// <param name="StartIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <param name="Create_User"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public List<YWTOrderPlatform_ForListOR> PlatformOrderList_Apply_Search(int StartIndex, int endIndex, string Create_User, out int mResultType, out string mResultMessage)
+        {
+            string sql = @"SP_YWTOrder_Platform_Apply_Search";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@StartIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),               
+                new SqlParameter("@endIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "ContactMobile", DataRowVersion.Default, endIndex),
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)                
+			};
+            DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                List<YWTOrderPlatform_ForListOR> _list = new List<YWTOrderPlatform_ForListOR>();
+                foreach (DataRow _row in ds.Tables[0].Rows)
+                {
+                    _list.Add(new YWTOrderPlatform_ForListOR(_row));
+                }
+                return _list;
+            }
+            return null;
+        }
+
        //到场-完成运维单
+       //
 
-       //评价运维商
-       
-       //评价运维人员
+       /// <summary>
+        /// 运维人员评价
+        /// 运维商评价
+       /// </summary>
+       /// <param name="Order_ID"></param>
+       /// <param name="Assess_Type">评价类型: 91 第三方运维人员 92 运维商</param>
+        /// <param name="YW_Result">运维结果: 完成 未完成</param>
+       /// <param name="Score">评分</param>
+       /// <param name="AssessContent">评价内容</param>
+       /// <param name="Create_User">操作人</param>
+       /// <param name="mResultType"></param>
+       /// <param name="mResultMessage"></param>
+        public void PlatformOrder_Assess_Save(string Order_ID, string Assess_Type, string YW_Result,
+            int Score, string AssessContent, string Create_User, out int mResultType, out string mResultMessage)
+        {
+            string sql = @"SP_YWTOrder_Platform_Assess_Save";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, Order_ID),               
+                new SqlParameter("@Assess_Type", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "Assess_Type", DataRowVersion.Default, Assess_Type),
+                new SqlParameter("@YW_Result", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "YW_Result", DataRowVersion.Default, YW_Result),
 
-       //结束
+                new SqlParameter("@Score", SqlDbType.Int, 8, ParameterDirection.Input, false, 0, 0, "Score", DataRowVersion.Default, Score),               
+                new SqlParameter("@AssessContent", SqlDbType.NVarChar, 500, ParameterDirection.Input, false, 0, 0, "AssessContent", DataRowVersion.Default, AssessContent),               
+                new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, Create_User)            
 
-
+			};
+            DbHelperSQL.ExecuteProcedureNonQuery(sql, parameters, out   mResultType, out   mResultMessage);
+        }
         
 
     }

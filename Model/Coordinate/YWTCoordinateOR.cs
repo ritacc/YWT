@@ -55,7 +55,7 @@ namespace YWT.Model.Coordinate
         public long UserAutoID { get; set; }
 
 		/// <summary>
-		/// SNRCoordinate构造函数
+		/// Coordinate构造函数
 		/// </summary>
 		public YWTCoordinateOR()
 		{
@@ -67,7 +67,7 @@ namespace YWT.Model.Coordinate
 		}
 
 		/// <summary>
-		/// SNRCoordinate构造函数
+		/// Coordinate构造函数
 		/// </summary>
         public YWTCoordinateOR(DataRow row)
 		{

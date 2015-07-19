@@ -49,7 +49,7 @@ namespace YWT.Model.User
 		/// </summary>
 		public DateTime CreateDateTime { get; set; }
 		/// <summary>
-		/// SNRSupplier构造函数
+		/// Supplier构造函数
 		/// </summary>
 		public YWTSupplierOR()
 		{
@@ -58,7 +58,7 @@ namespace YWT.Model.User
 		}
 
 		/// <summary>
-		/// SNRSupplier构造函数
+		/// Supplier构造函数
 		/// </summary>
         public YWTSupplierOR(DataRow row)
 		{

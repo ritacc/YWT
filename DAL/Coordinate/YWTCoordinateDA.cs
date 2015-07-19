@@ -17,20 +17,19 @@ namespace YWT.DAL.Coordinate
         /// <summary>
         /// 插入
         /// </summary>
-        public void Insert(YWTCoordinateOR sNRCoordinate, out int mResultType, out string mResultMessage)
+        public void Insert(YWTCoordinateOR _Coordinate, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-                //new SqlParameter("@ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "ID", DataRowVersion.Default, sNRCoordinate.ID),
-                new SqlParameter("@longitude", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "longitude", DataRowVersion.Default, sNRCoordinate.longitude),
-                new SqlParameter("@latitude", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "latitude", DataRowVersion.Default, sNRCoordinate.latitude),
-                new SqlParameter("@CarID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "CarID", DataRowVersion.Default, sNRCoordinate.CarID),
-                new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, sNRCoordinate.UserID),
-                new SqlParameter("@UserAutoID", SqlDbType.BigInt, 36, ParameterDirection.Input, false, 0, 0, "UserAutoID", DataRowVersion.Default, sNRCoordinate.UserAutoID),
+                new SqlParameter("@longitude", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "longitude", DataRowVersion.Default, _Coordinate.longitude),
+                new SqlParameter("@latitude", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "latitude", DataRowVersion.Default, _Coordinate.latitude),
+                new SqlParameter("@CarID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "CarID", DataRowVersion.Default, _Coordinate.CarID),
+                new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, _Coordinate.UserID),
+                new SqlParameter("@UserAutoID", SqlDbType.BigInt, 36, ParameterDirection.Input, false, 0, 0, "UserAutoID", DataRowVersion.Default, _Coordinate.UserAutoID),
                 
-                new SqlParameter("@IMEI", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "IMEI", DataRowVersion.Default, sNRCoordinate.IMEI),
-                new SqlParameter("@OS", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "OS", DataRowVersion.Default, sNRCoordinate.OS),
-                new SqlParameter("@manufacturer", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "manufacturer", DataRowVersion.Default, sNRCoordinate.manufacturer),         
+                new SqlParameter("@IMEI", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "IMEI", DataRowVersion.Default, _Coordinate.IMEI),
+                new SqlParameter("@OS", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "OS", DataRowVersion.Default, _Coordinate.OS),
+                new SqlParameter("@manufacturer", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "manufacturer", DataRowVersion.Default, _Coordinate.manufacturer),         
 			};
             DbHelperSQL.ExecuteProcedureNonQuery("SP_YWTCoordinate_Save", parameters, out   mResultType, out   mResultMessage);
             //

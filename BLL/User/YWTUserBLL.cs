@@ -71,7 +71,18 @@ namespace YWT.BLL.User
         {
             return new YWTUserDA().SuplierAddUser(_user, "EDIT", out   mResultType, out   mResultMessage);
         }
-
+         /// <summary>
+        /// 供应商用户管理 更新
+        /// </summary>
+        /// <param name="_user"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public bool EditSelfInfo(YWTUserInfoOR _user, out int mResultType, out string mResultMessage)
+        {
+            return new YWTUserDA().EditSelfInfo(_user,  out   mResultType, out   mResultMessage);
+        }
+        
         /// <summary>
         /// 查询运维商用户详细信息
         /// </summary>
@@ -101,6 +112,7 @@ namespace YWT.BLL.User
         }
 
         #endregion
+
         #region 认证
         /// <summary>
         /// 查询认证文件

@@ -18,9 +18,9 @@ namespace YWT.BLL.Coordinate
         /// <summary>
         /// 插入
         /// </summary>
-        public void Insert(YWTCoordinateOR sNRCoordinate, out int mResultType, out string mResultMessage)
+        public void Insert(YWTCoordinateOR _Coordinate, out int mResultType, out string mResultMessage)
         {
-            new YWTCoordinateDA().Insert(sNRCoordinate, out   mResultType, out   mResultMessage);
+            new YWTCoordinateDA().Insert(_Coordinate, out   mResultType, out   mResultMessage);
         }
         #region 查询定位
         /// <summary>
