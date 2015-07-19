@@ -76,6 +76,9 @@
     <Compile Include="API\HL.ashx.cs">
       <DependentUpon>HL.ashx</DependentUpon>
     </Compile>
+    <Compile Include="API\VerifyCode.ashx.cs">
+      <DependentUpon>VerifyCode.ashx</DependentUpon>
+    </Compile>
     <Compile Include="API\YWT_Order.ashx.cs">
       <DependentUpon>YWT_Order.ashx</DependentUpon>
     </Compile>
@@ -84,6 +87,9 @@
     </Compile>
     <Compile Include="API\YWT_OrderPlatform.ashx.cs">
       <DependentUpon>YWT_OrderPlatform.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="API\YWT_Setup.ashx.cs">
+      <DependentUpon>YWT_Setup.ashx</DependentUpon>
     </Compile>
     <Compile Include="API\YWT_Supplier.ashx.cs">
       <DependentUpon>YWT_Supplier.ashx</DependentUpon>
@@ -195,6 +201,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="API\YWT_YWLog.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="API\VerifyCode.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="API\YWT_Setup.ashx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
