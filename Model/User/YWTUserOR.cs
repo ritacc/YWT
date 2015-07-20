@@ -108,8 +108,28 @@ namespace YWT.Model.User
             /// </summary>
             public string PayPassword { get; set; }
 
-          
 
+            /// <summary>
+            /// 认证真实姓名
+            /// </summary>
+            public string CertifyRealName { get; set; }
+            /// <summary>
+            ///  身份证号
+            /// </summary>
+            public string CertifyIDCard { get; set; }
+            /// <summary>
+            /// 公司名称
+            /// </summary>
+            public string CertifyCompanyName { get; set; }
+
+            /// <summary>
+            /// 使用优惠码
+            /// </summary>
+            public string Use_RecommendCode { get; set; }
+            /// <summary>
+            /// 我的优惠码
+            /// </summary>
+            public string User_RecommendCode { get; set; }
             /// <summary>
             /// SNRUser构造函数
             /// </summary>
@@ -201,6 +221,11 @@ namespace YWT.Model.User
 
                 PayPassword = string.IsNullOrEmpty(row["PayPassword"].ToString()) ? "0" : "1";
 
+                CertifyRealName = row["CertifyRealName"].ToString();
+                CertifyIDCard = row["CertifyIDCard"].ToString();
+                CertifyCompanyName = row["CertifyCompanyName"].ToString();
+                Use_RecommendCode = row["Use_RecommendCode"].ToString();
+                User_RecommendCode = row["User_RecommendCode"].ToString();
             }
        
 
