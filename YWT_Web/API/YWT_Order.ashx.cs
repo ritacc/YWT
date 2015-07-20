@@ -41,11 +41,9 @@ namespace YWT.API
             switch (action.ToLower())
             {
                 case "addinternal"://内部单
-                    context.Response.Write(AddOrder(q0, false, q1));
+                    context.Response.Write(AddOrder(q0, q1));
                     break;
-                case "addexternal"://外部单
-                    context.Response.Write(AddOrder(q0, true, q1));
-                    break;
+               
                 case "getlist"://获取列表
                     context.Response.Write(GetList(q0, q1, q2));    //开始页数;用户ID，类型(-1 全部 0 运维中)
                     break; 
@@ -61,11 +59,7 @@ namespace YWT.API
                 case "orderassess"://运维单评价
                     context.Response.Write(OrderAssess(q0)); // Json
                     break;
-                //外单
-                case "orderplatformapply"://申请运维单
-                    context.Response.Write(OrderPlatformApply(q0)); // Json
-                    break; 
-                    
+                                    
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
@@ -80,7 +74,7 @@ namespace YWT.API
         /// <param name="IsPublishToPlat">是否平台订单</param>
         /// <param name="CreateUser"></param>
         /// <returns></returns>
-        private string AddOrder(string json,bool IsPublishToPlat,string CreateUser)
+        private string AddOrder(string json,string CreateUser)
         {
             AjaxContentOR _result = new AjaxContentOR();
                 try
@@ -95,7 +89,7 @@ namespace YWT.API
                      {
                          int mResultType = 0;
                          string mResultMessage = "";
-                         _OrderAdmin.OrderMain.IsPublishToPlat = IsPublishToPlat;
+                         _OrderAdmin.OrderMain.IsPublishToPlat = false;
                          _OrderAdmin.OrderMain.Creator = CreateUser;
                          new YWTOrderBLL().Insert(_OrderAdmin, out mResultType, out mResultMessage);
                          if (mResultType == 0)
@@ -196,7 +190,11 @@ namespace YWT.API
         public string SaveOrderFlow(string Order_ID, string Order_Status, string Create_User, string x1, string x2, string position, string remark, string fileJosn)
         {
             AjaxContentOR _result = new AjaxContentOR();
-            List<OrderFileOR> _lsitFiles = fileJosn.ParseJSON<List<OrderFileOR>>();
+            List<OrderFileOR> _lsitFiles = null;
+            if (!string.IsNullOrEmpty(fileJosn))
+            {
+                _lsitFiles = fileJosn.ParseJSON<List<OrderFileOR>>();
+            }
             try
             {
                 int mResultType = 0;
@@ -305,49 +303,7 @@ namespace YWT.API
         }        
         #endregion
 
-        #region 外单接口处理
-        /// <summary>
-        /// 申请运维单
-        /// </summary>
-        /// <param name="josnAssess"></param>
-        /// <returns></returns>
-        public string OrderPlatformApply(string josnApply)
-        {
-            AjaxContentOR _result = new AjaxContentOR();
-            try
-            {
-                YWTOrderPlatformApplyOR _assess = josnApply.ParseJSON<YWTOrderPlatformApplyOR>();
-                if (_assess == null)
-                {
-                    _result.Status = false;
-                    _result.ReturnMsg = "解析参数出错。";
-                }
-                else
-                {
-                    int mResultType = 0;
-                    string mResultMessage = string.Empty;
-                    new YWTOrderPlatformBLL().OrderPlatformApply(_assess, out mResultType, out mResultMessage);
-                    if (mResultType == 0)
-                    {
-                        _result.Status = true;
-                        _result.ReturnMsg = "Success";
-                    }
-                    else
-                    {
-                        _result.ReturnMsg = mResultMessage;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _result.ReturnMsg = ex.Message.ToString();
-                Utils.WriteLog("YWT_Order.ashx/OrderPlatformApply", ex.ToString());
-            }
-            return _result.ToJSON2();
-        }
-
-
-        #endregion
+       
         public bool IsReusable
         {
             get

@@ -130,8 +130,10 @@ namespace YWT.Model.User
             /// 我的优惠码
             /// </summary>
             public string User_RecommendCode { get; set; }
+
             /// <summary>
             /// SNRUser构造函数
+            /// User构造函数
             /// </summary>
             public YWTUserOR()
             {
@@ -157,7 +159,7 @@ namespace YWT.Model.User
             }
 
             /// <summary>
-            /// SNRUser构造函数
+            /// User构造函数
             /// </summary>
             public YWTUserOR(DataRow row)
             {

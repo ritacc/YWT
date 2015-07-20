@@ -21,8 +21,12 @@ namespace YWT.DAL.Order
         /// </summary>
         public void Insert(YWTOrderAdminOR orderAdmin, out int mResultType, out string mResultMessage)
         {
-            string sqlOrdermain = @"sp_SNROrder_Save";
+            string sqlOrdermain = @"sp_YWTOrder_Save";
             YWTOrderOR order = orderAdmin.OrderMain;
+            if (string.IsNullOrEmpty(order.Order_ID))
+            {
+                order.Order_ID = Guid.NewGuid().ToString();
+            }
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, order.Order_ID),                
@@ -58,16 +62,15 @@ namespace YWT.DAL.Order
             if (orderAdmin.OrderFile != null)
             {
                 List<OrderFileOR> OrderFile = orderAdmin.OrderFile;
-                foreach (OrderFileOR sNROrderFile in OrderFile)
+                foreach (OrderFileOR _OrderFile in OrderFile)
                 {
                     string sqlOrderFile = @"SP_YWTOrder_File_Save";
                     SqlParameter[] parametersOrderFile = new SqlParameter[]
                     {
-                        new SqlParameter("@ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "ID", DataRowVersion.Default,string.IsNullOrEmpty( sNROrderFile.Order_File_ID)? Guid.NewGuid().ToString(): sNROrderFile.Order_File_ID),
                         new SqlParameter("@OrderID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "OrderID", DataRowVersion.Default, order.Order_ID),
-                        new SqlParameter("@FileType", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "FileType", DataRowVersion.Default, sNROrderFile.FileType),
-                        new SqlParameter("@FileName", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "FileName", DataRowVersion.Default, sNROrderFile.FileName),
-                        new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, sNROrderFile.Creator)
+                        new SqlParameter("@OrderFileType", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "OrderFileType", DataRowVersion.Default, _OrderFile.FileType),
+                        new SqlParameter("@ImagePath", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default, _OrderFile.FileName),
+                        new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, order.Creator)
                     };
                     _cmds.Add(new CommandInfo(sqlOrderFile, parametersOrderFile));
                 }
@@ -221,7 +224,7 @@ namespace YWT.DAL.Order
                     _cmds.Add(new CommandInfo() { CommandText = sqlprod, Parameters = parameterFiles });
                 }
             }
-            
+           
             SqlParameter[] _parameters = new SqlParameter[]
 			{
                 new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
@@ -253,7 +256,7 @@ namespace YWT.DAL.Order
                 new SqlParameter("@Score", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "Score", DataRowVersion.Default, orderAssess.Score),
                 new SqlParameter("@AssessContent", SqlDbType.NVarChar, 1000, ParameterDirection.Input, false, 0, 0, "AssessContent", DataRowVersion.Default, orderAssess.AssessContent),                
                 new SqlParameter("@IsAddIntegral", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "IsAddIntegral", DataRowVersion.Default, orderAssess.IsAddIntegral),
-                new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, orderAssess.Creator)                
+                new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, orderAssess.Creator)
 			};
             DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
         }

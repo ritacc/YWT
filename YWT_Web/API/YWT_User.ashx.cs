@@ -49,6 +49,9 @@ namespace YWT.API
                 case "edit":
                     context.Response.Write(UpdateUserInfo(q0));
                     break;
+                case "editselfinfo"://修改个人资料，第三方运维人员
+                    context.Response.Write(EditSelfInfo(q0));
+                    break;
                 case "addsupuser": //添加供应商用户
                     context.Response.Write(AddSupplierUser(q0,"add"));
                     break;
@@ -163,7 +166,34 @@ namespace YWT.API
             }
             return _result.ToJSON2();
         }
-
+        /// <summary>
+        /// 修改自己资料
+        /// </summary>
+        /// <param name="josnval"></param>
+        /// <returns></returns>
+        public string EditSelfInfo(string josnval)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            YWTUserInfoOR userOR = josnval.ParseJSON<YWTUserInfoOR>();
+            if (userOR == null)
+            {
+                _result.Status = false;
+                _result.ReturnMsg = "参数错误。";
+            }
+            int mResultType = 0;
+            string mResultMessage = string.Empty;
+            new YWTUserBLL().EditSelfInfo(userOR, out mResultType, out mResultMessage);           
+            if (!(mResultType == 0))
+            {
+                _result.ReturnMsg = mResultMessage;
+            }
+            else
+            {
+                _result.Status = true;
+                _result.ReturnMsg = "Success";
+            }
+            return _result.ToJSON2();
+        }
         /// <summary>
         /// 
         /// </summary>

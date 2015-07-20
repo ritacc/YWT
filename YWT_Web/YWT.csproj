@@ -55,6 +55,8 @@
     <Content Include="down\url.txt" />
     <Content Include="down\ywt.png" />
     <Content Include="eventslog\1.txt" />
+    <Content Include="htmlfile\Order_Insert.png" />
+    <Content Include="htmlfile\Order_List.png" />
     <Content Include="Index.aspx" />
     <Content Include="Interface\Interface.aspx" />
     <Content Include="Interface\Interface.sql" />
@@ -83,6 +85,9 @@
     <Compile Include="API\YWT_OrderFile.ashx.cs">
       <DependentUpon>YWT_OrderFile.ashx</DependentUpon>
     </Compile>
+    <Compile Include="API\YWT_OrderPlatform.ashx.cs">
+      <DependentUpon>YWT_OrderPlatform.ashx</DependentUpon>
+    </Compile>
     <Compile Include="API\YWT_Setup.ashx.cs">
       <DependentUpon>YWT_Setup.ashx</DependentUpon>
     </Compile>
@@ -97,6 +102,9 @@
     </Compile>
     <Compile Include="API\YWT_UserInfo.ashx.cs">
       <DependentUpon>YWT_UserInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="API\YWT_YWLog.ashx.cs">
+      <DependentUpon>YWT_YWLog.ashx</DependentUpon>
     </Compile>
     <Compile Include="down\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -189,6 +197,12 @@
     <Content Include="down\ywt.ipa" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="API\YWT_OrderPlatform.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="API\YWT_YWLog.ashx" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="API\VerifyCode.ashx" />
   </ItemGroup>
   <ItemGroup>
@@ -201,8 +215,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>610</DevelopmentServerPort>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57163</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
