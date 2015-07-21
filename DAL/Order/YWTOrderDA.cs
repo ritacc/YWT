@@ -130,7 +130,7 @@ namespace YWT.DAL.Order
             };
 
             DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOrder_Search", parameters, out    mResultType, out   mResultMessage);
-            if (ds.Tables.Count == 3 && ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables.Count == 4 && ds.Tables[0].Rows.Count > 0)
             {
                 //主表信息
                 YWTOrderDetaillOR _OrderDetaill = new YWTOrderDetaillOR(ds.Tables[0].Rows[0]);
