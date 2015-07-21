@@ -51,7 +51,7 @@ namespace YWT.Model.Order
 			// 
 			Order_File_ID=row["Order_File_ID"].ToString().Trim();
 			// 对应单证编号
-			OrderID=row["OrderID"].ToString().Trim();
+            OrderID = row["Order_ID"].ToString().Trim();
 			// 文件类型 到场照片、完成照片文件等
 			FileType=row["FileType"].ToString().Trim();
 			// 文件名

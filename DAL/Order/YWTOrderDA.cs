@@ -140,12 +140,22 @@ namespace YWT.DAL.Order
                 {
                     _lisUser.Add(new OrderTaskUserOR(_row));
                 }
+                _OrderDetaill.OrderUsers = _lisUser;
                 //流程
                 List<OrderFlowOR> _lisFlow = new List<OrderFlowOR>();
                 foreach (DataRow _row in ds.Tables[2].Rows)
                 {
                     _lisFlow.Add(new OrderFlowOR(_row));
                 }
+                _OrderDetaill.OrderFlows = _lisFlow;
+                //文件
+                List<OrderFileOR> _listFile = new List<OrderFileOR>();
+                foreach (DataRow _row in ds.Tables[3].Rows)
+                {
+                    _listFile.Add(new OrderFileOR(_row));
+                }
+                _OrderDetaill.OrderFiles = _listFile;
+
                 return _OrderDetaill;
             }
             return null;

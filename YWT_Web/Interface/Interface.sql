@@ -30,10 +30,6 @@ INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'edit',N'修
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'修改用户数据:Json格式提交')
 
-INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'edit',N'修改用户基本信息')
-SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'修改用户数据:Json格式提交')
-
 --运维商用户管理
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'addsupuser',N'添加供应商用户')
 SET @Inerface_ID=@@IDENTITY 
