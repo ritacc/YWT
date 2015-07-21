@@ -1,0 +1,63 @@
+DECLARE XX CURSOR FOR
+partition by  order by 
+BETWEEN
+ROW_NUMBER() over(order by FR_date)  rowid
+services
+PROCEDURE
+
+CROSS APPLY和 OUTER APPLY
+--查询表结果
+SELECT * FROM   ::fn_listextendedproperty (NULL, 'user', 'dbo', 'table', 'e_Capital_fr', 'column', default)
+
+--添加默认值
+NOT NULL CONSTRAINT DF_《表名》_<字段> DEFAULT 0
+
+--添加备注
+BEGIN TRANSACTION
+GO
+DECLARE @v sql_variant = N'编号，ID'
+EXECUTE sp_addextendedproperty N'MS_Description', @v, N'SCHEMA', N'dbo', N'TABLE', N'Import_Flow', N'COLUMN', N'Import_Flow_ID'
+GO
+--主键
+,CONSTRAINT PK_QP_HWM PRIMARY KEY CLUSTERED (QP_HWM_ID) ON [PRIMARY]
+
+--自增长		IDENTITY(1,1)
+
+CREATE UNIQUE NONCLUSTERED INDEX IX_HWM_Main ON dbo.HWM_Main(SixNo) 
+IComparable<CJUser>
+
+Receivables
+
+--关闭自动增涨。
+set identity_insert mytable on
+
+alert($(".GridItems").find(":checkbox:checked:not(:disabled)[name='cbKey'] ").length)
+
+  Response.ContentType = "application/vnd.ms-excel";
+  Response.AppendHeader("Content-disposition", "attachment;filename=" + HttpUtility.UrlEncode("宇龙PackingList.xls"));
+
+上传文件：
+  <script type="text/javascript" language="javascript" src="../../../../include/cbscs.file.v.1.0.js"></script>
+  <td align=center><a href="#" onclick="goaccessory('FTCONTRACT','FTCONTRACT','<%=rs("ftcontract_no")%>','true')">查看</a></td>
+
+--回滚事务
+IF (@@TRANCOUNT>1)
+BEGIN
+	COMMIT TRANSACTION PROCS;
+END
+ELSE
+BEGIN
+	ROLLBACK TRANSACTION PROCS;
+END
+
+		DECLARE @CUR_STATUS smallint = NULL;
+		SET @CUR_STATUS = CURSOR_STATUS('local', 'C_C');
+		IF @CUR_STATUS >= 0 
+		BEGIN
+			CLOSE C_C;
+			DEALLOCATE C_C;
+		END
+		ELSE IF @CUR_STATUS = -1 --已经关闭，只deallocate
+		BEGIN
+			DEALLOCATE C_C;
+		END
