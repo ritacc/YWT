@@ -45,6 +45,9 @@
     <Compile Include="Interface\InterfaceActionOR.cs" />
     <Compile Include="Interface\InterfacePara.cs" />
     <Compile Include="OrderPlatform\YWTOrderPlatform_ForItemOR.cs" />
+    <Compile Include="OrderSimple\OrderFileOR.cs" />
+    <Compile Include="OrderSimple\OrderFlowOR.cs" />
+    <Compile Include="OrderSimple\OrderTaskUserOR.cs" />
     <Compile Include="Order\OrderAssessOR.cs" />
     <Compile Include="Order\OrderFileOR.cs" />
     <Compile Include="Order\OrderFlowOR.cs" />

@@ -31,14 +31,14 @@ namespace YWT.Model.Order
         /// <summary>
         /// 运维人员
         /// </summary>
-        public List<OrderTaskUserOR> OrderUsers { get; set; }
+        public List<OrderTaskUserSimpleOR> OrderUsers { get; set; }
 
         /// <summary>
         /// 运维流程
         /// </summary>
-        public List<OrderFlowOR> OrderFlows { get; set; }
+        public List<OrderFlowSimpleOR> OrderFlows { get; set; }
 
-        public List<OrderFileOR> OrderFiles { get; set; }
+        public List<OrderFileSimpleOR> OrderFiles { get; set; }
 
         public YWTOrderDetaillOR(DataRow row)
             : base(row)
