@@ -38,6 +38,8 @@ namespace YWT.Model.Order
         /// </summary>
         public List<OrderFlowOR> OrderFlows { get; set; }
 
+        public List<OrderFileOR> OrderFiles { get; set; }
+
         public YWTOrderDetaillOR(DataRow row)
             : base(row)
         {
