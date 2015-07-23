@@ -69,6 +69,7 @@
     <Content Include="SQL\YWT_User_CertifyType.sql" />
     <Content Include="SQL\UseType.sql" />
     <Content Include="T.aspx" />
+    <Content Include="Txt\Record.txt" />
     <Content Include="Txt\YWT_UserInfo.txt" />
     <Content Include="Upload\FT.txt" />
   </ItemGroup>

@@ -135,27 +135,27 @@ namespace YWT.DAL.Order
                 //主表信息
                 YWTOrderDetaillOR _OrderDetaill = new YWTOrderDetaillOR(ds.Tables[0].Rows[0]);
                 //分配人员
-                List<OrderTaskUserOR> _lisUser = new List<OrderTaskUserOR>();
+                List<OrderTaskUserSimpleOR> _lisUser = new List<OrderTaskUserSimpleOR>();
                 foreach (DataRow _row in ds.Tables[1].Rows)
                 {
-                    _lisUser.Add(new OrderTaskUserOR(_row));
+                    _lisUser.Add(new OrderTaskUserSimpleOR(_row));
                 }
                 _OrderDetaill.OrderUsers = _lisUser;
                 //流程
-                List<OrderFlowOR> _lisFlow = new List<OrderFlowOR>();
+                List<OrderFlowSimpleOR> _lisFlow = new List<OrderFlowSimpleOR>();
                 foreach (DataRow _row in ds.Tables[2].Rows)
                 {
-                    _lisFlow.Add(new OrderFlowOR(_row));
+                    _lisFlow.Add(new OrderFlowSimpleOR(_row));
                 }
                 _OrderDetaill.OrderFlows = _lisFlow;
                 //文件
-                List<OrderFileOR> _listFile = new List<OrderFileOR>();
+                List<OrderFileSimpleOR> _listFile = new List<OrderFileSimpleOR>();
                 foreach (DataRow _row in ds.Tables[3].Rows)
                 {
-                    _listFile.Add(new OrderFileOR(_row));
+                    _listFile.Add(new OrderFileSimpleOR(_row));
                 }
                 _OrderDetaill.OrderFiles = _listFile;
-
+                _OrderDetaill.SetNexStatus();
                 return _OrderDetaill;
             }
             return null;
