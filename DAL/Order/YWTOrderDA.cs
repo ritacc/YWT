@@ -264,7 +264,7 @@ namespace YWT.DAL.Order
                 new SqlParameter("@YW_Result", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "YW_Result", DataRowVersion.Default, orderAssess.YW_Result),
                 new SqlParameter("@Score", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "Score", DataRowVersion.Default, orderAssess.Score),
                 new SqlParameter("@AssessContent", SqlDbType.NVarChar, 1000, ParameterDirection.Input, false, 0, 0, "AssessContent", DataRowVersion.Default, orderAssess.AssessContent),                
-                new SqlParameter("@IsAddIntegral", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "IsAddIntegral", DataRowVersion.Default, orderAssess.IsAddIntegral),
+               // new SqlParameter("@IsAddIntegral", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "IsAddIntegral", DataRowVersion.Default, orderAssess.IsAddIntegral),
                 new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, orderAssess.Creator)
 			};
             DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
