@@ -50,7 +50,7 @@ namespace YWT.DAL.Warehouse
             };
 
 
-            DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOrder_Search", parameters, out    mResultType, out   mResultMessage);
+            DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTWarehouse_Search", parameters, out    mResultType, out   mResultMessage);
             if (ds.Tables.Count == 1)
             {
                 List<WarehouseOR> _lis = new List<WarehouseOR>();

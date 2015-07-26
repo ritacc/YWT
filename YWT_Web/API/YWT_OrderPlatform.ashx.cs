@@ -54,7 +54,7 @@ namespace YWT.API
                     break;
                case "applyrecord": //第三方人员查询运维单记录
                     context.Response.Write(PlatformOrderList_Apply_Search(int.Parse(q0), q1));   //sNum,Create_User
-                    break;                    
+                    break;
 
                case "getitem"://查询一条平台运维单 
                     context.Response.Write(PlatformOrderItemSearch(q0,q1)); //q0 orderid,q1 Create_User

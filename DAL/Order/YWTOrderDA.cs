@@ -44,7 +44,7 @@ namespace YWT.DAL.Order
                 //new SqlParameter("@Status", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "Status", DataRowVersion.Default, order.Status),
                 new SqlParameter("@Remark", SqlDbType.NVarChar, 400, ParameterDirection.Input, false, 0, 0, "Remark", DataRowVersion.Default, order.Remark),
                 //new SqlParameter("@SupplierID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "SupplierID", DataRowVersion.Default, order.SupplierID),
-                new SqlParameter("@Creator", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, order.Creator),
+                new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, order.Creator),
                 //new SqlParameter("@CreateDateTime", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "CreateDateTime", DataRowVersion.Default, order.CreateDateTime),
                 new SqlParameter("@CustomerShort", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "CustomerShort", DataRowVersion.Default, order.CustomerShort),
                 new SqlParameter("@ContactMan", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "ContactMan", DataRowVersion.Default, order.ContactMan),
