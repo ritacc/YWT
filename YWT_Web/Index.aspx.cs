@@ -11,7 +11,7 @@ namespace YWT
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("http://www.ritacc.cn");
+            Response.Redirect("/Interface/Interface.aspx");
         }
     }
 }

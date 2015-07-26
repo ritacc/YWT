@@ -52,6 +52,8 @@
     <Compile Include="User\YWTUserInfoBLL.cs" />
     <Compile Include="User\YWTSupplierBLL.cs" />
     <Compile Include="User\YWTUserBLL.cs" />
+    <Compile Include="Warehouse\WarehouseBLL.cs" />
+    <Compile Include="YWLog\YWLogBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
@@ -63,7 +65,9 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Other\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

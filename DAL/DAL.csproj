@@ -54,6 +54,8 @@
     <Compile Include="InterfaceDA.cs" />
     <Compile Include="Order\YWTOrderDA.cs" />
     <Compile Include="Order\YWTOrderPlatformDA.cs" />
+    <Compile Include="Other\OnlineApprovalDA.cs" />
+    <Compile Include="Other\RegistrationDA.cs" />
     <Compile Include="Pub\YWTSetupBLL.cs" />
     <Compile Include="Pub\YWTVVerifyCodeDA.cs" />
     <Compile Include="SysDB\AccessSqlserverDA.cs" />
@@ -61,6 +63,10 @@
     <Compile Include="User\YWTSupplierDA.cs" />
     <Compile Include="User\YWTUserDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Warehouse\WarehouseDA.cs" />
+    <Compile Include="YWLog\YWLogDA.cs" />
+    <Compile Include="YWLog\YWLogFileDA.cs" />
+    <Compile Include="YWLog\YWLogReplyDA.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

@@ -88,6 +88,7 @@ SET @Dict_Type_Code=N'orderstatus'
 INSERT INTO YWT_Dict_Type (Dict_Type_Code,Dict_Type_Text,Dict_Type_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'运单状态',N'',GETDATE(),GETDATE())
 --内单状态
 INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'0',N'下单',N'',GETDATE(),GETDATE())
+INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'1',N'支付',N'',GETDATE(),GETDATE())
 INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'20',N'指派运维人员',N'',GETDATE(),GETDATE())
 INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'30',N'开始运维',N'',GETDATE(),GETDATE())
 INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'90',N'完成运维',N'',GETDATE(),GETDATE())
@@ -103,8 +104,8 @@ SET @Dict_Type_Code=N'orderFileType'
 INSERT INTO YWT_Dict_Type (Dict_Type_Code,Dict_Type_Text,Dict_Type_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'运维单文件类型',N'',GETDATE(),GETDATE())
 
 INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'orderfile',N'下单文件',N'',GETDATE(),GETDATE())
-INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'daodafile',N'到达目的地文件',N'',GETDATE(),GETDATE())
-INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'wanchenfile',N'完成文件',N'',GETDATE(),GETDATE())
+INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'30',N'到达目的地文件',N'',GETDATE(),GETDATE())
+INSERT INTO YWT_Dict_Code (Dict_Type_Code,Dict_Code,Dict_Text,Dict_Desc,CreateDate,Last_Modify_Date) VALUES(@Dict_Type_Code,N'90',N'完成文件',N'',GETDATE(),GETDATE())
 
 SET @Dict_Type_Code=N'ordertype' 
 

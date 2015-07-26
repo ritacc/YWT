@@ -27,13 +27,14 @@ namespace YWT.DAL.Order
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-       public List<YWTOrderPlatform_ForListOR> PlatformOrderListSearch(int StartIndex, int endIndex, out int mResultType, out string mResultMessage)
+       public List<YWTOrderPlatform_ForListOR> PlatformOrderListSearch_ForAll(int StartIndex, int endIndex, out int mResultType, out string mResultMessage)
         {
             string sql = @"SP_YWTOrder_Platform_Search";
             SqlParameter[] parameters = new SqlParameter[]
 			{
-                new SqlParameter("@StartIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),               
-                new SqlParameter("@endIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "ContactMobile", DataRowVersion.Default, endIndex)
+                new SqlParameter("@StartIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),
+                new SqlParameter("@endIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "ContactMobile", DataRowVersion.Default, endIndex),
+                new SqlParameter("@SearchType", SqlDbType.VarChar, 10, ParameterDirection.Input, false, 0, 0, "SearchType", DataRowVersion.Default, "all")               
 			};
             DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
             if (ds != null && ds.Tables.Count > 0)
@@ -48,6 +49,37 @@ namespace YWT.DAL.Order
             return null;
         }
 
+       /// <summary>
+       /// 查询平台多条运维单
+       /// </summary>
+       /// <param name="StartIndex"></param>
+       /// <param name="endIndex"></param>
+       /// <param name="mResultType"></param>
+       /// <param name="mResultMessage"></param>
+       /// <returns></returns>
+       public List<YWTOrderPlatform_ForListOR> PlatformOrderListSearch_ForSupplier(string Create_User, int StartIndex, int endIndex, out int mResultType, out string mResultMessage)
+       {
+           string sql = @"SP_YWTOrder_Platform_Search";
+           SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@StartIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),
+                new SqlParameter("@endIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "ContactMobile", DataRowVersion.Default, endIndex),
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User),
+                new SqlParameter("@SearchType", SqlDbType.VarChar, 10, ParameterDirection.Input, false, 0, 0, "SearchType", DataRowVersion.Default, "sup")
+			};
+           DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+           if (ds != null && ds.Tables.Count > 0)
+           {
+               List<YWTOrderPlatform_ForListOR> _list = new List<YWTOrderPlatform_ForListOR>();
+               foreach (DataRow _row in ds.Tables[0].Rows)
+               {
+                   _list.Add(new YWTOrderPlatform_ForListOR(_row));
+               }
+               return _list;
+           }
+           return null;
+       }
+
         /// <summary>
         /// 查询一条平台运维单 
         /// 运单主体\申请人员列表
@@ -61,7 +93,7 @@ namespace YWT.DAL.Order
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
-                new SqlParameter("@Create_User", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)
 			};
             DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
             if (ds != null && ds.Tables.Count > 0)
@@ -72,17 +104,50 @@ namespace YWT.DAL.Order
                     DataRow _row = ds.Tables[0].Rows[0];
                     result = new YWTOrderPlatform_ForItemOR(_row);
                     
-                    List<YWTOrderPlatformApplyUserOR> _list = new List<YWTOrderPlatformApplyUserOR>();
-                    foreach (DataRow _rowuser in ds.Tables[0].Rows)
-                    {
-                        _list.Add(new YWTOrderPlatformApplyUserOR(_rowuser));
-                    }
-                    result.ApplyUsers = _list;
+                    //List<YWTOrderPlatformApplyUserOR> _list = new List<YWTOrderPlatformApplyUserOR>();
+                    //foreach (DataRow _rowuser in ds.Tables[0].Rows)
+                    //{
+                    //    _list.Add(new YWTOrderPlatformApplyUserOR(_rowuser));
+                    //}
+                    //result.ApplyUsers = _list;
                 }
                 return result;
             }
             return null;
         }
+
+      
+
+       public YWTOrderPlatform_ForItemOR PlatformOrderItemSearch(string Order_ID, long Platform_Apply_ID,long MinID,   out int mResultType, out string mResultMessage)
+        {
+            string sql = @"SP_YWTOrder_Platform_ApplyUsers_Search";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
+                new SqlParameter("@Platform_Apply_ID", SqlDbType.BigInt, 10, ParameterDirection.Input, false, 0, 0, "Platform_Apply_ID", DataRowVersion.Default, Platform_Apply_ID),
+                new SqlParameter("@MinID", SqlDbType.BigInt, 10, ParameterDirection.Input, false, 0, 0, "MinID", DataRowVersion.Default, MinID),
+			};
+            DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                YWTOrderPlatform_ForItemOR result = null;
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    DataRow _row = ds.Tables[0].Rows[0];
+                    result = new YWTOrderPlatform_ForItemOR(_row);
+                    
+                    //List<YWTOrderPlatformApplyUserOR> _list = new List<YWTOrderPlatformApplyUserOR>();
+                    //foreach (DataRow _rowuser in ds.Tables[0].Rows)
+                    //{
+                    //    _list.Add(new YWTOrderPlatformApplyUserOR(_rowuser));
+                    //}
+                    //result.ApplyUsers = _list;
+                }
+                return result;
+            }
+            return null;
+        }
+       
 
         /// <summary>
         /// 第三方人员 申请运维单
@@ -114,9 +179,9 @@ namespace YWT.DAL.Order
        /// <param name="Create_User"></param>
        /// <param name="mResultType"></param>
        /// <param name="mResultMessage"></param>
-        public void OrderPlatformSelectApplyUser(string orderID, string Platform_Apply_ID, string Create_User, out int mResultType, out string mResultMessage)
+        public void OrderPlatform_ComfirmApplyUser(string orderID, string Platform_Apply_ID, string Create_User, out int mResultType, out string mResultMessage)
        {
-           string sql = @"SP_YWTOrder_Platform_SelectApplyUser";
+           string sql = @"SP_YWTOrder_Platform_ComfirmApplyUser";
            SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, orderID),
@@ -189,8 +254,7 @@ namespace YWT.DAL.Order
             return null;
         }
 
-       //到场-完成运维单
-       //
+     
 
        /// <summary>
         /// 运维人员评价
@@ -221,7 +285,50 @@ namespace YWT.DAL.Order
 			};
             DbHelperSQL.ExecuteProcedureNonQuery(sql, parameters, out   mResultType, out   mResultMessage);
         }
-        
 
+        #region 申请人数据查询
+
+        public List<YWTOrderPlatformApplyUser_ForListOR> GetListApplyUsers(string Order_ID, long MinID, out int mResultType, out string mResultMessage)
+        {
+            string sql = @"SP_YWTOrder_Platform_ApplyUsers_Search";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
+                new SqlParameter("@MinID", SqlDbType.BigInt, 10, ParameterDirection.Input, false, 0, 0, "MinID", DataRowVersion.Default, MinID)
+
+			};
+            DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                List<YWTOrderPlatformApplyUser_ForListOR> _list = new List<YWTOrderPlatformApplyUser_ForListOR>();
+                foreach (DataRow _row in ds.Tables[0].Rows)
+                {
+                    _list.Add(new YWTOrderPlatformApplyUser_ForListOR(_row));
+                }
+                return _list;
+            }
+            return null;
+        }
+            
+        public YWTOrderPlatformApplyUserOR GetItemApplyUsers(string Platform_Apply_ID, out int mResultType, out string mResultMessage)
+        {
+            string sql = @"SP_YWTOrder_Platform_ApplyUsers_Search";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Platform_Apply_ID", SqlDbType.BigInt, 10, ParameterDirection.Input, false, 0, 0, "Platform_Apply_ID", DataRowVersion.Default, Platform_Apply_ID)
+			};
+            DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                
+                foreach (DataRow _row in ds.Tables[0].Rows)
+                {
+                   return  new YWTOrderPlatformApplyUserOR(_row);
+                }                 
+            }
+            return null;
+        }
+
+        #endregion
     }
 }
