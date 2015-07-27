@@ -15,16 +15,30 @@ namespace YWT.BLL.Order
     {
          
         /// <summary>
-        /// 查询平台运维单
+        /// 查询平台运维单 所有人列表
         /// </summary>
         /// <param name="StartIndex"></param>
         /// <param name="endIndex"></param>
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-        public List<YWTOrderPlatform_ForListOR> PlatformOrderListSearch(int StartIndex, int endIndex, out int mResultType, out string mResultMessage)
+        public List<YWTOrderPlatform_ForListOR> PlatformOrderListSearch_ForAll(int StartIndex, int endIndex, out int mResultType, out string mResultMessage)
         {
-            return new YWTOrderPlatformDA().PlatformOrderListSearch(StartIndex, endIndex, out   mResultType, out   mResultMessage);
+            return new YWTOrderPlatformDA().PlatformOrderListSearch_ForAll(StartIndex, endIndex, out   mResultType, out   mResultMessage);
+        }
+
+        /// <summary>
+        /// 下单人
+        /// </summary>
+        /// <param name="Create_User"></param>
+        /// <param name="StartIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public List<YWTOrderPlatform_ForListOR> PlatformOrderListSearch_ForSupplier(string Create_User, int StartIndex, int endIndex, out int mResultType, out string mResultMessage)
+        {
+            return new YWTOrderPlatformDA().PlatformOrderListSearch_ForSupplier(Create_User, StartIndex, endIndex, out   mResultType, out   mResultMessage);
         }
 
         /// <summary>
@@ -60,9 +74,9 @@ namespace YWT.BLL.Order
         /// <param name="Create_User"></param>
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
-        public void OrderPlatformSelectApplyUser(string orderID, string Platform_Apply_ID, string Create_User, out int mResultType, out string mResultMessage)
+        public void OrderPlatform_ComfirmApplyUser(string orderID, string Platform_Apply_ID, string Create_User, out int mResultType, out string mResultMessage)
         {
-           new YWTOrderPlatformDA().OrderPlatformSelectApplyUser(  orderID,   Platform_Apply_ID,  Create_User, out   mResultType, out   mResultMessage);
+            new YWTOrderPlatformDA().OrderPlatform_ComfirmApplyUser(orderID, Platform_Apply_ID, Create_User, out   mResultType, out   mResultMessage);
         }
 
 
@@ -110,5 +124,17 @@ namespace YWT.BLL.Order
         {
             new YWTOrderPlatformDA().PlatformOrder_Assess_Save(Order_ID, Assess_Type, YW_Result, Score, AssessContent, Create_User, out  mResultType, out  mResultMessage);
         }
+
+        #region 申请人数据查询
+        public List<YWTOrderPlatformApplyUser_ForListOR> GetListApplyUsers(string Order_ID, long MinID, out int mResultType, out string mResultMessage)
+        {
+         return   new YWTOrderPlatformDA().GetListApplyUsers(Order_ID,  MinID, out  mResultType, out  mResultMessage);
+        }
+
+        public YWTOrderPlatformApplyUserOR GetItemApplyUsers(string Platform_Apply_ID, out int mResultType, out string mResultMessage)
+        {
+           return new YWTOrderPlatformDA().GetItemApplyUsers( Platform_Apply_ID, out  mResultType, out  mResultMessage);
+        }
+        #endregion
     }
 }

@@ -43,27 +43,39 @@ namespace YWT.API
                 case "addexternal"://外部单
                     context.Response.Write(AddOrder(q0, q1));
                     break;
-               case "getlist"://查请没有结束的平台运维单
-                    context.Response.Write(PlatformOrderListSearch(int.Parse(q0)));
+                case "getlistforall"://查请没有结束的平台运维单
+                    context.Response.Write(PlatformOrderListSearch_ForAll(int.Parse(q0)));
                     break;
+               case "getlistforsupplier"://查询下单人列表
+                    context.Response.Write(PlatformOrderListSearch_ForSupplier(int.Parse(q0), q1));
+                    break;
+               case "ywusergetlist": //第三方人员查询申请成功、申请过的
+                    context.Response.Write(PlatformOrderList_ApplySuccess_Search(int.Parse(q0), q1));   //sNum,Create_User
+                    break;
+               case "applyrecord": //第三方人员查询运维单记录
+                    context.Response.Write(PlatformOrderList_Apply_Search(int.Parse(q0), q1));   //sNum,Create_User
+                    break;                    
+
                case "getitem"://查询一条平台运维单 
                     context.Response.Write(PlatformOrderItemSearch(q0,q1)); //q0 orderid,q1 Create_User
                     break;
                case "applyyw"://申请运维单
                     context.Response.Write(OrderPlatformApply(q0,q1));  
                     break;
-                case "selectapplyuser": //确定第三方运维人
-                    context.Response.Write(OrderPlatformSelectApplyUser(q0, q1,q2));    // orderID,   Platform_Apply_ID,   Create_User
+               case "comfirmapplyuser": //确定第三方运维人
+                    context.Response.Write(OrderPlatformComfirmApplyUser(q0, q1,q2));    // orderID,   Platform_Apply_ID,   Create_User
                     break;
-                case "ywusergetlist": //第三方人员查询申请成功、申请过的
-                    context.Response.Write(PlatformOrderList_ApplySuccess_Search(int.Parse(q0), q1));   //sNum,Create_User
-                    break;
-                case "applyrecord": //第三方人员查询运维单记录
-                    context.Response.Write(PlatformOrderList_Apply_Search(int.Parse(q0), q1));   //sNum,Create_User
-                    break;                    
-                case "assess":
+                
+                case "assess": //评分
                     context.Response.Write(PlatformOrder_Assess_Save(q0,q1,q2,int.Parse(q3), q4,q5));   //Order_ID,   Assess_Type,   YW_Result,  Score,   AssessContent,   Create_User
                     break;
+                case "getlistapplyusers": //获取申请人列表
+                    context.Response.Write(GetListApplyUsers(q0, long.Parse(q1)));   //Order_ID,   Assess_Type,   YW_Result,  Score,   AssessContent,   Create_User
+                    break;
+                case "getitemapplyusers": //根据申请ID 查询申请人的详细信息
+                    context.Response.Write(GetItemApplyUsers(q0));   //Order_ID,   Assess_Type,   YW_Result,  Score,   AssessContent,   Create_User
+                    break;
+
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
@@ -130,7 +142,7 @@ namespace YWT.API
             {
                     int mResultType = 0;
                     string mResultMessage = string.Empty;
-                    List < YWTOrderPlatform_ForListOR > _list= new YWTOrderPlatformBLL().PlatformOrderListSearch(StartIndex, endIndex, out   mResultType, out   mResultMessage);
+                    List<YWTOrderPlatform_ForListOR> _list = new YWTOrderPlatformBLL().PlatformOrderListSearch_ForAll(StartIndex, endIndex, out   mResultType, out   mResultMessage);
                     if (mResultType == 0)
                     {
                         _result.Status = true;
@@ -150,8 +162,157 @@ namespace YWT.API
             }
             return _result.ToJSON2();
             
-        } 
+        }
+        
+        #region 查询运维单 所有人 下单人   申请成功  申请记录
+        /// <summary>
+        /// 查询平台运维单
+        /// </summary>
+        /// <param name="sNum"></param>
+        /// <returns></returns>
+        public string PlatformOrderListSearch_ForAll(int sNum)
+        {
+            int PageSize = 10;
+            int StartIndex = sNum * PageSize;
+            int endIndex = (sNum + 1) * PageSize;
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                List<YWTOrderPlatform_ForListOR> _list = new YWTOrderPlatformBLL().PlatformOrderListSearch_ForAll(StartIndex, endIndex, out   mResultType, out   mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";
+                    _result.ResultObject = _list;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
 
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/OrderPlatformApply", ex.ToString());
+            }
+            return _result.ToJSON2();
+
+        }
+
+        /// <summary>
+        /// 查询平台运维单
+        /// </summary>
+        /// <param name="sNum"></param>
+        /// <returns></returns>
+        public string PlatformOrderListSearch_ForSupplier(int sNum, string Create_User)
+        {
+            int PageSize = 10;
+            int StartIndex = sNum * PageSize;
+            int endIndex = (sNum + 1) * PageSize;
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                List<YWTOrderPlatform_ForListOR> _list = new YWTOrderPlatformBLL().PlatformOrderListSearch_ForSupplier(Create_User, StartIndex, endIndex, out   mResultType, out   mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";
+                    _result.ResultObject = _list;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/OrderPlatformApply", ex.ToString());
+            }
+            return _result.ToJSON2();
+
+        }
+
+        /// <summary>
+        /// 第三方人员申请成功运维单
+        /// </summary>
+        /// <param name="sNum"></param>
+        /// <param name="Create_User"></param>
+        /// <returns></returns>
+        public string PlatformOrderList_ApplySuccess_Search(int sNum, string Create_User)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int PageSize = 10;
+                int StartIndex = sNum * PageSize;
+                int endIndex = (sNum + 1) * PageSize;
+
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                List<YWTOrderPlatform_ForListOR> item = new YWTOrderPlatformBLL().PlatformOrderList_ApplySuccess_Search(StartIndex, endIndex, Create_User, out   mResultType, out   mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";
+                    _result.ResultObject = item;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/PlatformOrderItemSearch", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+        /// <summary>
+        /// 第三方人员查询申请记录查询
+        /// </summary>
+        /// <param name="sNum"></param>
+        /// <param name="Create_User"></param>
+        /// <returns></returns>
+        public string PlatformOrderList_Apply_Search(int sNum, string Create_User)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int PageSize = 10;
+                int StartIndex = sNum * PageSize;
+                int endIndex = (sNum + 1) * PageSize;
+
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                List<YWTOrderPlatform_ForListOR> item = new YWTOrderPlatformBLL().PlatformOrderList_Apply_Search(StartIndex, endIndex, Create_User, out   mResultType, out   mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";
+                    _result.ResultObject = item;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/PlatformOrderItemSearch", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        #endregion
         /// <summary>
         /// 查询一条平台运维单 
         /// 运单主体\申请人员列表
@@ -246,14 +407,14 @@ namespace YWT.API
         /// <param name="Create_User"></param>
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
-        public string OrderPlatformSelectApplyUser(string orderID, string Platform_Apply_ID, string Create_User)
+        public string OrderPlatformComfirmApplyUser(string orderID, string Platform_Apply_ID, string Create_User)
         {
             AjaxContentOR _result = new AjaxContentOR();
             try
             {
                 int mResultType = 0;
                 string mResultMessage = string.Empty;
-                new YWTOrderPlatformBLL().OrderPlatformSelectApplyUser(orderID, Platform_Apply_ID, Create_User, out   mResultType, out   mResultMessage);
+                new YWTOrderPlatformBLL().OrderPlatform_ComfirmApplyUser(orderID, Platform_Apply_ID, Create_User, out   mResultType, out   mResultMessage);
                 if (mResultType == 0)
                 {
                     _result.Status = true;
@@ -271,83 +432,7 @@ namespace YWT.API
             }
             return _result.ToJSON2();
         }
-
-
-        /// <summary>
-        /// 第三方人员申请成功运维单
-        /// </summary>
-        /// <param name="sNum"></param>
-        /// <param name="Create_User"></param>
-        /// <returns></returns>
-        public string PlatformOrderList_ApplySuccess_Search(int sNum, string Create_User)
-        {
-            AjaxContentOR _result = new AjaxContentOR();
-            try
-            {
-                int PageSize = 10;
-                int StartIndex = sNum * PageSize;
-                int endIndex = (sNum + 1) * PageSize; 
-
-                int mResultType = 0;
-                string mResultMessage = string.Empty;
-                List<YWTOrderPlatform_ForListOR> item = new YWTOrderPlatformBLL().PlatformOrderList_ApplySuccess_Search(StartIndex, endIndex, Create_User, out   mResultType, out   mResultMessage);
-                if (mResultType == 0)
-                {
-                    _result.Status = true;
-                    _result.ReturnMsg = "Success";
-                    _result.ResultObject = item;
-                }
-                else
-                {
-                    _result.ReturnMsg = mResultMessage;
-                }
-            }
-            catch (Exception ex)
-            {
-                _result.ReturnMsg = ex.Message.ToString();
-                Utils.WriteLog("YWT_Order.ashx/PlatformOrderItemSearch", ex.ToString());
-            }
-            return _result.ToJSON2();
-        }
-
-        /// <summary>
-        /// 第三方人员查询申请记录查询
-        /// </summary>
-        /// <param name="sNum"></param>
-        /// <param name="Create_User"></param>
-        /// <returns></returns>
-        public string PlatformOrderList_Apply_Search(int sNum, string Create_User)
-        {
-            AjaxContentOR _result = new AjaxContentOR();
-            try
-            {
-                int PageSize = 10;
-                int StartIndex = sNum * PageSize;
-                int endIndex = (sNum + 1) * PageSize;
-
-                int mResultType = 0;
-                string mResultMessage = string.Empty;
-                List<YWTOrderPlatform_ForListOR> item = new YWTOrderPlatformBLL().PlatformOrderList_Apply_Search(StartIndex, endIndex, Create_User, out   mResultType, out   mResultMessage);
-                if (mResultType == 0)
-                {
-                    _result.Status = true;
-                    _result.ReturnMsg = "Success";
-                    _result.ResultObject = item;
-                }
-                else
-                {
-                    _result.ReturnMsg = mResultMessage;
-                }
-            }
-            catch (Exception ex)
-            {
-                _result.ReturnMsg = ex.Message.ToString();
-                Utils.WriteLog("YWT_Order.ashx/PlatformOrderItemSearch", ex.ToString());
-            }
-            return _result.ToJSON2();
-        }
-
-
+       
         /// <summary>
         /// 运维人员评价
         /// 运维商评价
@@ -384,7 +469,73 @@ namespace YWT.API
             }
             return _result.ToJSON2();
         }
-         
+        #region 申请人数据查询
+        /// <summary>
+        /// 获取申请人列表
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <param name="MinID"></param>
+        /// <returns></returns>
+        public string GetListApplyUsers(string orderID, long MinID)
+        {   
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                List<YWTOrderPlatformApplyUser_ForListOR> _list = new YWTOrderPlatformBLL().GetListApplyUsers(orderID, MinID, out   mResultType, out   mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";
+                    _result.ResultObject = _list;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/OrderPlatformApply", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+        /// <summary>
+        /// 根据申请ID 查询申请人的详细信息
+        /// </summary>
+        /// <param name="Platform_Apply_ID"></param>
+        /// <returns></returns>
+        public string GetItemApplyUsers(string Platform_Apply_ID)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                var objitem = new YWTOrderPlatformBLL().GetItemApplyUsers(Platform_Apply_ID, out   mResultType, out   mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";
+                    _result.ResultObject = objitem;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/OrderPlatformApply", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        #endregion
 
         public bool IsReusable
         {

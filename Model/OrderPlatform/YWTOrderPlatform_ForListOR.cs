@@ -29,7 +29,7 @@ namespace YWT.Model.Order
         /// <summary>
         /// 运单类型
         /// </summary>
-        public string OrderType { get; set; }
+        //public string OrderType { get; set; }
 
         /// <summary>
         /// 工作时长
@@ -40,19 +40,19 @@ namespace YWT.Model.Order
         /// <summary>
         /// 
         /// </summary>
-        public string Task_Province { get; set; }
+        private string Task_Province { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Task_City { get; set; }
+        private string Task_City { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Task_County { get; set; }
+        private string Task_County { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Task_Town { get; set; }
+        private string Task_Town { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -62,7 +62,7 @@ namespace YWT.Model.Order
         /// <summary>
         /// 状态 0新建 1生效 2...
         /// </summary>
-        public int Status { get; set; } 
+        public int Status { get; set; }
 
         /// <summary>
         /// 
@@ -88,8 +88,8 @@ namespace YWT.Model.Order
         /// <summary>
         /// 需求人数
         /// </summary>
-        public int PersonNum { get; set; } 
-        #endregion 
+        public int PersonNum { get; set; }
+        #endregion
         /// <summary>
         /// 状态名称
         /// </summary>
@@ -99,6 +99,23 @@ namespace YWT.Model.Order
         /// </summary>
         public string OrderType_Name { get; set; }
 
+        /// <summary>
+        /// 申请人数
+        /// </summary>
+        public int ApplyNum { get; set; }
+
+        /// <summary>
+        /// 星级
+        /// </summary>
+        public int Stars { get; set; }
+        /// <summary>
+        /// 完成订单数量
+        /// </summary>
+       // public int OrderFinishNum { get; set; }
+        /// <summary>
+        /// 平均平价
+        /// </summary>
+       // public int ScoreAvg { get; set; }
 
         /// <summary>
         /// 公司名称
@@ -117,7 +134,7 @@ namespace YWT.Model.Order
             // 标题
             OrderTitle = row["OrderTitle"].ToString().Trim();
             // 运单类型
-            OrderType = row["OrderType"].ToString().Trim();
+            //OrderType = row["OrderType"].ToString().Trim();
 
 
             // 工作时长
@@ -154,6 +171,24 @@ namespace YWT.Model.Order
             // 需求人数
             if (row["PersonNum"] != DBNull.Value)
                 PersonNum = Convert.ToInt32(row["PersonNum"]);
+
+            if (row["ApplyNum"] != DBNull.Value)//申请人
+            {
+                ApplyNum = Convert.ToInt32(row["ApplyNum"]);
+            }
+            if (row["Stars"] != DBNull.Value)
+            {
+                Stars = Convert.ToInt32(row["Stars"]);
+            }
+
+            //if (row["OrderFinishNum"] != DBNull.Value)
+            //{
+            //    OrderFinishNum = Convert.ToInt32(row["OrderFinishNum"]);
+            //}
+            //if (row["ScoreAvg"] != DBNull.Value)
+            //{
+            //    ScoreAvg = Convert.ToInt32(row["ScoreAvg"]);
+            //}
 
             #endregion
             Status_Name = row["Status_Name"].ToString();

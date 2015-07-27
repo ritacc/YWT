@@ -29,7 +29,7 @@ namespace YWT.Model.OrderPlatform
         /// <summary>
         /// 运单类型
         /// </summary>
-        public string OrderType { get; set; }
+        private string OrderType { get; set; }
         /// <summary>
         /// 工作任务
         /// </summary>
@@ -43,19 +43,19 @@ namespace YWT.Model.OrderPlatform
         /// <summary>
         /// 
         /// </summary>
-        public string Task_Province { get; set; }
+        private string Task_Province { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Task_City { get; set; }
+        private string Task_City { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Task_County { get; set; }
+        private string Task_County { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Task_Town { get; set; }
+        private string Task_Town { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -162,7 +162,7 @@ namespace YWT.Model.OrderPlatform
         public string Company { get; set; }
         #endregion
 
-        public List<YWTOrderPlatformApplyUserOR> ApplyUsers { get; set; }
+        //public List<YWTOrderPlatformApplyUserOR> ApplyUsers { get; set; }
 
         public YWTOrderPlatform_ForItemOR(DataRow row)
         {

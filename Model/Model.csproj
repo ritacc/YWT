@@ -44,6 +44,7 @@
     <Compile Include="Coordinate\YWTCoordinateOR.cs" />
     <Compile Include="Interface\InterfaceActionOR.cs" />
     <Compile Include="Interface\InterfacePara.cs" />
+    <Compile Include="OrderPlatform\YWTOrderPlatformApplyUser_ForListOR.cs" />
     <Compile Include="OrderPlatform\YWTOrderPlatform_ForItemOR.cs" />
     <Compile Include="OrderSimple\OrderFileOR.cs" />
     <Compile Include="OrderSimple\OrderFlowOR.cs" />
@@ -61,6 +62,8 @@
     <Compile Include="Order\YWTOrderDetaillOR.cs" />
     <Compile Include="OrderPlatform\YWTOrderPlatformApplyUserOR.cs" />
     <Compile Include="OrderPlatform\YWTOrderPlatform_ForListOR.cs" />
+    <Compile Include="Other\OnlineApprovalOR.cs" />
+    <Compile Include="Other\RegistrationOR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserCertifyTypeOR.cs" />
     <Compile Include="User\YWTSupplierUserOR.cs" />
@@ -70,6 +73,13 @@
     <Compile Include="User\YWTUserOR.cs" />
     <Compile Include="User\YWTUserPostionInfoOR.cs" />
     <Compile Include="User\YWTUserSupplierNameOR.cs" />
+    <Compile Include="Warehouse\WarehouseOR.cs" />
+    <Compile Include="Warehouse\WarehouseRecordOR.cs" />
+    <Compile Include="YWLog\YWLogDetailOR.cs" />
+    <Compile Include="YWLog\YWLogFileOR.cs" />
+    <Compile Include="YWLog\YWLogOR.cs" />
+    <Compile Include="YWLog\YWLogReplyOR.cs" />
+    <Compile Include="YWLog\YWLogReplyDetailOR.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

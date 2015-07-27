@@ -67,7 +67,7 @@ namespace YWT.DAL.Order
                     string sqlOrderFile = @"SP_YWTOrder_File_Save";
                     SqlParameter[] parametersOrderFile = new SqlParameter[]
                     {
-                        new SqlParameter("@OrderID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "OrderID", DataRowVersion.Default, order.Order_ID),
+                        new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, order.Order_ID),
                         new SqlParameter("@OrderFileType", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "OrderFileType", DataRowVersion.Default, _OrderFile.FileType),
                         new SqlParameter("@ImagePath", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default, _OrderFile.FileName),
                         new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, order.Creator)
@@ -220,8 +220,7 @@ namespace YWT.DAL.Order
             List<CommandInfo> _cmds = new List<CommandInfo>();
             //并以上传多张图片
             if (_lsitFiles != null && _lsitFiles.Count > 0)
-            {
-                string sqlprod = @"SP_YWTOrder_File_Save";
+            {                 
                 foreach (var item in _lsitFiles)
                 {
                     SqlParameter[] parameterFiles = new SqlParameter[]
@@ -231,7 +230,7 @@ namespace YWT.DAL.Order
                         new SqlParameter("@ImagePath", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default,item.FileName),
                         new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default,Create_User)
 			        };
-                    _cmds.Add(new CommandInfo() { CommandText = sqlprod, Parameters = parameterFiles });
+                    _cmds.Add(new CommandInfo() { CommandText =  "SP_YWTOrder_File_Save", Parameters = parameterFiles });
                 }
             }
            

@@ -1,0 +1,39 @@
+---------------New Log---------------
+-----时间: 2015/7/26 18:51:14
+-----来源: YWT_Order.ashx/PlatformOrderItemSearch
+------URL: http://localhost:57163/API/YWT_OrderPlatform.ashx?action=getitem&q0=e86e7624-1111-4be4-b2f7-e636fbbc716c&q1=686e6c29-d2d6-4f27-a752-a06a5f41048c
+-----内容: System.ArgumentException: 列“”不属于表 Table。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 YWT.Model.Order.YWTOrderPlatformApplyUserOR..ctor(DataRow row) 位置 E:\Mobile\YWT\Project\YWT\Model\OrderPlatform\YWTOrderPlatformApplyUserOR.cs:行号 95
+   在 YWT.DAL.Order.YWTOrderPlatformDA.PlatformOrderItemSearch(String Order_ID, String Create_User, Int32& mResultType, String& mResultMessage) 位置 E:\Mobile\YWT\Project\YWT\DAL\Order\YWTOrderPlatformDA.cs:行号 110
+   在 YWT.BLL.Order.YWTOrderPlatformBLL.PlatformOrderItemSearch(String Order_ID, String Create_User, Int32& mResultType, String& mResultMessage) 位置 E:\Mobile\YWT\Project\YWT\BLL\Order\YWTOrderPlatformBLL.cs:行号 53
+   在 YWT.API.YWT_OrderPlatform.PlatformOrderItemSearch(String Order_ID, String Create_User) 位置 E:\Mobile\YWT\Project\YWT\YWT_Web\API\YWT_OrderPlatform.ashx.cs:行号 330
+-----IP: ::1
+
+---------------New Log---------------
+-----时间: 2015/7/26 18:51:51
+-----来源: YWT_Order.ashx/PlatformOrderItemSearch
+------URL: http://localhost:57163/API/YWT_OrderPlatform.ashx?action=getitem&q0=e86e7624-1111-4be4-b2f7-e636fbbc716c&q1=686e6c29-d2d6-4f27-a752-a06a5f41048c&1
+-----内容: System.ArgumentException: 列“”不属于表 Table。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 YWT.Model.Order.YWTOrderPlatformApplyUserOR..ctor(DataRow row) 位置 E:\Mobile\YWT\Project\YWT\Model\OrderPlatform\YWTOrderPlatformApplyUserOR.cs:行号 95
+   在 YWT.DAL.Order.YWTOrderPlatformDA.PlatformOrderItemSearch(String Order_ID, String Create_User, Int32& mResultType, String& mResultMessage) 位置 E:\Mobile\YWT\Project\YWT\DAL\Order\YWTOrderPlatformDA.cs:行号 110
+   在 YWT.BLL.Order.YWTOrderPlatformBLL.PlatformOrderItemSearch(String Order_ID, String Create_User, Int32& mResultType, String& mResultMessage) 位置 E:\Mobile\YWT\Project\YWT\BLL\Order\YWTOrderPlatformBLL.cs:行号 53
+   在 YWT.API.YWT_OrderPlatform.PlatformOrderItemSearch(String Order_ID, String Create_User) 位置 E:\Mobile\YWT\Project\YWT\YWT_Web\API\YWT_OrderPlatform.ashx.cs:行号 330
+-----IP: ::1
+
+---------------New Log---------------
+-----时间: 2015/7/26 18:52:38
+-----来源: YWT_Order.ashx/PlatformOrderItemSearch
+------URL: http://localhost:57163/API/YWT_OrderPlatform.ashx?action=getitem&q0=e86e7624-1111-4be4-b2f7-e636fbbc716c&q1=686e6c29-d2d6-4f27-a752-a06a5f41048c&12
+-----内容: System.ArgumentException: 列“”不属于表 Table。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 YWT.Model.Order.YWTOrderPlatformApplyUserOR..ctor(DataRow row) 位置 E:\Mobile\YWT\Project\YWT\Model\OrderPlatform\YWTOrderPlatformApplyUserOR.cs:行号 95
+   在 YWT.DAL.Order.YWTOrderPlatformDA.PlatformOrderItemSearch(String Order_ID, String Create_User, Int32& mResultType, String& mResultMessage) 位置 E:\Mobile\YWT\Project\YWT\DAL\Order\YWTOrderPlatformDA.cs:行号 110
+   在 YWT.BLL.Order.YWTOrderPlatformBLL.PlatformOrderItemSearch(String Order_ID, String Create_User, Int32& mResultType, String& mResultMessage) 位置 E:\Mobile\YWT\Project\YWT\BLL\Order\YWTOrderPlatformBLL.cs:行号 53
+   在 YWT.API.YWT_OrderPlatform.PlatformOrderItemSearch(String Order_ID, String Create_User) 位置 E:\Mobile\YWT\Project\YWT\YWT_Web\API\YWT_OrderPlatform.ashx.cs:行号 330
+-----IP: ::1
+

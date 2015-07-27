@@ -26,8 +26,7 @@ namespace YWT.Model.Order
                 new  OrderStatusItem(){ OrderType=1, Status=0, StatusName="下单"},                
                 new  OrderStatusItem(){ OrderType=1, Status=20, StatusName="指派运维人员"},
                 new  OrderStatusItem(){ OrderType=1, Status=30, StatusName="开始运维"},
-                new  OrderStatusItem(){ OrderType=1, Status=90, StatusName="完成运维"},                
-                new  OrderStatusItem(){ OrderType=1, Status=90, StatusName="完成运维"}, 
+                new  OrderStatusItem(){ OrderType=1, Status=90, StatusName="完成运维"},
                 new  OrderStatusItem(){ OrderType=1, Status=99, StatusName="评价"},
 
                 new  OrderStatusItem(){ OrderType=2, Status=0, StatusName="下单"},                

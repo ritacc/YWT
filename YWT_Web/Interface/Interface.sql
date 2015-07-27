@@ -169,9 +169,25 @@ SET @Inerface_ID=@@IDENTITY
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据《包含运维单数据，及上传文件数据》 详细字段看开发流程 运维单')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'userID:操作人ID')
 
-INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'getlist',N'查询没有结束的平台运维单')
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'getlistforall',N'所有人列表')
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'开始页数从0开始 每次加载十条，下拉刷新:刷新时数量+1 ,如果查询成功但没有数据说明已经加载完成。不要再刷。')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'getlistforsupplier',N'下单人列表  ')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'开始页数从0开始 每次加载十条，下拉刷新:刷新时数量+1 ,如果查询成功但没有数据说明已经加载完成。不要再刷。')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'操作人ID')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'ywusergetlist',N'第三方人员查询申请成功记录查询')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'开始页数从0开始 每次加载十条，下拉刷新:刷新时数量+1 ')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'操作人ID')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'applyrecord',N'第三方人员查询申请记录查询')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'开始页数从0开始 每次加载十条，下拉刷新:刷新时数量+1 ')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'操作人ID')
+
 
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'getitem',N'查询一条平台运维单')
 SET @Inerface_ID=@@IDENTITY 
@@ -183,22 +199,13 @@ SET @Inerface_ID=@@IDENTITY
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'json数据:{ Order_ID,Apply_UserID,Apply_Content,ContactMan,ContactMobile}')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'操作人ID')
 
-INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'selectapplyuser',N'确定第三方运维人')
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'comfirmapplyuser',N'确定第三方运维人')
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维单ID')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'申请运维单记录的ID')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'操作人ID')
 
-INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'ywusergetlist',N'第三方人员查询申请成功记录查询')
-SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'开始页数从0开始 每次加载十条，下拉刷新:刷新时数量+1 ')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'操作人ID')
 
-
-INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'applyrecord',N'第三方人员查询申请记录查询')
-SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'开始页数从0开始 每次加载十条，下拉刷新:刷新时数量+1 ')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'操作人ID')
 
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'assess',N'评价')
 SET @Inerface_ID=@@IDENTITY 
@@ -209,6 +216,15 @@ INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q4',N'评价内容')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q5',N'操作人ID')
 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'getlistapplyusers',N'申请人数 申请人数列表')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维单ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'最小ID  第一次传-1, 第一次及以后取最小ID')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'getitemapplyusers',N'根据申请ID 查询申请人的详细信息 ')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'根据申请 Platform_Apply_ID')
 
 GO
 /*
@@ -270,3 +286,42 @@ SET @Inerface_ID=@@IDENTITY
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'IMEI')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'OS') 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'Manufacturer') 
+
+GO
+
+/*
+YWT_YWLog.ashx	运维日志	
+*/
+DECLARE @Inerface_ID	BIGINT		
+		,@IFile			VARCHAR(50)='YWT_YWLog.ashx'
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'addlog','写入运维日志')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维日志Json数据:{LogID,UserID,Title ,Conten,LogStatus} LogStatus:0 保存，1 发布 ')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'运维日志文件多个如:[{"FileName":"/Upload/....png"},{"FileName":"/Upload/....png"}]') 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getlist','获取自己的列表')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'用于分页，第一次传-1, 第一次及以后取最小ID') 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getcompanylist','查询点评列表')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'用于分页，第一次传-1, 第一次及以后取最小ID') 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getitem','查询一条日志明细 主数据，文件，点评')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'日志ID :logid') 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'logreply','点评日志')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'日志ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'操作人ID') 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'点评内容') 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getitemreply','点评日志')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'日志ID :logid') 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'用于分页，getitem 已经查询了第一次，取最小logID传入') 
