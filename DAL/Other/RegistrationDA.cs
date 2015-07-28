@@ -75,7 +75,6 @@ namespace YWT.DAL.Other
 			};
             DbHelperSQL.ExecuteProcedureNonQuery( "SP_YWTRegistration_Delete", parameters, out   mResultType, out   mResultMessage);
 		}
-
     }
 }
 
