@@ -68,9 +68,9 @@ namespace YWT.Model.OrderPlatform
             {
                 ScoreAvg = Convert.ToInt32(row["ScoreAvg"]);
             }
-           
 
-             Apply_Content = row[""].ToString();
+
+            Apply_Content = row["Apply_Content"].ToString();
              Apply_Date =Convert.ToDateTime( row["Apply_Date"].ToString());
              ContactMan = row["ContactMan"].ToString();
              ContactMobile = row["ContactMobile"].ToString();

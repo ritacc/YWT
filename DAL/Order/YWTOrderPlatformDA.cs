@@ -186,7 +186,7 @@ namespace YWT.DAL.Order
 			{
                 new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, orderID),
                 new SqlParameter("@Platform_Apply_ID", SqlDbType.BigInt, 10, ParameterDirection.Input, false, 0, 0, "Platform_Apply_ID", DataRowVersion.Default, Platform_Apply_ID),
-                new SqlParameter("@Create_User", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)
 			};
            DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
        }
@@ -208,7 +208,7 @@ namespace YWT.DAL.Order
 			{
                 new SqlParameter("@StartIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),               
                 new SqlParameter("@endIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "ContactMobile", DataRowVersion.Default, endIndex),
-                new SqlParameter("@Create_User", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)                
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)                
 			};
             DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
             if (ds != null && ds.Tables.Count > 0)
@@ -238,8 +238,8 @@ namespace YWT.DAL.Order
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@StartIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),               
-                new SqlParameter("@endIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "ContactMobile", DataRowVersion.Default, endIndex),
-                new SqlParameter("@Create_User", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)                
+                new SqlParameter("@endIndex", SqlDbType.Int, 10, ParameterDirection.Input, false, 0, 0, "endIndex", DataRowVersion.Default, endIndex),
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, Create_User)                
 			};
             DataSet ds = DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
             if (ds != null && ds.Tables.Count > 0)

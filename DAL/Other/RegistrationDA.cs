@@ -53,7 +53,8 @@ namespace YWT.DAL.Other
             }
             return null;
         }
-        public void InsertuUpdate(RegistrationOR registration, string RecordStatus, out int mResultType, out string mResultMessage)        {
+        public void InsertuUpdate(RegistrationOR registration, string RecordStatus, out int mResultType, out string mResultMessage)        
+        {
             string sql = "SP_YWTRegistration_Save";
             SqlParameter[] parameters = new SqlParameter[]
 			{
