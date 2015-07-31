@@ -56,7 +56,7 @@ namespace YWT.DAL.Warehouse
                 List<WarehouseOR> _lis = new List<WarehouseOR>();
                 foreach (DataRow _row in ds.Tables[0].Rows)
                 {
-                    _lis.Add(new WarehouseOR(_row));
+                    _lis.Add(new WarehouseOR(_row));    
                 }
                 return _lis;
             }

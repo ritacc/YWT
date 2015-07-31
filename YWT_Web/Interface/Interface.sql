@@ -59,8 +59,6 @@ INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'认证类型 p 个人 e 企业')
 GO
 
-
-
 /*
 	YWT_Supplier 运维商信息
 */
@@ -325,3 +323,41 @@ SET @Inerface_ID=@@IDENTITY
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'日志ID :logid') 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'用于分页，getitem 已经查询了第一次，取最小logID传入') 
+
+GO
+
+/*
+YWT_OnlineApproval.ashx	在线审批	
+*/
+DECLARE @Inerface_ID	BIGINT		
+		,@IFile			VARCHAR(50)='YWT_OnlineApproval.ashx'
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'add','写申请')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1','操作人ID') 
+
+
+GO
+
+/*
+YWT_Registration.ashx	手机打卡	
+*/
+DECLARE @Inerface_ID	BIGINT		
+		,@IFile			VARCHAR(50)='YWT_Registration.ashx'
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'add','手机打卡')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1','操作人ID') 
+GO
+/*
+YWT_Warehouse.ashx	仓库在线	
+*/
+DECLARE @Inerface_ID	BIGINT		
+		,@IFile			VARCHAR(50)='YWT_Warehouse.ashx'
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'add','添加产品')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1','操作人ID') 
+
+
+ 
