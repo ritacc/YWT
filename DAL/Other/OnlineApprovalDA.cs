@@ -14,12 +14,13 @@ namespace YWT.DAL.Other
     /// </summary>
     public class OnlineApprovalDA
     {
-        public List<OnlineApprovalOR> SearchList(string Create_User,long MinID, out int mResultType, out string mResultMessage)
+        public List<OnlineApprovalOR> SearchList(string Create_User, int StartIndex, int EndIndex, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default,Create_User),
-                new SqlParameter("@MinID", SqlDbType.BigInt,10, ParameterDirection.Input, false, 0, 0, "MinID", DataRowVersion.Default, MinID),
+                new SqlParameter("@StartIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),
+                new SqlParameter("@EndIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "EndIndex", DataRowVersion.Default, EndIndex),
             };
 
 
@@ -35,36 +36,43 @@ namespace YWT.DAL.Other
             }
             return null;
         }
-        //public List<OnlineApprovalOR> SearchList(string Create_User,int StartIndex,int EndIndex, out int mResultType, out string mResultMessage)
-        //{
-        //    SqlParameter[] parameters = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default,Create_User),
-        //        new SqlParameter("@StartIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),
-        //        new SqlParameter("@EndIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "EndIndex", DataRowVersion.Default, EndIndex),
-        //    };
+        /// <summary>
+        /// 运维商查询需要审批的列表
+        /// </summary>
+        /// <param name="Create_User"></param>
+        /// <param name="StartIndex"></param>
+        /// <param name="EndIndex"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public List<OnlineApproval_ForCompanyListOR> SearchListForComapny(string Create_User, int StartIndex, int EndIndex, out int mResultType, out string mResultMessage)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default,Create_User),
+                new SqlParameter("@StartIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),
+                new SqlParameter("@EndIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "EndIndex", DataRowVersion.Default, EndIndex),
+            };
 
 
-        //    DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOnlineApproval_Search", parameters, out    mResultType, out   mResultMessage);
-        //    if (ds.Tables.Count == 1)
-        //    {
-        //        List<OnlineApprovalOR> _lis = new List<OnlineApprovalOR>();
-        //        foreach (DataRow _row in ds.Tables[0].Rows)
-        //        {
-        //            _lis.Add(new OnlineApprovalOR(_row));
-        //        }
-        //        return _lis;
-        //    }
-        //    return null;
-        //}
+            DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOnlineApproval_SearchForCompany", parameters, out    mResultType, out   mResultMessage);
+            if (ds.Tables.Count == 1)
+            {
+                List<OnlineApproval_ForCompanyListOR> _lis = new List<OnlineApproval_ForCompanyListOR>();
+                foreach (DataRow _row in ds.Tables[0].Rows)
+                {
+                    _lis.Add(new OnlineApproval_ForCompanyListOR(_row));
+                }
+                return _lis;
+            }
+            return null;
+        }
         public OnlineApprovalOR SearchItem(string   OnlineApproval_ID, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OnlineApproval_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "OnlineApproval_ID", DataRowVersion.Default,OnlineApproval_ID),
             };
-
-
             DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOnlineApproval_Load", parameters, out    mResultType, out   mResultMessage);
             if (ds.Tables.Count == 1)
             {
@@ -93,6 +101,20 @@ namespace YWT.DAL.Other
 			};
             DbHelperSQL.ExecuteProcedureNonQuery(sql, parameters, out   mResultType, out   mResultMessage);
 		}
+
+        public void Approval(string OnlineApproval_ID, string ApprovalUserID, string ApprovalStatus, string ApprovalResult, out int mResultType, out string mResultMessage)
+        {
+            string sql = "SP_YWTOnlineApproval_Approval";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@OnlineApproval_ID", SqlDbType.BigInt, 8, ParameterDirection.Input, false, 0, 0, "OnlineApproval_ID", DataRowVersion.Default, OnlineApproval_ID),
+                new SqlParameter("@ApprovalUserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "ApprovalUserID", DataRowVersion.Default, ApprovalUserID),
+                new SqlParameter("@ApprovalStatus", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "ApprovalStatus", DataRowVersion.Default, ApprovalStatus),
+                new SqlParameter("@ApprovalResult", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "ApprovalResult", DataRowVersion.Default, ApprovalResult)
+			};
+            DbHelperSQL.ExecuteProcedureNonQuery(sql, parameters, out   mResultType, out   mResultMessage);
+        }
+
         public void Delete(string OnlineApproval_ID,out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]

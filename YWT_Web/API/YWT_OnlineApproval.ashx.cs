@@ -163,15 +163,19 @@ namespace YWT.API
             return _result.ToJSON2();
         }
 
-        private string GetList(string Create_User,string minid)
+        private string GetList(string Create_User,string num)
         {
             AjaxContentOR _result = new AjaxContentOR();
             try
             {
+                int inum = int.Parse(num);
+                int StartIndex = inum * 10;
+                int EndIndex = (inum + 1) * 10;
+
                 int mResultType = 0;
                 string mResultMessage = "";
 
-                var obj = new OnlineApprovalBLL().SearchList(Create_User, Convert.ToInt64(minid), out mResultType, out mResultMessage);
+                var obj = new OnlineApprovalBLL().SearchList(Create_User, StartIndex, EndIndex, out mResultType, out mResultMessage);
                 if (mResultType == 0)
                 {
                     _result.Status = true;
@@ -188,6 +192,82 @@ namespace YWT.API
                 _result.ReturnMsg = err.ToString();
 
                 Utils.WriteLog("YWT_YWLog..ashx/AddOrder", err.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+        /// <summary>
+        /// 运维商审核列表
+        /// </summary>
+        /// <param name="Create_User"></param>
+        /// <param name="searchType">-1 全部 0 未审核  1 已审核</param>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        private string GetCompanyList(string Create_User,string searchType, string num)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int inum = int.Parse(num);
+                int StartIndex = inum * 10;
+                int EndIndex = (inum + 1) * 10;
+
+                int mResultType = 0;
+                string mResultMessage = "";
+
+                var obj = new OnlineApprovalBLL().SearchListForComapny(Create_User, StartIndex, EndIndex, out mResultType, out mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";
+                    _result.ResultObject = obj;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception err)
+            {
+                _result.ReturnMsg = err.ToString();
+
+                Utils.WriteLog("YWT_YWLog..ashx/GetCompanyList", err.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+        /// <summary>
+        /// 审核列表
+        /// </summary>
+        /// <param name="OnlineApproval_ID"></param>
+        /// <param name="ApprovalUserID"></param>
+        /// <param name="ApprovalStatus"></param>
+        /// <param name="ApprovalResult"></param>
+        /// <returns></returns>
+        private string Approval(string OnlineApproval_ID, string ApprovalUserID, string ApprovalStatus, string ApprovalResult)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = "";
+
+                new OnlineApprovalBLL().Approval(OnlineApproval_ID, ApprovalUserID, ApprovalStatus, ApprovalResult, out  mResultType, out  mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = "Success";                    
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception err)
+            {
+                _result.ReturnMsg = err.ToString();
+
+                Utils.WriteLog("YWT_YWLog..ashx/Approval", err.ToString());
             }
             return _result.ToJSON2();
         }

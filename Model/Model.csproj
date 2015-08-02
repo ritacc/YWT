@@ -63,6 +63,8 @@
     <Compile Include="OrderPlatform\YWTOrderPlatformApplyUserOR.cs" />
     <Compile Include="OrderPlatform\YWTOrderPlatform_ForListOR.cs" />
     <Compile Include="Other\OnlineApprovalOR.cs" />
+    <Compile Include="Other\OnlineApproval_ForCompanyListOR.cs" />
+    <Compile Include="Other\OnlineApproval_ForSelfListOR.cs" />
     <Compile Include="Other\RegistrationOR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserCertifyTypeOR.cs" />

@@ -38,10 +38,20 @@ namespace YWT.BLL.Other
  
         }
 
-        public List<OnlineApprovalOR> SearchList(string Create_User, long MinID, out int mResultType, out string mResultMessage)
+        public List<OnlineApprovalOR> SearchList(string Create_User, int StartIndex, int EndIndex, out int mResultType, out string mResultMessage)
         {
-            return new OnlineApprovalDA().SearchList(Create_User, MinID, out   mResultType, out   mResultMessage);
+            return new OnlineApprovalDA().SearchList(Create_User, StartIndex, EndIndex, out   mResultType, out   mResultMessage);
         }
+
+         public List<OnlineApproval_ForCompanyListOR> SearchListForComapny(string Create_User, int StartIndex, int EndIndex, out int mResultType, out string mResultMessage)
+         {
+             return new OnlineApprovalDA().SearchListForComapny(Create_User, StartIndex, EndIndex, out   mResultType, out   mResultMessage);
+         }
+
+         public void Approval(string OnlineApproval_ID, string ApprovalUserID, string ApprovalStatus, string ApprovalResult, out int mResultType, out string mResultMessage)
+         {
+               new OnlineApprovalDA().Approval(OnlineApproval_ID, ApprovalUserID, ApprovalStatus, ApprovalResult,  out  mResultType, out  mResultMessage);
+         }
     }
 }
 
