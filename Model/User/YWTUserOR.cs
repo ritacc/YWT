@@ -200,7 +200,7 @@ namespace YWT.Model.User
                 UserImg = row["UserImg"].ToString();
                 if (string.IsNullOrEmpty(UserImg))
                 {
-                    UserImg = "/Images/defaultPhoto.png";
+                    UserImg = "/Upload/defaultPhoto.png";
                 }
 
                 // 个人认证 时间

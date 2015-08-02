@@ -294,7 +294,7 @@ DECLARE @Inerface_ID	BIGINT
 		,@IFile			VARCHAR(50)='YWT_YWLog.ashx'
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'addedit','写入运维日志 保存存后发布')
 SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维日志Json数据:{LogID,UserID,Title ,Conten,LogStatus} LogStatus:0 保存，1 发布 ')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维日志Json数据:{LogID,UserID,Title ,Content,LogStatus} LogStatus:0 保存，1 发布 ')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'运维日志文件多个如:[{"FileName":"/Upload/....png"},{"FileName":"/Upload/....png"}]') 
 
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getlist','获取自己的列表')
@@ -333,10 +333,27 @@ DECLARE @Inerface_ID	BIGINT
 		,@IFile			VARCHAR(50)='YWT_OnlineApproval.ashx'
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'add','写申请')
 SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1','操作人ID') 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据 {"ApplyType":"","ApplyContent":"申请内容","ApplyUserID":"申请人"} 
+<br/> ApplyType申请类型<购买配件、增加人员 > ')
 
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getlist','在线审批列表')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'用于分页，第一次传-1, 第一次及以后取最小ID') 
 
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getitem','查询一条在线审批')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'审批ID')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getcompanylist','查询需要审核，未审核列表')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'用于分页，第一次传-1, 第一次及以后取最小ID') 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'approval','审批')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'审批ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'审批人')
 GO
 
 /*

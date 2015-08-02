@@ -16,6 +16,10 @@ namespace YWT.Model.Other
 		/// </summary>
 		public long OnlineApproval_ID { get; set; }
 		/// <summary>
+		/// 
+		/// </summary>
+		public string ApplyNo { get; set; }
+		/// <summary>
 		/// 申请类型
 		/// </summary>
 		public string ApplyType { get; set; }
@@ -34,15 +38,23 @@ namespace YWT.Model.Other
 		/// <summary>
 		/// 审核人
 		/// </summary>
-		public string Approval_UserID { get; set; }
+		public string ApprovalUserID { get; set; }
 		/// <summary>
 		/// 审核状态
 		/// </summary>
-		public string Approval_Status { get; set; }
+		public int ApprovalStatus { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ApprovalStatusName { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ApprovalResult { get; set; }
 		/// <summary>
 		/// 审核时间
 		/// </summary>
-		public DateTime Approval_Time { get; set; }
+		public DateTime ApprovalTime { get; set; }
 		/// <summary>
 		/// OnlineApproval构造函数
 		/// </summary>
@@ -59,6 +71,8 @@ namespace YWT.Model.Other
 			// 
 			if(row["OnlineApproval_ID"]!= DBNull.Value)
                 OnlineApproval_ID=Convert.ToInt64(row["OnlineApproval_ID"].ToString());
+			// 
+			ApplyNo=row["ApplyNo"].ToString().Trim();
 			// 申请类型
 			ApplyType=row["ApplyType"].ToString().Trim();
 			// 申请内容
@@ -69,12 +83,17 @@ namespace YWT.Model.Other
 			if(row["ApplyDate"]!= DBNull.Value)
                 ApplyDate=Convert.ToDateTime(row["ApplyDate"]);
 			// 审核人
-			Approval_UserID=row["Approval_UserID"].ToString().Trim();
+			ApprovalUserID=row["ApprovalUserID"].ToString().Trim();
 			// 审核状态
-			Approval_Status=row["Approval_Status"].ToString().Trim();
+			if(row["ApprovalStatus"]!= DBNull.Value)
+                ApprovalStatus=Convert.ToInt32(row["ApprovalStatus"]);
+			// 
+			ApprovalStatusName=row["ApprovalStatusName"].ToString().Trim();
+			// 
+			ApprovalResult=row["ApprovalResult"].ToString().Trim();
 			// 审核时间
-			if(row["Approval_Time"]!= DBNull.Value)
-                Approval_Time=Convert.ToDateTime(row["Approval_Time"]);
+			if(row["ApprovalTime"]!= DBNull.Value)
+                ApprovalTime=Convert.ToDateTime(row["ApprovalTime"]);
 		}
     }
 }

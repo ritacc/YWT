@@ -80,6 +80,8 @@
     <Compile Include="YWLog\YWLogOR.cs" />
     <Compile Include="YWLog\YWLogReplyOR.cs" />
     <Compile Include="YWLog\YWLogReplyDetailOR.cs" />
+    <Compile Include="YWLog\YWLog_ForListOR.cs" />
+    <Compile Include="YWLog\YWLog_ForSelfListOR.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

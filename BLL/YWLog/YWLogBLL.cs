@@ -48,17 +48,17 @@ namespace YWT.BLL.Log
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-        public List<YWLogDetailOR> LogSearchForCompany(string Creator, long MinID, out int mResultType, out string mResultMessage)
+        public List<YWLog_ForListOR> LogSearchForCompany(string Creator, long MinID, out int mResultType, out string mResultMessage)
         {
             string SearchType = "company";
             string LogID = "";
             DataSet ds = new YWLogDA().LogSearch(Creator, SearchType, MinID, LogID, out   mResultType, out   mResultMessage);
-            if (mResultType > 0 && ds != null)
+            if (mResultType == 0 && ds != null)
             {
-                List<YWLogDetailOR> _list = new List<YWLogDetailOR>();
+                List<YWLog_ForListOR> _list = new List<YWLog_ForListOR>();
                 foreach (DataRow _row in ds.Tables[0].Rows)
                 {
-                    _list.Add(new YWLogDetailOR(_row));
+                    _list.Add(new YWLog_ForListOR(_row));
                 }
                 return _list;
             }
@@ -72,17 +72,17 @@ namespace YWT.BLL.Log
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-        public List<YWLogDetailOR> LogSearchForSelf(string Creator, long MinID, out int mResultType, out string mResultMessage)
+        public List<YWLog_ForSelfListOR> LogSearchForSelf(string Creator, long MinID, out int mResultType, out string mResultMessage)
         {
             string SearchType = "self";
             string LogID = "";
             DataSet ds = new YWLogDA().LogSearch(Creator, SearchType, MinID, LogID, out   mResultType, out   mResultMessage);
-            if (mResultType > 0 && ds != null)
+            if (mResultType == 0 && ds != null)
             {
-                List<YWLogDetailOR> _list = new List<YWLogDetailOR>();
+                List<YWLog_ForSelfListOR> _list = new List<YWLog_ForSelfListOR>();
                 foreach (DataRow _row in ds.Tables[0].Rows)
                 {
-                    _list.Add(new YWLogDetailOR(_row));
+                    _list.Add(new YWLog_ForSelfListOR(_row));
                 }
                 return _list;
             }

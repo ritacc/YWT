@@ -37,7 +37,7 @@ namespace YWT.API
             }
             switch (action.ToLower())
             {
-                case "addedit"://内部单
+                case "addedit"://添加、编辑日志
                     context.Response.Write(AddLog(q0, q1));
                     break;
                 case "getlist"://获取自己的列表
@@ -73,7 +73,11 @@ namespace YWT.API
             try
             {
                 YWLogOR _logMain = json.ParseJSON<YWLogOR>();
-                List<YWLogFileOR> _lsitFiles = fileJson.ParseJSON<List<YWLogFileOR>>();
+                List<YWLogFileOR> _lsitFiles = null;// fileJson.ParseJSON<List<YWLogFileOR>>();
+                if (!string.IsNullOrEmpty(fileJson))
+                {
+                    _lsitFiles = fileJson.ParseJSON<List<YWLogFileOR>>();
+                }
 
                 if (_logMain == null)
                 {
@@ -155,7 +159,7 @@ namespace YWT.API
                 {
                     int mResultType = 0;
                     string mResultMessage = string.Empty;
-                    List<YWLogDetailOR> _list = new YWLogBLL().LogSearchForCompany(Creator, MinID, out   mResultType, out   mResultMessage);
+                    List<YWLog_ForListOR> _list = new YWLogBLL().LogSearchForCompany(Creator, MinID, out   mResultType, out   mResultMessage);
                     _result.Status = true;
                     _result.ReturnMsg = "";
                     _result.ResultObject = _list;
@@ -190,7 +194,7 @@ namespace YWT.API
                 {
                     int mResultType = 0;
                     string mResultMessage = string.Empty;
-                    List<YWLogDetailOR> _list = new YWLogBLL().LogSearchForSelf(Creator, MinID, out   mResultType, out   mResultMessage);
+                    List<YWLog_ForSelfListOR> _list = new YWLogBLL().LogSearchForSelf(Creator, MinID, out   mResultType, out   mResultMessage);
                     _result.Status = true;
                     _result.ReturnMsg = "";
                     _result.ResultObject = _list;
@@ -216,14 +220,13 @@ namespace YWT.API
         {
             AjaxContentOR _result = new AjaxContentOR();
             try
-            { 
+            {
                     int mResultType = 0;
                     string mResultMessage = string.Empty;
                     YWLogDetailOR ItemOR = new YWLogBLL().GetLogItem(Creator, LogID, out   mResultType, out   mResultMessage);
                     _result.Status = true;
                     _result.ReturnMsg = "";
                     _result.ResultObject = ItemOR;
-                
             }
             catch (Exception ex)
             {

@@ -80,8 +80,8 @@ namespace YWT.API
             {
                 string path = _context.Server.MapPath("~/");
 
-                path += string.Format("/Upload/" + folder + "/{0}/{1}/{2}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"), DateTime.Now.ToString("yyyy-MM-dd"));
-                savePath = string.Format("/Upload/" + folder + "/{0}/{1}/{2}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"), DateTime.Now.ToString("yyyy-MM-dd"));
+                path += string.Format("/Upload/" + folder + "/{0}/{1}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"));
+                savePath = string.Format("/Upload/" + folder + "/{0}/{1}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"));
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
                 if (!Directory.Exists(path))

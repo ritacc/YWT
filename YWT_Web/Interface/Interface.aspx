@@ -53,7 +53,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div> <a href="/T.aspx">字段查询</a>&nbsp;<a href="/ywt/start.html">设计主页</a></div>
+    <div> <a href="/T.aspx">字段查询</a>&nbsp;<a href="/ywt08/start.html">设计主页</a></div>
     <div><a href="http://pre.im/d5a5">测试地址</a>
         
     </div>

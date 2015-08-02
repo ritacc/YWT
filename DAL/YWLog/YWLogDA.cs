@@ -76,7 +76,7 @@ namespace YWT.DAL.Log
             string sql = @"sp_YWTYWLog_Search";
             SqlParameter[] parameters = new SqlParameter[]
 			{
-                new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, LogID),
+                new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, Creator),
                 new SqlParameter("@SearchType", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "SearchType", DataRowVersion.Default, SearchType),
                 new SqlParameter("@MinID", SqlDbType.BigInt, 20, ParameterDirection.Input, false, 0, 0, "MinID", DataRowVersion.Default, MinID),
                 new SqlParameter("@LogID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "LogID", DataRowVersion.Default, LogID)

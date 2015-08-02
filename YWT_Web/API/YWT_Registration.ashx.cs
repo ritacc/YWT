@@ -35,10 +35,10 @@ namespace YWT.API
             }
             switch (action.ToLower())
             {
-                case "add"://内部单
+                case "add"://添加
                     context.Response.Write(Add(q0, q1));
                     break;
-                case "edit"://内部单
+                case "edit"://修改
                     context.Response.Write(Edit(q0, q1));
                     break;
                 case "getlist"://获取自己的列表

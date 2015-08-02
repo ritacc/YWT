@@ -1,0 +1,27 @@
+---------------New Log---------------
+-----时间: 2015/8/2 14:48:00
+-----来源: YWT_YWLog..ashx/AddOrder
+------URL: http://localhost:57163/API/YWT_YWLog.ashx?action=addedit&q0={"UserID":"686e6c29-d2d6-4f27-a752-a06a5f41048c","Title":"����","Conten":"����"}&q1=&q2=
+-----内容: System.Runtime.Serialization.SerializationException: 应为来自命名空间“”的元素“root”。。遇到名称为“”、命名空间为“”的“None”。
+   在 System.Runtime.Serialization.Json.DataContractJsonSerializer.InternalReadObject(XmlReaderDelegator xmlReader, Boolean verifyObjectName)
+   在 System.Runtime.Serialization.XmlObjectSerializer.InternalReadObject(XmlReaderDelegator reader, Boolean verifyObjectName, DataContractResolver dataContractResolver)
+   在 System.Runtime.Serialization.XmlObjectSerializer.ReadObjectHandleExceptions(XmlReaderDelegator reader, Boolean verifyObjectName, DataContractResolver dataContractResolver)
+   在 System.Runtime.Serialization.Json.DataContractJsonSerializer.ReadObject(XmlDictionaryReader reader)
+   在 System.Runtime.Serialization.Json.DataContractJsonSerializer.ReadObject(Stream stream)
+   在 YWT.Common.JSONExtension.ParseJSON[T](String str) 位置 E:\Mobile\YWT\Project\YWT\Common\JSONExtension.cs:行号 60
+   在 YWT.API.YWT_YWLog.AddLog(String json, String fileJson) 位置 E:\Mobile\YWT\Project\YWT\YWT_Web\API\YWT_YWLog.ashx.cs:行号 76
+-----IP: ::1
+
+---------------New Log---------------
+-----时间: 2015/8/2 14:51:17
+-----来源: YWT_YWLog..ashx/AddOrder
+------URL: http://localhost:57163/API/YWT_YWLog.ashx?action=addedit&q0={"UserID":"686e6c29-d2d6-4f27-a752-a06a5f41048c","Title":"����","Conten":"����"}&q1=
+-----内容: System.Data.SqlClient.SqlException (0x80131904): 过程或函数 'sp_YWTYWLog_Save' 需要参数 '@Content'，但未提供该参数。
+   在 CBSCS.DBUtility.DbHelperSQL.ExecuteProcedures(List`1 cmdList, Int32& mResultType, String& mResultMessage)
+   在 YWT.DAL.Log.YWLogDA.InsertUpdate(YWLogOR yWLog, List`1 _lsitFiles, Int32& mResultType, String& mResultMessage) 位置 E:\Mobile\YWT\Project\YWT\DAL\YWLog\YWLogDA.cs:行号 49
+   在 YWT.BLL.Log.YWLogBLL.InsertUpdate(YWLogOR yWLog, List`1 _lsitFiles, Int32& mResultType, String& mResultMessage) 位置 E:\Mobile\YWT\Project\YWT\BLL\YWLog\YWLogBLL.cs:行号 28
+   在 YWT.API.YWT_YWLog.AddLog(String json, String fileJson) 位置 E:\Mobile\YWT\Project\YWT\YWT_Web\API\YWT_YWLog.ashx.cs:行号 92
+ClientConnectionId:7a2a2b07-840a-404c-aa25-6aa47b8b27c9
+Error Number:201,State:4,Class:16
+-----IP: ::1
+

@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace YWT.Model.Log
+namespace YWT.Model.YWLog
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class YWLogOR
+   public class YWLog_ForListOR
     {
-       
-		/// <summary>
+       /// <summary>
 		/// 
 		/// </summary>
 		public string LogID { get; set; }
@@ -23,10 +20,7 @@ namespace YWT.Model.Log
 		/// 
 		/// </summary>
 		public string Title { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
-		public string Content { get; set; }
+		 
 		/// <summary>
 		/// 
 		/// </summary>
@@ -45,6 +39,7 @@ namespace YWT.Model.Log
                 }
             }
         }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -53,10 +48,20 @@ namespace YWT.Model.Log
 		/// 
 		/// </summary>
 		public DateTime Create_Date { get; set; }
+
+        /// <summary>
+        /// 创建人姓名
+        /// </summary>
+        public string RealName { get; set; }
+        /// <summary>
+        /// 创建人头像
+        /// </summary>
+        public string UserImg { get; set; }
+
 		/// <summary>
 		/// YWLog构造函数
 		/// </summary>
-		public YWLogOR()
+		public YWLog_ForListOR()
 		{
 
 		}
@@ -64,7 +69,7 @@ namespace YWT.Model.Log
 		/// <summary>
 		/// YWLog构造函数
 		/// </summary>
-		public YWLogOR(DataRow row)
+        public YWLog_ForListOR(DataRow row)
 		{
 			// 
 			LogID=row["LogID"].ToString().Trim();
@@ -72,8 +77,7 @@ namespace YWT.Model.Log
 			UserID=row["UserID"].ToString().Trim();
 			// 
 			Title=row["Title"].ToString().Trim();
-			// 
-			Content=row["Content"].ToString().Trim();
+			 
 			// 
 			if(row["LogStatus"]!= DBNull.Value)
                 LogStatus=Convert.ToInt32(row["LogStatus"]);
@@ -83,7 +87,9 @@ namespace YWT.Model.Log
 			// 
 			if(row["Create_Date"]!= DBNull.Value)
                 Create_Date=Convert.ToDateTime(row["Create_Date"]);
+
+            RealName = row["RealName"].ToString();
+            UserImg = row["UserImg"].ToString();
 		}
     }
 }
-

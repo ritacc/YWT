@@ -35,11 +35,33 @@ namespace YWT.DAL.Other
             }
             return null;
         }
-        public OnlineApprovalOR SearchItem(string OnlineApproval_ID, out int mResultType, out string mResultMessage)
+        //public List<OnlineApprovalOR> SearchList(string Create_User,int StartIndex,int EndIndex, out int mResultType, out string mResultMessage)
+        //{
+        //    SqlParameter[] parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default,Create_User),
+        //        new SqlParameter("@StartIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),
+        //        new SqlParameter("@EndIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "EndIndex", DataRowVersion.Default, EndIndex),
+        //    };
+
+
+        //    DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOnlineApproval_Search", parameters, out    mResultType, out   mResultMessage);
+        //    if (ds.Tables.Count == 1)
+        //    {
+        //        List<OnlineApprovalOR> _lis = new List<OnlineApprovalOR>();
+        //        foreach (DataRow _row in ds.Tables[0].Rows)
+        //        {
+        //            _lis.Add(new OnlineApprovalOR(_row));
+        //        }
+        //        return _lis;
+        //    }
+        //    return null;
+        //}
+        public OnlineApprovalOR SearchItem(string   OnlineApproval_ID, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@OnlineApproval_ID", SqlDbType.BigInt, 36, ParameterDirection.Input, false, 0, 0, "OnlineApproval_ID", DataRowVersion.Default,OnlineApproval_ID),
+                new SqlParameter("@OnlineApproval_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "OnlineApproval_ID", DataRowVersion.Default,OnlineApproval_ID),
             };
 
 
@@ -57,14 +79,17 @@ namespace YWT.DAL.Other
             string sql = "SP_YWTOnlineApproval_Save";
             SqlParameter[] parameters = new SqlParameter[]
 			{
-                new SqlParameter("@OnlineApproval_ID", SqlDbType.BigInt, 8, ParameterDirection.Input, false, 0, 0, "OnlineApproval_ID", DataRowVersion.Default, onlineApproval.OnlineApproval_ID),
+                //new SqlParameter("@OnlineApproval_ID", SqlDbType.BigInt, 8, ParameterDirection.Input, false, 0, 0, "OnlineApproval_ID", DataRowVersion.Default, onlineApproval.OnlineApproval_ID),
+                //new SqlParameter("@ApplyNo", SqlDbType.VarChar, 12, ParameterDirection.Input, false, 0, 0, "ApplyNo", DataRowVersion.Default, onlineApproval.ApplyNo),
                 new SqlParameter("@ApplyType", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "ApplyType", DataRowVersion.Default, onlineApproval.ApplyType),
                 new SqlParameter("@ApplyContent", SqlDbType.VarChar, 600, ParameterDirection.Input, false, 0, 0, "ApplyContent", DataRowVersion.Default, onlineApproval.ApplyContent),
                 new SqlParameter("@ApplyUserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "ApplyUserID", DataRowVersion.Default, onlineApproval.ApplyUserID),
-                new SqlParameter("@ApplyDate", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "ApplyDate", DataRowVersion.Default, onlineApproval.ApplyDate),
-                new SqlParameter("@Approval_UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Approval_UserID", DataRowVersion.Default, onlineApproval.Approval_UserID),
-                new SqlParameter("@Approval_Status", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "Approval_Status", DataRowVersion.Default, onlineApproval.Approval_Status),
-                new SqlParameter("@Approval_Time", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "Approval_Time", DataRowVersion.Default, onlineApproval.Approval_Time)
+                //new SqlParameter("@ApplyDate", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "ApplyDate", DataRowVersion.Default, onlineApproval.ApplyDate),
+                //new SqlParameter("@ApprovalUserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "ApprovalUserID", DataRowVersion.Default, onlineApproval.ApprovalUserID),
+                //new SqlParameter("@ApprovalStatus", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "ApprovalStatus", DataRowVersion.Default, onlineApproval.ApprovalStatus),
+                //new SqlParameter("@ApprovalStatusName", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "ApprovalStatusName", DataRowVersion.Default, onlineApproval.ApprovalStatusName),
+                //new SqlParameter("@ApprovalResult", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "ApprovalResult", DataRowVersion.Default, onlineApproval.ApprovalResult),
+                //new SqlParameter("@ApprovalTime", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "ApprovalTime", DataRowVersion.Default, onlineApproval.ApprovalTime)
 			};
             DbHelperSQL.ExecuteProcedureNonQuery(sql, parameters, out   mResultType, out   mResultMessage);
 		}
