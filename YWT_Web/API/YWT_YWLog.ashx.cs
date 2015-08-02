@@ -37,7 +37,7 @@ namespace YWT.API
             }
             switch (action.ToLower())
             {
-                case "addlog"://内部单
+                case "addedit"://内部单
                     context.Response.Write(AddLog(q0, q1));
                     break;
                 case "getlist"://获取自己的列表

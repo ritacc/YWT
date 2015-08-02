@@ -294,7 +294,7 @@ YWT_YWLog.ashx	运维日志
 */
 DECLARE @Inerface_ID	BIGINT		
 		,@IFile			VARCHAR(50)='YWT_YWLog.ashx'
-INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'addlog','写入运维日志')
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'addedit','写入运维日志 保存存后发布')
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维日志Json数据:{LogID,UserID,Title ,Conten,LogStatus} LogStatus:0 保存，1 发布 ')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'运维日志文件多个如:[{"FileName":"/Upload/....png"},{"FileName":"/Upload/....png"}]') 
