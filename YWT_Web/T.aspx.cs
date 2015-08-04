@@ -11,6 +11,7 @@ using YWT.Model.Order;
 using YWT.BLL.SysDB;
 using System.Data;
 using YWT.Model.Other;
+using YWT.Model.Warehouse;
 
 namespace YWT
 {
@@ -27,12 +28,12 @@ namespace YWT
                 _list.Add(new OrderTaskUserOR() { UserID = "afafafeee" });
                 _list.Add(new OrderTaskUserOR() { UserID = "gggggg" });
 
-                OnlineApprovalOR obj = new  OnlineApprovalOR();
+                RegistrationOR obj = new RegistrationOR();
                 this.txt.Text = obj.ToJSON2();// _list.ToJSON2();
             }
 
         }
-
+        
         private void InitPage()
         {
             DataTable dt = new AccessSqlserverBLL().GetAllTable();

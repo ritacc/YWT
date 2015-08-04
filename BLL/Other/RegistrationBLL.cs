@@ -32,15 +32,20 @@ namespace YWT.BLL.Other
             new RegistrationDA().InsertuUpdate(obj, "EDIT", out   mResultType, out   mResultMessage);
         }
         
-        public RegistrationOR SearchItem(string keyid, out int mResultType, out string mResultMessage)
-        {
-            return new RegistrationDA().SearchItem(keyid, out   mResultType, out   mResultMessage);
+        //public RegistrationOR SearchItem(string keyid, out int mResultType, out string mResultMessage)
+        //{
+        //    return new RegistrationDA().SearchItem(keyid, out   mResultType, out   mResultMessage);
  
-        }
+        //}
 
         public List<RegistrationOR> SearchList(string Create_User, long MinID, out int mResultType, out string mResultMessage)
         {
             return new RegistrationDA().SearchList(Create_User, MinID, out   mResultType, out   mResultMessage);
+        }
+        public List<RegistrationForCommpanyOR> SearchCompanyList(string Create_User, string UserID, DateTime StartTime, DateTime EndTime
+          , string MinID, out int mResultType, out string mResultMessage)
+        {
+            return new RegistrationDA().SearchCompanyList(Create_User, UserID, StartTime, EndTime, MinID, out   mResultType, out   mResultMessage);
         }
     }
 }

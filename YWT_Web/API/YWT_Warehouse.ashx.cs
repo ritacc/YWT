@@ -36,10 +36,10 @@ namespace YWT.API
             switch (action.ToLower())
             {
                 case "add"://添加
-                    context.Response.Write(Add(q0, q1));
+                    context.Response.Write(Add(q0));
                     break;
                 case "edit"://修改
-                    context.Response.Write(Edit(q0, q1));
+                    context.Response.Write(Edit(q0));
                     break;
                 case "getlist"://获取列表
                     context.Response.Write(this.GetList(q0, q1));
@@ -58,7 +58,7 @@ namespace YWT.API
         /// <param name="json"></param>
         /// <param name="Create_User"></param>
         /// <returns></returns>
-        private string Add(string json, string Create_User)
+        private string Add(string json)
         {
             AjaxContentOR _result = new AjaxContentOR();
             try
@@ -96,7 +96,7 @@ namespace YWT.API
             return _result.ToJSON2();
         }
 
-        private string Edit(string json, string Create_User)
+        private string Edit(string json)
         {
             AjaxContentOR _result = new AjaxContentOR();
             try

@@ -348,12 +348,15 @@ INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getcompanylist','查询需要审核，未审核列表')
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'用于分页，第一次传-1, 第一次及以后取最小ID') 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'开始页数从0开始 每次加载十条，下拉刷新:刷新时数量+1') 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'分状态展示  0 未审核  1 已审核  -1 全部') 
 
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'approval','审批')
 SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'审批ID')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'审批人')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'申请ID OnlineApproval_ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'审核人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'1 同意  2 不同意')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q3',N'审批意见 审核人填写')
 GO
 
 /*
@@ -363,18 +366,51 @@ DECLARE @Inerface_ID	BIGINT
 		,@IFile			VARCHAR(50)='YWT_Registration.ashx'
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'add','手机打卡')
 SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据：<br/>
+{UserID":"","latitude":"","longitude":"","Position":"坐标转换的位置信息","IMEI":""}')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1','操作人ID') 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getlist','获取产品列表')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'最小ID，第一次-1')
+ 
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getcompanylist','查询员工打卡记录')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'指定运维人员ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'查询类型： day 当日   7day 7天内  pmonth 上月  cmonth 本月 3month')
+--INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q3',N'结束时间')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q3',N'最小ID，第一次-1')
+ 
 GO
 /*
-YWT_Warehouse.ashx	仓库在线	
+YWT_Warehouse.ashx	仓库在线
 */
 DECLARE @Inerface_ID	BIGINT		
 		,@IFile			VARCHAR(50)='YWT_Warehouse.ashx'
 INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'add','添加产品')
 SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1','操作人ID') 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据：<br/>
+{"Prodeuct_Name":"产品名称","Product_Brand":"品牌","Prodeuct_Model":"型号","Number":数量,"Unit":"单位： 个、件、套、米、台","Create_User":"添加、修改人ID"}')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'edit','修改产品')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'Json数据：<br/>
+{"Warehouse_ID":0,"Prodeuct_Name":"产品名称","Product_Brand":"品牌","Prodeuct_Model":"型号","Number":数量,"Unit":"单位： 个、件、套、米、台","Create_User":"添加、修改人ID"}')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getlist','获取产品列表')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'操作人ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'最小ID，第一次-1')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getitem','查询产品明细')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'产品ID')
+
+
+
+
 
 
  

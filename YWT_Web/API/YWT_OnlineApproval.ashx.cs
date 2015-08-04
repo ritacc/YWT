@@ -38,15 +38,22 @@ namespace YWT.API
                 case "add"://内部单
                     context.Response.Write(Add(q0));
                     break;
-                case "edit"://内部单
-                    context.Response.Write(Edit(q0, q1));
-                    break;
+                //case "edit"://内部单
+                //    context.Response.Write(Edit(q0, q1));
+                //    break;
                 case "getlist"://获取自己的列表
                     context.Response.Write(this.GetList(q0, q1));
                     break;                 
                 case "getitem"://查询明细
                     context.Response.Write(this.GetItem(q0));
                     break;
+
+                case "getcompanylist"://审核列表 分为：未审核、已审核 全部 0,1，-1
+                    context.Response.Write(this.GetCompanyList(q0, q1,q2));                          
+                    break;
+                case "approval"://审核
+                    context.Response.Write(this.Approval(q0, q1, q2, q3));
+                    break; 
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
@@ -200,10 +207,10 @@ namespace YWT.API
         /// 运维商审核列表
         /// </summary>
         /// <param name="Create_User"></param>
+        /// /// <param name="num"></param>
         /// <param name="searchType">-1 全部 0 未审核  1 已审核</param>
-        /// <param name="num"></param>
         /// <returns></returns>
-        private string GetCompanyList(string Create_User,string searchType, string num)
+        private string GetCompanyList(string Create_User, string num,string searchType)
         {
             AjaxContentOR _result = new AjaxContentOR();
             try
@@ -239,10 +246,10 @@ namespace YWT.API
         /// <summary>
         /// 审核列表
         /// </summary>
-        /// <param name="OnlineApproval_ID"></param>
-        /// <param name="ApprovalUserID"></param>
-        /// <param name="ApprovalStatus"></param>
-        /// <param name="ApprovalResult"></param>
+        /// <param name="OnlineApproval_ID">申请ID OnlineApproval_ID</param>
+        /// <param name="ApprovalUserID">审核人ID</param>
+        /// <param name="ApprovalStatus">1 同意  2 不同意</param>
+        /// <param name="ApprovalResult">审批意见 审核人填写</param>
         /// <returns></returns>
         private string Approval(string OnlineApproval_ID, string ApprovalUserID, string ApprovalStatus, string ApprovalResult)
         {
