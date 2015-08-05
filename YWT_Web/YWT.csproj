@@ -61,6 +61,14 @@
     <Content Include="Interface\Interface.aspx" />
     <Content Include="Interface\Interface.sql" />
     <Content Include="IOS\ios.plist" />
+    <Content Include="Icon\10、20\gl_60_gray.png" />
+    <Content Include="Icon\10、20\index_60_gray.png" />
+    <Content Include="Icon\10、20\tj_60_gray.png" />
+    <Content Include="Icon\10、20\wd_60_gray.png" />
+    <Content Include="Icon\10、20\ywd_60_gray.png" />
+    <Content Include="Icon\10、20\效果图.jpg" />
+    <Content Include="Icon\ywtlogo114.png" />
+    <Content Include="Icon\ywtlogo57.png" />
     <Content Include="SQL\YWT_Dict.sql" />
     <Content Include="Record\Record.txt" />
     <Content Include="ref\CBSCS.DBUtility.dll" />
