@@ -102,7 +102,7 @@ namespace YWT.BLL.Log
             string SearchType = "item";
 
             DataSet ds = new YWLogDA().LogSearch(Creator, SearchType, 0, LogID, out   mResultType, out   mResultMessage);
-            if (mResultType > 0 && ds != null)
+            if (mResultType == 0 && ds != null)
             {
                 YWLogDetailOR logItem = new YWLogDetailOR(ds.Tables[0].Rows[0]);
                 //日志文件
@@ -137,7 +137,7 @@ namespace YWT.BLL.Log
             string SearchType = "replylist";
             
             DataSet ds = new YWLogDA().LogSearch(Creator, SearchType, MinID, LogID, out   mResultType, out   mResultMessage);
-            if (mResultType > 0 && ds != null)
+            if (mResultType == 0 && ds != null)
             {
                 List<YWLogReplyDetailOR> _list = new List<YWLogReplyDetailOR>();
                 foreach (DataRow _row in ds.Tables[1].Rows)
