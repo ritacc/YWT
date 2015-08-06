@@ -30,7 +30,7 @@ namespace YWT.BLL.User
         /// <summary>
         /// 登录验证
         /// </summary>
-        public YWTUserSupplierNameOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, int LoginType, out int mResultType, out string mResultMessage)
+        public YWTUser_ForLoginOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, int LoginType, out int mResultType, out string mResultMessage)
         {
             return new YWTUserDA().LoginCheck(UserNameOrMobile, password, IMEI, OS, Manufacturer, LoginType, out   mResultType, out   mResultMessage);
         }
@@ -38,7 +38,7 @@ namespace YWT.BLL.User
         /// <summary>
         /// 登录验证
         /// </summary>
-        public YWTUserSupplierNameOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, out int mResultType, out string mResultMessage)
+        public YWTUser_ForLoginOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, out int mResultType, out string mResultMessage)
         {
             return new YWTUserDA().LoginCheck(UserNameOrMobile, password, IMEI, OS, Manufacturer, 0, out   mResultType, out   mResultMessage);
         }
@@ -96,6 +96,10 @@ namespace YWT.BLL.User
             return new YWTUserDA().GetADetail(UserID, Create_User, out  mResultType, out  mResultMessage);
         }
 
+        public YWTUserOR GetItem(string UserID, out int mResultType, out string mResultMessage)
+        {
+            return new YWTUserDA().GetItem(UserID, out  mResultType, out  mResultMessage);
+        }
         /// <summary>
         /// 获取运维商用户
         /// </summary>

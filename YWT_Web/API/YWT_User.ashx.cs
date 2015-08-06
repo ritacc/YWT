@@ -64,15 +64,115 @@ namespace YWT.API
                 case "getasupuser": //获取供应商下面一个用户数据
                     context.Response.Write(GetASupplierUsers(q0, q1)); 
                     break;
+                case "getauserbyid": //根据id查询用户信息
+                    context.Response.Write(GetUserByID(q0));
+                    break;
                 //获取文件
-                case "getcertifyfile":
-                    context.Response.Write(GetCertifyFile(q0, q1)); 
+                case "getuserfile":     //查询用户认证文件
+                    context.Response.Write(GetUserFiles(q0));
+                    break;
+                case "userfilecertify":
+                    context.Response.Write(UserFileCertify(q0, q1, q2, q3, q4));
                     break;
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
             }
         }
+
+        /// <summary>
+        /// 根据id查询用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetUserByID(string id)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {  
+               int mResultType = 0;
+                string mResultMessage = "";
+                YWTUserOR rObj = new YWTUserBLL().GetItem(id, out   mResultType, out   mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ResultObject = rObj;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.Status = false;
+                _result.ReturnMsg = ex.Message.ToString();
+                Common.Utils.WriteLog("HDL_User.ashx/UpdateSupplier", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+        #region 认证
+        public string GetUserFiles(string userid)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = "";
+                _result.Status = true;
+                List<YWTUserFileOR> list = new YWTUserFileBLL().GetUserFiles(userid, out   mResultType, out   mResultMessage);
+                _result.ResultObject = list;
+            }
+            catch (Exception ex)
+            {
+                _result.Status = false;
+                _result.ReturnMsg = ex.Message.ToString();
+                Common.Utils.WriteLog("HDL_User.ashx/UpdateSupplier", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+        /// <summary>
+        /// 用户提交认证申请
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <param name="CertifyType"></param>
+        /// <param name="CertifyRealName"></param>
+        /// <param name="CertifyIDCard"></param>
+        /// <param name="CertifyCompanyName"></param>
+        /// <returns></returns>
+        public string UserFileCertify(string UserID, string CertifyType, string CertifyRealName, string CertifyIDCard, string CertifyCompanyName)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = "";
+                if (mResultType == 0)
+                {
+                    new YWTUserFileBLL().YWTUserFileCertify(UserID, CertifyType, CertifyRealName, CertifyIDCard, CertifyCompanyName,
+                          out   mResultType, out   mResultMessage);
+                    if (mResultType == 0)
+                    {
+                        _result.Status = true;
+                        _result.ReturnMsg = "成功。";
+                    }
+                }
+                if (mResultType != 0)
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.Status = false;
+                _result.ReturnMsg = ex.Message.ToString();
+                Common.Utils.WriteLog("HDL_User.ashx/UpdateSupplier", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        #endregion
 
         #region 注册 登录 修改密码
         /// <summary>
@@ -209,7 +309,7 @@ namespace YWT.API
 
             int mResultType = 0;
             string mResultMessage = string.Empty;
-            YWTUserSupplierNameOR _user = new YWTUserBLL().LoginCheck(UserName, DES.Encrypt(password), IMEI, OS, Manufacturer, out   mResultType, out   mResultMessage);
+            YWTUser_ForLoginOR _user = new YWTUserBLL().LoginCheck(UserName, DES.Encrypt(password), IMEI, OS, Manufacturer, out   mResultType, out   mResultMessage);
             if (!(mResultType == 0))
             {
                 _result.ReturnMsg = mResultMessage;
@@ -346,34 +446,34 @@ namespace YWT.API
 
         #endregion
 
-        #region 认证
+        //#region 认证
         
-        /// <summary>
-        /// 获取谁证文件
-        /// </summary>
-        /// <param name="Create_User">操作用户ID</param>
-        /// <param name="CertifyType"> 谁证类型 P个人， E 运维商</param>
-        /// <returns></returns>
-        public string GetCertifyFile(string Create_User, string CertifyType) //
-        {
-            AjaxContentOR _result = new AjaxContentOR();
-            int mResultType = 0;
-            string mResultMessage = string.Empty;
-            var result = new YWTUserBLL().GetCertifyFile(Create_User, CertifyType, out mResultType, out mResultMessage);
-            if (!(mResultType == 0))
-            {
-                _result.ReturnMsg = mResultMessage;
-            }
-            else
-            {
-                _result.Status = true;
-                _result.ReturnMsg = "Success";
-                _result.ResultObject = result;
-            }
-            return _result.ToJSON2();
-        }
-        //提交
-        #endregion
+        ///// <summary>
+        ///// 获取谁证文件
+        ///// </summary>
+        ///// <param name="Create_User">操作用户ID</param>
+        ///// <param name="CertifyType"> 谁证类型 P个人， E 运维商</param>
+        ///// <returns></returns>
+        //public string GetCertifyFile(string Create_User, string CertifyType) //
+        //{
+        //    AjaxContentOR _result = new AjaxContentOR();
+        //    int mResultType = 0;
+        //    string mResultMessage = string.Empty;
+        //    var result = new YWTUserBLL().GetCertifyFile(Create_User, CertifyType, out mResultType, out mResultMessage);
+        //    if (!(mResultType == 0))
+        //    {
+        //        _result.ReturnMsg = mResultMessage;
+        //    }
+        //    else
+        //    {
+        //        _result.Status = true;
+        //        _result.ReturnMsg = "Success";
+        //        _result.ResultObject = result;
+        //    }
+        //    return _result.ToJSON2();
+        //}
+        ////提交
+        //#endregion
         public bool IsReusable
         {
             get

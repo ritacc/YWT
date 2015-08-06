@@ -52,6 +52,7 @@
     <Compile Include="Pub\YWTSetupBLL.cs" />
     <Compile Include="Pub\YWTVerifyCodeBLL.cs" />
     <Compile Include="SysDB\AccessSqlserverBLL.cs" />
+    <Compile Include="User\YWTUserFileBLL.cs" />
     <Compile Include="User\YWTUserInfoBLL.cs" />
     <Compile Include="User\YWTSupplierBLL.cs" />
     <Compile Include="User\YWTUserBLL.cs" />

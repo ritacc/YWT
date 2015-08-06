@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using YWT.Common;
 
 namespace YWT.Model.User
 {
-    public class YWTUserOR
+   public class YWTUser_ForLoginOR
     {
-            /// <summary>
+       /// <summary>
             /// 
             /// </summary>
             public string ID { get; set; }
@@ -32,10 +31,10 @@ namespace YWT.Model.User
             /// </summary>
             public string RealName { get; set; }
 
-            //public string RealNameChar { get; set; }
-            ///// <summary>
-            ///// 真实姓名首字母
-            ///// </summary>
+           // public string RealNameChar { get; set; }
+            /// <summary>
+            /// 真实姓名首字母
+            /// </summary>
             //public string GetRealNameChar {
             //    get
             //    {
@@ -46,7 +45,7 @@ namespace YWT.Model.User
             /// <summary>
             /// 加入日期
             /// </summary>
-            public DateTime JoinDateTime { get; set; }
+           // public DateTime JoinDateTime { get; set; }
             /// <summary>
             /// 是否可用
             /// </summary>
@@ -58,19 +57,19 @@ namespace YWT.Model.User
             /// <summary>
             /// 设备IMEI唯一编码
             /// </summary>
-            public string IMEI { get; set; }
+           // public string IMEI { get; set; }
             /// <summary>
             /// 手机系统版本
             /// </summary>
-            public string OS { get; set; }
+           // public string OS { get; set; }
             /// <summary>
             /// 设备生产商
             /// </summary>
-            public string manufacturer { get; set; }
+           // public string manufacturer { get; set; }
             /// <summary>
             /// 最后登录时间
             /// </summary>
-            public DateTime LastLoginTime { get; set; }
+            //public DateTime LastLoginTime { get; set; }
             /// <summary>
             /// 对应供应商编号
             /// </summary>
@@ -81,28 +80,34 @@ namespace YWT.Model.User
             /// </summary>
             public string UserImg { get; set; }
 
-            #region 认证
-            /// <summary>
-            /// 个人认证
-            /// </summary>
-            public int CertifyPersonal { get; set; }
-            /// <summary>
-            /// 个人认证 时间
-            /// </summary>
-            public DateTime CertifyPersonal_Time { get; set; }
-            /// <summary>
-            /// 承运商认证
-            /// </summary>
-            public int CertifyEnterprise { get; set; }
-            /// <summary>
-            /// 承运商认证 时间
-            /// </summary>
-            public DateTime CertifyEnterprise_Time { get; set; }
+           
 
+            
+
+            #region 认证
             /// <summary>
             /// 审核备注
             /// </summary>
             public string Certify_Rmark { get; set; }
+
+            /// <summary>
+            /// 个人认证
+            /// </summary>
+            private int CertifyPersonal { get; set; }
+            /// <summary>
+            /// 个人认证 时间
+            /// </summary>
+            private DateTime CertifyPersonal_Time { get; set; }
+            /// <summary>
+            /// 承运商认证
+            /// </summary>
+            private int CertifyEnterprise { get; set; }
+            /// <summary>
+            /// 承运商认证 时间
+            /// </summary>
+            private DateTime CertifyEnterprise_Time { get; set; }
+
+            
 
             public string CertifyStatusName
             {
@@ -182,26 +187,6 @@ namespace YWT.Model.User
             }
             #endregion
 
-
-            /// <summary>
-            /// 支付密码
-            /// </summary>
-            public string PayPassword { get; set; }
-
-
-            /// <summary>
-            /// 认证真实姓名
-            /// </summary>
-            public string CertifyRealName { get; set; }
-            /// <summary>
-            ///  身份证号
-            /// </summary>
-            public string CertifyIDCard { get; set; }
-            /// <summary>
-            /// 公司名称
-            /// </summary>
-            public string CertifyCompanyName { get; set; }
-
             /// <summary>
             /// 使用优惠码
             /// </summary>
@@ -215,33 +200,22 @@ namespace YWT.Model.User
             /// SNRUser构造函数
             /// User构造函数
             /// </summary>
-            public YWTUserOR()
+            public YWTUser_ForLoginOR()
             {
-
-                ID = Guid.NewGuid().ToString();
-                LastLoginTime = DateTime.Now;
-                JoinDateTime = DateTime.Now;
+                ID = Guid.NewGuid().ToString();               
                 UserName = "";
                 //真实姓名
                 RealName = "";
                 //用户类型 0普通用户 1供应商 2司机 99管理员           
                 UserType = 0;
-                //设备IMEI唯一编码
-                IMEI = "";
-                //手机系统版本
-                OS = "";
-                //设备生产商
-                manufacturer = "";
                 //对应供应商编号
                 SupplierID = "";
-                 
-                //UserImg = "";
             }
 
             /// <summary>
             /// User构造函数
             /// </summary>
-            public YWTUserOR(DataRow row)
+            public YWTUser_ForLoginOR(DataRow row)
             {
                 // 
                 ID = row["ID"].ToString();
@@ -254,25 +228,15 @@ namespace YWT.Model.User
                 Mobile = row["Mobile"].ToString().Trim();
                 // 真实姓名
                 RealName = row["RealName"].ToString().Trim();
-                //RealNameChar = row["RealNameChar"].ToString().Trim();
-                // 加入日期
-                if (row["JoinDateTime"] != DBNull.Value)
-                    JoinDateTime = Convert.ToDateTime(row["JoinDateTime"]);
+              
+               
                 // 是否可用
                 if (row["Active"] != DBNull.Value)
                     Active = Convert.ToBoolean(row["Active"]);
                 // 用户类型 0普通用户 1供应商 2司机 99管理员
                 if (row["UserType"] != DBNull.Value)
                     UserType = Convert.ToInt32(row["UserType"]);
-                // 设备IMEI唯一编码
-                IMEI = row["IMEI"].ToString().Trim();
-                // 手机系统版本
-                OS = row["OS"].ToString().Trim();
-                // 设备生产商
-                manufacturer = row["manufacturer"].ToString().Trim();
-                // 最后登录时间
-                if (row["LastLoginTime"] != DBNull.Value)
-                    LastLoginTime = Convert.ToDateTime(row["LastLoginTime"]);
+                
                 // 对应供应商编号
                 SupplierID = row["SupplierID"].ToString().Trim();
                 
@@ -283,6 +247,8 @@ namespace YWT.Model.User
                     UserImg = "/Upload/defaultPhoto.png";
                 }
 
+                if (row["CertifyCheck"] != DBNull.Value)
+                    CertifyCheck = Convert.ToInt32(row["CertifyCheck"]);                
                 // 个人认证 时间
                 if (row["CertifyPersonal"] != DBNull.Value)
                     CertifyPersonal = Convert.ToInt32(row["CertifyPersonal"]);
@@ -298,18 +264,11 @@ namespace YWT.Model.User
                 /// 承运商认证 时间
                 if (row["CertifyEnterprise_Time"] != DBNull.Value)
                     CertifyEnterprise_Time = Convert.ToDateTime(row["CertifyEnterprise_Time"]);
-
                 Certify_Rmark = row["Certify_Rmark"].ToString();
 
-                PayPassword = string.IsNullOrEmpty(row["PayPassword"].ToString()) ? "0" : "1";
-
-                CertifyRealName = row["CertifyRealName"].ToString();
-                CertifyIDCard = row["CertifyIDCard"].ToString();
-                CertifyCompanyName = row["CertifyCompanyName"].ToString();
+              
                 Use_RecommendCode = row["Use_RecommendCode"].ToString();
                 User_RecommendCode = row["User_RecommendCode"].ToString();
             }
-       
-
     }
 }

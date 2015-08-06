@@ -22,7 +22,7 @@ namespace YWT.DAL.User
                 new SqlParameter("@PassWord", SqlDbType.VarChar, 32, ParameterDirection.Input, false, 0, 0, "PassWord", DataRowVersion.Default, YWTUser.PassWord),
                 new SqlParameter("@Mobile", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "Mobile", DataRowVersion.Default, YWTUser.Mobile),
                 new SqlParameter("@RealName", SqlDbType.VarChar, 16, ParameterDirection.Input, false, 0, 0, "RealName", DataRowVersion.Default, YWTUser.RealName),
-                new SqlParameter("@RealNameChar", SqlDbType.VarChar, 1, ParameterDirection.Input, false, 0, 0, "RealNameChar", DataRowVersion.Default, YWTUser.GetRealNameChar),
+                //new SqlParameter("@RealNameChar", SqlDbType.VarChar, 1, ParameterDirection.Input, false, 0, 0, "RealNameChar", DataRowVersion.Default, YWTUser.GetRealNameChar),
 
                 new SqlParameter("@Active", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "Active", DataRowVersion.Default, YWTUser.Active),
                 new SqlParameter("@UserType", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "UserType", DataRowVersion.Default, YWTUser.UserType),
@@ -42,7 +42,7 @@ namespace YWT.DAL.User
             return null;
         }
 
-        public YWTUserSupplierNameOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, int LoginType, out int mResultType, out string mResultMessage)
+        public YWTUser_ForLoginOR LoginCheck(string UserNameOrMobile, string password, string IMEI, string OS, string Manufacturer, int LoginType, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -57,7 +57,7 @@ namespace YWT.DAL.User
             if (mResultType == 0)
             {
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                    return new YWTUserSupplierNameOR(ds.Tables[0].Rows[0]);
+                    return new YWTUser_ForLoginOR(ds.Tables[0].Rows[0]);
             }
             return null;
         }
@@ -99,7 +99,7 @@ namespace YWT.DAL.User
                 new SqlParameter("@PassWord", SqlDbType.VarChar, 32, ParameterDirection.Input, false, 0, 0, "PassWord", DataRowVersion.Default, YWTUser.PassWord),
                 new SqlParameter("@Mobile", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "Mobile", DataRowVersion.Default, YWTUser.Mobile),
                 new SqlParameter("@RealName", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "RealName", DataRowVersion.Default, YWTUser.RealName),
-                new SqlParameter("@RealNameChar", SqlDbType.VarChar, 1, ParameterDirection.Input, false, 0, 0, "RealNameChar", DataRowVersion.Default, YWTUser.GetRealNameChar),
+                //new SqlParameter("@RealNameChar", SqlDbType.VarChar, 1, ParameterDirection.Input, false, 0, 0, "RealNameChar", DataRowVersion.Default, YWTUser.GetRealNameChar),
 
                 new SqlParameter("@Active", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "Active", DataRowVersion.Default, YWTUser.Active),
                 new SqlParameter("@UserType", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "UserType", DataRowVersion.Default, YWTUser.UserType),
@@ -193,6 +193,31 @@ namespace YWT.DAL.User
                         _UserInfo = new YWTUserInfoOR(ds.Tables[1].Rows[0]);// 详细信息
                     }
                     return new YWTUserDetailOR() { User=_User, UserInfo=_UserInfo };
+                }
+            }
+            return null;
+        }
+
+        public YWTUserOR GetItem(string UserID, out int mResultType, out string mResultMessage)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, UserID),
+                new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, UserID)
+			};
+            DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTUser_GetADetail", parameters, out   mResultType, out   mResultMessage);
+            if (mResultType == 0)
+            {
+                if (ds != null && ds.Tables.Count == 2)
+                {
+                    YWTUserOR _User = new YWTUserOR(ds.Tables[0].Rows[0]);
+                    return _User;
+                    //YWTUserInfoOR _UserInfo = null;
+                    //if (ds.Tables[1].Rows.Count > 0)
+                    //{
+                    //    _UserInfo = new YWTUserInfoOR(ds.Tables[1].Rows[0]);// 详细信息
+                    //}
+                    //return new YWTUserDetailOR() { User = _User, UserInfo = _UserInfo };
                 }
             }
             return null;

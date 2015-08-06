@@ -53,10 +53,22 @@ SET @Inerface_ID=@@IDENTITY
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'要查询下面的用户ID')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'操作ID')
 
-INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'getcertifyfile',N'查询谁已经上传的文件或需要上传的文件 ')
+INSERT INTO SNR_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'userfilecertify','提交用户认证')
 SET @Inerface_ID=@@IDENTITY 
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'用户ID')
-INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'认证类型 p 个人 e 企业')
+INSERT INTO SNR_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'认证用户ID')
+INSERT INTO SNR_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'认证类型: P个人，用户类型为：30 时使用，E企业：用户类型为10时使用')
+INSERT INTO SNR_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q2',N'姓名')
+INSERT INTO SNR_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q3',N'身份证号')
+INSERT INTO SNR_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q4',N'E类型认证时使用，公司名称。')
+
+INSERT INTO SNR_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getuserfile','查询用户认证文件')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO SNR_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'认证用户ID')
+
+INSERT INTO SNR_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getauserbyid','根据id查询用户信息')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO SNR_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'查询用户ID')
+
 GO
 
 /*
