@@ -43,6 +43,7 @@
     <Compile Include="Coordinate\YWTCoordinateBLL.cs" />
     <Compile Include="File\UPFileBLL.cs" />
     <Compile Include="InterfaceBLL.cs" />
+    <Compile Include="Msg\YWTMsgBLL.cs" />
     <Compile Include="Order\YWTOrderBLL.cs" />
     <Compile Include="Order\YWTOrderPlatformBLL.cs" />
     <Compile Include="Other\OnlineApprovalBLL.cs" />
