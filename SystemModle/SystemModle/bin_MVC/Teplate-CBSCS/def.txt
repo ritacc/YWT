@@ -1,0 +1,41 @@
+
+:List
+<#keyFild>	 主键
+<#ClassName>	类的名字：根据表名所取的名字
+<#ClassTitle>	名称
+<#ClaseNameSpace>	类的命名空间
+<#usingNamespace>	uing命名空间
+<#GridViewTh>		空数据项
+<#BoundFieldItem>	GridView列数据
+<#GridViewThcolspan>
+<#FolderPath>	文件夹路径
+
+
+<#ListSerch>	list查询列<table>....</table>
+
+<table cellspacing="0" class="searchtable">
+        <tr>
+            <td>知识库类别:</td>
+            <td><asp:TextBox ID="txtKnowledageType" runat="server"></asp:TextBox>
+            </td>
+            <td>知识库小类：</td>
+            <td><asp:TextBox ID="txtknowledageChildType" runat="server"></asp:TextBox></td>
+            <td><asp:Button ID="btnSearch" runat="server" Text="查询" CssClass="btn_bg" 
+ onclick="btnSearch_Click" OnClientClick="return $.yz.getErrorList()"/></td>
+        </tr>
+    </table>
+
+:Edit.cs
+<#EditDesignerItem>	Designer控件项
+<#editLoadData>		加载数据
+<#editSetValue>		设置值
+
+:Edit.aspx
+<#editTrList>		数据显示项
+<#yzList>
+
+:Da.cs
+<#daContent>		dal类内容
+
+:OR.cs
+<#ORContent>

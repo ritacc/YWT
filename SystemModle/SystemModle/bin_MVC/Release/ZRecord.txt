@@ -1,0 +1,37 @@
+替换规则：
+字段名称： #FildsName 字段内容：#FildsID 转换：#FildsFormart 
+类型：#FildsType DB类型： #DBType  最大长度：#maxlength
+
+
+--实体生成
+		[DbField("#FildsID")]
+		public #FildsType #FildsFormart { get; set; }
+
+Save 存储过程:
+        [DbParameter("#FildsID")]
+        public #FildsType #FildsFormart
+        {
+            get { return m_Parent.#FildsFormart; }
+            set { m_Parent.#FildsFormart = value; }
+        }
+
+
+--列表：
+								<td class="t_left">
+									<%=item.#FildsFormart%>
+								</td>
+
+--修改
+
+            <tr>
+                <td>
+                    <%=GodownText.#FildsFormart %>
+                    <span class="asterisk">＊</span>
+                </td>
+                <td>
+                    <%=Html.TextBoxFor(m => m.#FildsFormart, htmlAttributes: new { maxlength = #maxlength, style = "width:100px;" })%>
+                    <div>
+                        <%:Html.ValidationMessageFor(m => m.#FildsFormart)%>
+                    </div>
+                </td>                
+            </tr>
