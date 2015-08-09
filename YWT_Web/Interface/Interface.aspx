@@ -53,10 +53,13 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div> <a href="/T.aspx">字段查询</a>&nbsp;<a href="/ywt08/start.html">设计主页</a></div>
-    <div><a href="http://pre.im/d5a5">测试地址</a>
-        
+    <div> 
+            &nbsp; &nbsp; &nbsp; &nbsp; <a href="/T.aspx">字段查询</a>
+            &nbsp; &nbsp; &nbsp; &nbsp;<a href="/ywt08/start.html">设计主页</a>
+            &nbsp; &nbsp; &nbsp; &nbsp; <a href="/D.aspx">数据查询</a>
+            &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://pre.im/d5a5">测试地址</a>
     </div>
+   
 
     <div>
     <table class="listTable" cellspacing="0" rules="all" border="1"  style="width:100%;border-collapse:collapse;">

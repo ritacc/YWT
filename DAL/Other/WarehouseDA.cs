@@ -88,7 +88,7 @@ namespace YWT.DAL.Other
                 new SqlParameter("@Number", SqlDbType.Decimal, 9, ParameterDirection.Input, false, 0, 0, "Number", DataRowVersion.Default, warehouse.Number),
                 new SqlParameter("@Unit", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "Unit", DataRowVersion.Default, warehouse.Unit),
                 new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, warehouse.Create_User),
-                
+                new SqlParameter("@RecordStatus", SqlDbType.VarChar, 10, ParameterDirection.Input, false, 0, 0, "RecordStatus", DataRowVersion.Default,RecordStatus)
 
 			};
             DbHelperSQL.ExecuteProcedureNonQuery(sql, parameters, out   mResultType, out   mResultMessage);
