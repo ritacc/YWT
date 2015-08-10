@@ -223,6 +223,34 @@ namespace YWT.DAL.User
             return null;
         }
 
+        /// <summary>
+        /// 第三方运维人员订单数量
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public YWTUserOrderNumOR Get40OrderNum(string UserID, out int mResultType, out string mResultMessage)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, UserID)
+			};
+            DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOrder_Platform_Statistics", parameters, out   mResultType, out   mResultMessage);
+            if (mResultType == 0)
+            {
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    YWTUserOrderNumOR _User = new YWTUserOrderNumOR(ds.Tables[0].Rows[0]);
+                    return _User;
+                }
+            }
+            return null;
+        }
+
+        
+
+
         public List<YWTSupplierUserOR> GetSupplierUser(int startNum, int EndNum, string Create_User, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]

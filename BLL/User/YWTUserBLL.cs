@@ -100,6 +100,11 @@ namespace YWT.BLL.User
         {
             return new YWTUserDA().GetItem(UserID, out  mResultType, out  mResultMessage);
         }
+
+        public YWTUserOrderNumOR Get40OrderNum(string UserID, out int mResultType, out string mResultMessage)
+        {
+            return new YWTUserDA().Get40OrderNum(UserID, out  mResultType, out  mResultMessage);
+        }
         /// <summary>
         /// 获取运维商用户
         /// </summary>

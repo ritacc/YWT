@@ -77,6 +77,7 @@
     <Compile Include="User\YWTUserInfoOR.cs" />
     <Compile Include="User\YWTSupplierOR.cs" />
     <Compile Include="User\YWTUserOR.cs" />
+    <Compile Include="User\YWTUserOrderNumOR.cs" />
     <Compile Include="User\YWTUserPostionInfoOR.cs" />
     <Compile Include="User\YWTUserSupplierNameOR.cs" />
     <Compile Include="User\YWTUser_ForLoginOR.cs" />

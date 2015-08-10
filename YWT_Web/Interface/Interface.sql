@@ -69,6 +69,10 @@ INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getauserbyi
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'查询用户ID')
 
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'getordernum','第三方运维人员 主页运维单数量统计')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'查询用户ID')
+
 GO
 
 /*
@@ -421,3 +425,21 @@ SET @Inerface_ID=@@IDENTITY
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'产品ID')
 
  
+GO
+
+/*
+	YWT_MSG 运维商信息
+*/
+DECLARE @Inerface_ID	BIGINT		
+		,@IFile			VARCHAR(50)='YWT_MSG.ashx'
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'get','获取未读取的消息')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'当前操作人ID')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,'rt','获取刷新秒数')
+
+
+
+
+ 
+

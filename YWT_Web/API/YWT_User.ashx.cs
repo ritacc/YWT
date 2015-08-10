@@ -74,10 +74,45 @@ namespace YWT.API
                 case "userfilecertify":
                     context.Response.Write(UserFileCertify(q0, q1, q2, q3, q4));
                     break;
+                case "getordernum": //第三方运维人员 主页运维单数量统计
+                    context.Response.Write(Get40OrderNum(q0));
+                    break;
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
             }
+        }
+        /// <summary>
+        /// 第三方运维人员 主页运维单数量统计
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string Get40OrderNum(string id)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = "";
+                YWTUserOrderNumOR rObj = new YWTUserBLL().Get40OrderNum(id, out   mResultType, out   mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ReturnMsg = mResultMessage;
+                    _result.ResultObject = rObj;
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.Status = false;
+                _result.ReturnMsg = ex.Message.ToString();
+                Common.Utils.WriteLog("HDL_User.ashx/UpdateSupplier", ex.ToString());
+            }
+            return _result.ToJSON2();
         }
 
         /// <summary>

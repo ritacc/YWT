@@ -1,0 +1,13 @@
+---------------New Log---------------
+-----时间: 2015-8-10 18:53:49
+-----来源: HDL_User.ashx/UpdateSupplier
+------URL: http://localhost:57163/API/YWT_User.ashx?action=getordernum&q0=3B6CFC0E-BCC8-449A-8CC5-1D48BE87B592
+-----内容: System.InvalidCastException: 对象不能从 DBNull 转换为其他类型。
+   在 System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 System.Convert.ToInt32(Object value)
+   在 YWT.Model.User.YWTUserOrderNumOR..ctor(DataRow _row) 位置 E:\ritacc\YWT\Project\YWT\Model\User\YWTUserOrderNumOR.cs:行号 27
+   在 YWT.DAL.User.YWTUserDA.Get40OrderNum(String UserID, Int32& mResultType, String& mResultMessage) 位置 E:\ritacc\YWT\Project\YWT\DAL\User\YWTUserDA.cs:行号 244
+   在 YWT.BLL.User.YWTUserBLL.Get40OrderNum(String UserID, Int32& mResultType, String& mResultMessage) 位置 E:\ritacc\YWT\Project\YWT\BLL\User\YWTUserBLL.cs:行号 106
+   在 YWT.API.YWT_User.Get40OrderNum(String id) 位置 E:\ritacc\YWT\Project\YWT\YWT_Web\API\YWT_User.ashx.cs:行号 97
+-----IP: 127.0.0.1
+
