@@ -86,6 +86,7 @@ namespace YWT.DAL.Other
                 new SqlParameter("@longitude", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "longitude", DataRowVersion.Default, registration.longitude),
                 new SqlParameter("@Position", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "Position", DataRowVersion.Default, registration.Position),
                 new SqlParameter("@IMEI", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "IMEI", DataRowVersion.Default, registration.IMEI),
+                new SqlParameter("@RecordStatus", SqlDbType.VarChar, 10, ParameterDirection.Input, false, 0, 0, "RecordStatus", DataRowVersion.Default,RecordStatus)
 
 			};
             DbHelperSQL.ExecuteProcedureNonQuery(sql, parameters, out   mResultType, out   mResultMessage);
