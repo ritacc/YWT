@@ -7,15 +7,19 @@ using System.Data;
 
 namespace YWT.BLL.SysDB
 {
-   public class AccessSqlserverBLL
-   {
-       public DataTable SelectColumn(string tableName)
-       {
-           return new AccessSqlserverDA().SelectColumn(tableName);
-       }
-       public   DataTable GetAllTable()
-       {
-           return new AccessSqlserverDA().GetAllTable();
-       }
+    public class AccessSqlserverBLL
+    {
+        public DataTable SelectColumn(string tableName)
+        {
+            return new AccessSqlserverDA().SelectColumn(tableName);
+        }
+        public DataTable GetAllTable()
+        {
+            return new AccessSqlserverDA().GetAllTable();
+        }
+        public DataTable GetAllDate(string tableName)
+        {
+            return new AccessSqlserverDA().GetAllDate(tableName);
+        }
     }
 }

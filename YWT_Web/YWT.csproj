@@ -51,6 +51,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="D.aspx" />
     <Content Include="down\Index.aspx" />
     <Content Include="down\url.txt" />
     <Content Include="down\ywt.png" />
@@ -127,6 +128,13 @@
     </Compile>
     <Compile Include="API\YWT_YWLog.ashx.cs">
       <DependentUpon>YWT_YWLog.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="D.aspx.cs">
+      <DependentUpon>D.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="D.aspx.designer.cs">
+      <DependentUpon>D.aspx</DependentUpon>
     </Compile>
     <Compile Include="down\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

@@ -41,5 +41,11 @@ order by a.id,a.colorder ", tableName);
             string sql = "select name as table_name,id,'' as comments from sysobjects where xtype='U' order by name";
             return DbHelperSQL.QueryTable(sql);
         }
+
+        public DataTable GetAllDate(string tableName)
+        {
+            string sql = "select top 100 *  from " + tableName;
+            return DbHelperSQL.QueryTable(sql);
+        }
     }
 }
