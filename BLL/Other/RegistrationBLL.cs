@@ -27,10 +27,10 @@ namespace YWT.BLL.Other
         /// </summary>
         /// <param name="warehouse"></param>
         /// <returns></returns>
-        public void Update(RegistrationOR obj, out int mResultType, out string mResultMessage)
-        {
-            new RegistrationDA().InsertuUpdate(obj, "EDIT", out   mResultType, out   mResultMessage);
-        }
+        //public void Update(RegistrationOR obj, out int mResultType, out string mResultMessage)
+        //{
+        //    new RegistrationDA().InsertuUpdate(obj, "EDIT", out   mResultType, out   mResultMessage);
+        //}
         
         //public RegistrationOR SearchItem(string keyid, out int mResultType, out string mResultMessage)
         //{
