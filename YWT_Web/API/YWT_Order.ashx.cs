@@ -160,7 +160,7 @@ namespace YWT.API
             {
                 int mResultType = 0;
                 string mResultMessage = string.Empty;
-                YWTOrderDetaillOR ItemOR = new YWTOrderBLL().GetOrderItem(OrderID, UserID, out mResultType, out mResultMessage);
+                YWTOrderDetaill_FroItemOR ItemOR = new YWTOrderBLL().GetOrderItem(OrderID, UserID, out mResultType, out mResultMessage);
                 _result.Status = true;
                 _result.ReturnMsg = "";
                 _result.ResultObject = ItemOR;

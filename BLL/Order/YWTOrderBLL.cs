@@ -43,7 +43,7 @@ namespace YWT.BLL.Order
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-        public YWTOrderDetaillOR GetOrderItem(string Order_ID, string Create_User, out  int mResultType, out string mResultMessage)
+        public YWTOrderDetaill_FroItemOR GetOrderItem(string Order_ID, string Create_User, out  int mResultType, out string mResultMessage)
         {
             return new YWTOrderDA().GetOrderItem(Order_ID, Create_User, out   mResultType, out  mResultMessage);
         }

@@ -120,7 +120,7 @@ namespace YWT.DAL.Order
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-        public YWTOrderDetaillOR GetOrderItem(string Order_ID, string Create_User, out  int mResultType, out string mResultMessage)
+        public YWTOrderDetaill_FroItemOR GetOrderItem(string Order_ID, string Create_User, out  int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -133,7 +133,7 @@ namespace YWT.DAL.Order
             if (ds.Tables.Count == 4 && ds.Tables[0].Rows.Count > 0)
             {
                 //主表信息
-                YWTOrderDetaillOR _OrderDetaill = new YWTOrderDetaillOR(ds.Tables[0].Rows[0]);
+                YWTOrderDetaill_FroItemOR _OrderDetaill = new YWTOrderDetaill_FroItemOR(ds.Tables[0].Rows[0]);
                 //分配人员
                 List<OrderTaskUserSimpleOR> _lisUser = new List<OrderTaskUserSimpleOR>();
                 foreach (DataRow _row in ds.Tables[1].Rows)
