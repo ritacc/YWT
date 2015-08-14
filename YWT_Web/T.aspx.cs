@@ -45,7 +45,7 @@ namespace YWT
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            DataTable dt = new AccessSqlserverBLL().GetAllDate(dbdtable.SelectedItem.Text);
+            DataTable dt = new AccessSqlserverBLL().SelectColumn(dbdtable.SelectedItem.Text);
             gdcolumns.DataSource = dt;
             gdcolumns.DataBind();
         }

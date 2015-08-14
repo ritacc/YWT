@@ -103,9 +103,7 @@ namespace YWT.DAL.User
 
                 new SqlParameter("@Active", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "Active", DataRowVersion.Default, YWTUser.Active),
                 new SqlParameter("@UserType", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "UserType", DataRowVersion.Default, YWTUser.UserType),
-               
                 new SqlParameter("@RecordStatus", SqlDbType.VarChar, 10, ParameterDirection.Input, false, 0, 0, "RecordStatus", DataRowVersion.Default, RecordStatus),                
-                
                 new SqlParameter("@SupplierID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "SupplierID", DataRowVersion.Default, YWTUser.SupplierID)
 			};
             List<CommandInfo> _cmds = new List<CommandInfo>();
