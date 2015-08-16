@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coordinate\YWTCoordinateBLL.cs" />
+    <Compile Include="Customer\CustomerBLL.cs" />
     <Compile Include="File\UPFileBLL.cs" />
     <Compile Include="InterfaceBLL.cs" />
     <Compile Include="Msg\YWTMsgBLL.cs" />

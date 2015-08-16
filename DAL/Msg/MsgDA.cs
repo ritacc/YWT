@@ -17,7 +17,7 @@ namespace YWT.DAL.Msg
 			{   
                 new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default, UserID) 
 			};
-            DataSet ds = DbHelperSQL.ExecuteProcedure("sp_SNRMsg_Search", parameters, out   mResultType, out   mResultMessage);
+            DataSet ds = DbHelperSQL.ExecuteProcedure("sp_YWTMsg_Search", parameters, out   mResultType, out   mResultMessage);
             if (mResultType != 0)
                 return null;
 

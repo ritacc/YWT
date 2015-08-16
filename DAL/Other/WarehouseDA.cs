@@ -36,27 +36,7 @@ namespace YWT.DAL.Other
             }
             return null;
         }
-        //public List<WarehouseOR> SearchList(string Create_User,int StartIndex,int EndIndex, out int mResultType, out string mResultMessage)
-        //{
-        //    SqlParameter[] parameters = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default,Create_User),
-        //        new SqlParameter("@StartIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),
-        //        new SqlParameter("@EndIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "EndIndex", DataRowVersion.Default, EndIndex),
-        //    };
-
-        //    DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTWarehouse_Search", parameters, out    mResultType, out   mResultMessage);
-        //    if (ds.Tables.Count == 1)
-        //    {
-        //        List<WarehouseOR> _lis = new List<WarehouseOR>();
-        //        foreach (DataRow _row in ds.Tables[0].Rows)
-        //        {
-        //            _lis.Add(new WarehouseOR(_row));
-        //        }
-        //        return _lis;
-        //    }
-        //    return null;
-        //}
+ 
         public WarehouseOR SearchItem(string   Warehouse_ID, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]

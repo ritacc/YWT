@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coordinate\YWTCoordinateDA.cs" />
+    <Compile Include="Customer\CustomerDA.cs" />
     <Compile Include="File\UPFileDA.cs" />
     <Compile Include="InterfaceDA.cs" />
     <Compile Include="Msg\MsgDA.cs" />
@@ -69,7 +70,6 @@
     <Compile Include="User\YWTSupplierDA.cs" />
     <Compile Include="User\YWTUserDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Warehouse\WarehouseDA.cs" />
     <Compile Include="YWLog\YWLogDA.cs" />
     <Compile Include="YWLog\YWLogFileDA.cs" />
     <Compile Include="YWLog\YWLogReplyDA.cs" />

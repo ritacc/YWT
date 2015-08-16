@@ -83,44 +83,7 @@ namespace YWT.API
         }
         #endregion
 
-        /// <summary>
-        /// 获取
-        /// </summary>
-        /// <param name="userid"></param>
-        /// <returns></returns>
-        //private string GetCoordinate(string userid)
-        //{
-        //    AjaxContentOR _result = new AjaxContentOR();
-        //    try
-        //    {
-        //        int mResultType = 0;
-        //        string mResultMessage = string.Empty;
-        //        if (string.IsNullOrEmpty(userid))
-        //        {
-        //            _result.ReturnMsg = "非法提交，用户参数为空。";
-        //        }
-        //        else
-        //        {
-        //            var objLits = new YWTCoordinateBLL().GetCoordinate(userid, out mResultType, out mResultMessage);
-        //            if (mResultType == 0)
-        //            {
-        //                _result.Status = true;
-        //                _result.ReturnMsg = "";
-        //                _result.ResultObject = objLits;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception err)
-        //    {
-        //        _result.Status = true;
-        //        _result.ReturnMsg = err.Message;
-
-        //        Common.Utils.WriteLog("HDL_SaveLocation.ashx.setLocation", err.ToString());
-        //    }
-
-        //    return _result.ToJSON2();
-        //}
-
+        
         /// <summary>
         /// 仅供IOS原生态调用（高德）
         /// </summary>
@@ -135,16 +98,12 @@ namespace YWT.API
             {
                 try
                 {
-                    Double xx = Convert.ToDouble(lng);
-                    Double yy = Convert.ToDouble(lat);
-                                        
-
                     YWTCoordinateOR m = new YWTCoordinateOR();
                     m.CarID = "";
                     m.CreateDateTime = DateTime.Now;
                     m.ID = Guid.NewGuid().ToString();
-                    m.longitude = xx.ToString();
-                    m.latitude = yy.ToString();
+                    m.longitude = lng;
+                    m.latitude = lat;
 
                     long UserAutoID = 0;
                     if (long.TryParse(UserID, out UserAutoID))
@@ -158,9 +117,7 @@ namespace YWT.API
                    
                     int mResultType = 0;
                     string mResultMessage = "";
-                     new YWTCoordinateBLL().Insert(m, out mResultType, out mResultMessage);
-
-                    
+                     new YWTCoordinateBLL().Insert(m, out mResultType, out mResultMessage); 
                 }
                 catch (Exception err)
                 {
@@ -188,7 +145,6 @@ namespace YWT.API
                     int mResultType = 0;
                     string mResultMessage = "";
                     new YWTCoordinateBLL().Insert(_obj, out mResultType, out mResultMessage);
-                    // _result.ReturnMsg = "";// GetAddress(_obj.longitude, _obj.latitude);
                 }
             }
             catch (Exception err)

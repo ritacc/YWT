@@ -45,15 +45,16 @@ namespace YWT.DAL.Other
         /// <param name="mResultType"></param>
         /// <param name="mResultMessage"></param>
         /// <returns></returns>
-        public List<OnlineApproval_ForCompanyListOR> SearchListForComapny(string Create_User, int StartIndex, int EndIndex, out int mResultType, out string mResultMessage)
+        public List<OnlineApproval_ForCompanyListOR> SearchListForComapny(string Create_User, string searchType, int StartIndex, int EndIndex, out int mResultType, out string mResultMessage)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@Create_User", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Create_User", DataRowVersion.Default,Create_User),
+                new SqlParameter("@SearchType", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "SearchType", DataRowVersion.Default, searchType),
                 new SqlParameter("@StartIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "StartIndex", DataRowVersion.Default, StartIndex),
                 new SqlParameter("@EndIndex", SqlDbType.Int,8, ParameterDirection.Input, false, 0, 0, "EndIndex", DataRowVersion.Default, EndIndex),
             };
-
+            
 
             DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOnlineApproval_SearchForCompany", parameters, out    mResultType, out   mResultMessage);
             if (ds.Tables.Count == 1)

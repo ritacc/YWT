@@ -9,6 +9,11 @@ namespace YWT.Model.User
   public class YWTSupplierOR
     {
       /// <summary>
+      /// 真实姓名
+      /// </summary>
+      public string RealName { get; set; }
+
+      /// <summary>
 		/// 
 		/// </summary>
         public string ID { get; set; }

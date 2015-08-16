@@ -21,8 +21,8 @@ namespace YWT.DAL.Coordinate
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-                new SqlParameter("@longitude", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "longitude", DataRowVersion.Default, _Coordinate.longitude),
-                new SqlParameter("@latitude", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "latitude", DataRowVersion.Default, _Coordinate.latitude),
+                new SqlParameter("@longitude", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "longitude", DataRowVersion.Default, _Coordinate.longitude),
+                new SqlParameter("@latitude", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "latitude", DataRowVersion.Default, _Coordinate.latitude),
                 new SqlParameter("@CarID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "CarID", DataRowVersion.Default, _Coordinate.CarID),
                 new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, _Coordinate.UserID),
                 new SqlParameter("@UserAutoID", SqlDbType.BigInt, 36, ParameterDirection.Input, false, 0, 0, "UserAutoID", DataRowVersion.Default, _Coordinate.UserAutoID),

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Common\AjaxContentOR.cs" />
     <Compile Include="Coordinate\YWTCoordinateOR.cs" />
+    <Compile Include="Customer\CustomerOR.cs" />
     <Compile Include="Interface\InterfaceActionOR.cs" />
     <Compile Include="Interface\InterfacePara.cs" />
     <Compile Include="Msg\MsgOR.cs" />

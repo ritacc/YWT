@@ -228,6 +228,11 @@ namespace YWT.API
             m.UserType = _userOR.UserType;//== 0 ? 1 : _userOR.UserType; 
             m.Active = true;// _userOR.Active;
             m.SupplierID = string.IsNullOrEmpty(_userOR.SupplierID) ? "" : _userOR.SupplierID; //_userOR.SupplierID;
+            if (string.IsNullOrEmpty(_userOR.PassWord))
+            {
+                _result.ReturnMsg = "请输入密码。";
+                return _result.ToJSON2();
+            }
             m.PassWord = DES.Encrypt(_userOR.PassWord);
             YWTUserBLL bll = new YWTUserBLL();
             if (!PageValidate.IsMobile(m.Mobile))
@@ -402,8 +407,13 @@ namespace YWT.API
             {
                 _result.Status = false;
                 _result.ReturnMsg = "参数错误。";
-            } 
-             
+            }
+            if (string.IsNullOrEmpty(userOR.User.PassWord))
+            {
+                _result.ReturnMsg = "请输入密码。";
+                return _result.ToJSON2();
+            }
+            userOR.User.PassWord = DES.Encrypt(userOR.User.PassWord);
             int mResultType = 0;
             string mResultMessage = string.Empty;
             if (type == "add")

@@ -54,6 +54,7 @@ namespace YWT.DAL.User
                 new SqlParameter("@Fax", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "Fax", DataRowVersion.Default, YWTSupplier.Fax),
                 new SqlParameter("@Email", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "Email", DataRowVersion.Default, YWTSupplier.Email),
                 new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, UserID),
+                new SqlParameter("@RealName", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "RealName", DataRowVersion.Default, YWTSupplier.RealName)
 			};
             DbHelperSQL.ExecuteProcedureNonQuery("SP_YWTSupplier_Save", parameters, out   mResultType, out   mResultMessage);
         }
