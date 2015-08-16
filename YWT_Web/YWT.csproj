@@ -58,6 +58,8 @@
     <Content Include="eventslog\1.txt" />
     <Content Include="htmlfile\Order_Insert.png" />
     <Content Include="htmlfile\Order_List.png" />
+    <Content Include="Icon\logo114.png" />
+    <Content Include="Icon\logo57.png" />
     <Content Include="Index.aspx" />
     <Content Include="Interface\Interface.aspx" />
     <Content Include="Interface\Interface.sql" />
