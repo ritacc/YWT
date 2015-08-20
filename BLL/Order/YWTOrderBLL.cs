@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using YWT.DAL.Order;
 using YWT.Model.Order;
+using YWT.Model.Order.View;
 
 namespace YWT.BLL.Order
 {
@@ -82,6 +83,22 @@ namespace YWT.BLL.Order
         
         #endregion
 
-       
+        #region 统计
+        public MonthViewAadminResultOR MonthViewAadmin(string UserID, string mType, out  int mResultType, out string mResultMessage)
+        {
+            return new YWTOrderDA().MonthViewAadmin(UserID, mType, out  mResultType, out  mResultMessage); 
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public MonthViewResultOR MonthView(string UserID, out  int mResultType, out string mResultMessage)
+        { 
+            return new YWTOrderDA().MonthView(UserID, out  mResultType, out  mResultMessage); 
+        }
+        #endregion
     }
 }

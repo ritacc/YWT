@@ -171,6 +171,17 @@ INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'orderplatf
 SET @Inerface_ID=@@IDENTITY 
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'json，{Order_ID,Apply_UserID,Apply_Content: 申请内容,ContactMan:联系人,ContactMobile:联系电话}')
 
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'monthview',N'绩效统计 运维人员，看自己的。')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'登录用户ID')
+
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'monthviewaadmin',N'绩效统计 管理人员，看所有员工的。')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'登录用户ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'cm 当前月 m1 一个月前, m2 两个月彰，m3三个月前')
+
 GO
 
 /*
