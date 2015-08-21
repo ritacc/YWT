@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using CBSCS.DBUtility;
 using YWT.Model.Order;
+using YWT.Model.Order.View;
 
 
 namespace YWT.DAL.Order
@@ -109,7 +110,6 @@ namespace YWT.DAL.Order
                 return _lis;
             }
             return null;
-
         }
 
         /// <summary>
@@ -269,13 +269,65 @@ namespace YWT.DAL.Order
 			};
             DbHelperSQL.ExecuteProcedure(sql, parameters, out   mResultType, out   mResultMessage);
         }
-         
-
-       
-
         #endregion
 
-        
+        #region 统计
+
+        public MonthViewAadminResultOR MonthViewAadmin(string UserID, string mType, out  int mResultType, out string mResultMessage)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@UserID", SqlDbType.Int, 8, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, UserID),
+                new SqlParameter("@Type", SqlDbType.VarChar, 10, ParameterDirection.Input, false, 0, 0, "Type", DataRowVersion.Default,mType)
+            };
+
+            DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOrder_IntegralScore_MonthViewAadmin", parameters, out    mResultType, out   mResultMessage);
+            if (ds.Tables.Count == 2)
+            {
+                MonthViewAadminResultOR _result = new MonthViewAadminResultOR();
+                _result.Item = new MonthViewAadminOR(ds.Tables[0].Rows[0]);
+
+                List<MonthViewAadminOR> _list = new List<MonthViewAadminOR>();
+                foreach (DataRow _row in ds.Tables[1].Rows)
+                {
+                    _list.Add(new MonthViewAadminOR(_row));
+                }
+                _result.Items = _list;
+                return _result;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <param name="mResultType"></param>
+        /// <param name="mResultMessage"></param>
+        /// <returns></returns>
+        public MonthViewResultOR MonthView(string UserID,out  int mResultType, out string mResultMessage)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@UserID", SqlDbType.Int, 8, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, UserID)
+            };
+
+            DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOrder_IntegralScore_MonthView", parameters, out    mResultType, out   mResultMessage);
+            if (ds.Tables.Count == 2)
+            {
+                MonthViewResultOR _result = new MonthViewResultOR();
+                _result.Item = new MonthViewOR(ds.Tables[0].Rows[0]);
+
+                List<MonthViewOR> _list = new List<MonthViewOR>();
+                foreach (DataRow _row in ds.Tables[1].Rows)
+                {
+                    _list.Add(new MonthViewOR(_row));
+                }
+                _result.Items = _list;
+                return _result;
+            }
+            return null;
+        }
+        #endregion
     }
 }
 

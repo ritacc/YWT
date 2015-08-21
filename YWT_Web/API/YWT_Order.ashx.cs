@@ -56,10 +56,12 @@ namespace YWT.API
                 case "designateuser"://指派运维人员
                     context.Response.Write(DesignateUser(q0,q1,q2)); // 选择的用户 selectUser Json，Order_ID,   Create_User
                     break;
-                case "orderassess"://运维单评价
-                    context.Response.Write(OrderAssess(q0)); // Json
+                case "monthview"://绩效统计 运维人员，看自己的。
+                    context.Response.Write(MonthView(q0)); // Json
                     break;
-                                    
+                case "monthviewaadmin"://绩效统计 管理人员，看所有员工的。
+                    context.Response.Write(MonthViewAadmin(q0,q1)); // Json
+                    break;            
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
@@ -303,7 +305,47 @@ namespace YWT.API
         }        
         #endregion
 
-       
+        #region 绩效统计
+        private string MonthViewAadmin(string UserID, string mType)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                var result = new YWTOrderBLL().MonthViewAadmin(UserID, mType, out mResultType, out mResultMessage);
+                _result.Status = true;
+                _result.ReturnMsg = "";
+                _result.ResultObject = result;
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/GetOrderList", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        private string MonthView(string UserID)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                var result = new YWTOrderBLL().MonthView(UserID, out mResultType, out mResultMessage);
+                _result.Status = true;
+                _result.ReturnMsg = "";
+                _result.ResultObject = result;
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/GetOrderList", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        #endregion
+
         public bool IsReusable
         {
             get

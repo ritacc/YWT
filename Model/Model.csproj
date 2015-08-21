@@ -58,6 +58,10 @@
     <Compile Include="Order\OrderStatus.cs" />
     <Compile Include="Order\OrderStatusItem.cs" />
     <Compile Include="Order\OrderTaskUserOR.cs" />
+    <Compile Include="Order\View\MonthViewAadminOR.cs" />
+    <Compile Include="Order\View\MonthViewAadminResultOR.cs" />
+    <Compile Include="Order\View\MonthViewOR.cs" />
+    <Compile Include="Order\View\MonthViewResultOR.cs" />
     <Compile Include="Order\YWTOrderAdminOR.cs" />
     <Compile Include="Order\YWTOrderForListOR.cs" />
     <Compile Include="Order\YWTOrderOR.cs" />
