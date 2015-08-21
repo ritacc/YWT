@@ -6,6 +6,8 @@ using YWT.Model.Common;
 using System.IO;
 using YWT.Common;
 using YWT.BLL.File;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace YWT.API
 {
@@ -100,6 +102,7 @@ namespace YWT.API
                 {
                     _context.Request.Files[0].SaveAs(path + "\\" + newPath + end);
                 }
+                //Bitmap b=new Bitmap(
                 _result.Status = true;
                 _result.ReturnMsg = savePath + "/" + newPath + end;
             }
@@ -109,6 +112,24 @@ namespace YWT.API
                 _result.ReturnMsg = ex.Message;
             }
             return _result;
+        }
+
+        public static Bitmap ResizeImage(Bitmap bmp, int newW, int newH)
+        {
+            try
+            {
+                Bitmap b = new Bitmap(newW, newH);
+                Graphics g = Graphics.FromImage(b);
+                // 插值算法的质量    
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.DrawImage(bmp, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
+                g.Dispose();
+                return b;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public bool IsReusable
