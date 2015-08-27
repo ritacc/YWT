@@ -56,17 +56,162 @@ namespace YWT.API
                 case "designateuser"://指派运维人员
                     context.Response.Write(DesignateUser(q0,q1,q2)); // 选择的用户 selectUser Json，Order_ID,   Create_User
                     break;
+                case "orderassess"://运维单评价
+                    context.Response.Write(OrderAssess(q0)); // Json
+                    break;  
                 case "monthview"://绩效统计 运维人员，看自己的。
                     context.Response.Write(MonthView(q0)); // Json
                     break;
                 case "monthviewaadmin"://绩效统计 管理人员，看所有员工的。
                     context.Response.Write(MonthViewAadmin(q0,q1)); // Json
-                    break;            
+                    break;
+                //现场拍照
+                case "imgviewstart":// 
+                    context.Response.Write(ImgViewStart(q0,q1)); //  UserID,   PageIndex
+                    break;
+                case "imgviewstartitem":// 
+                    context.Response.Write(ImgViewStartItem(q0, q1)); // OrderID,  UserID 
+                    break;
+                //效果查询，过程还原
+                case "imgviewend":// 
+                    context.Response.Write(ImgViewEnd(q0, q1)); //  UserID,   PageIndex
+                    break;
+                case "imgviewenditem":// 
+                    context.Response.Write(ImgViewEndItem(q0, q1)); // OrderID,  UserID 
+                    break;
                 default:
                     context.Response.Write((new AjaxContentOR() { ReturnMsg = "未知异常:no_action" }).ToJSON2());
                     break;
             }
         }
+
+        #region 现场拍照
+        public string ImgViewStart(string UserID, string PageIndex)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+
+            int Page = 0;
+            if (!int.TryParse(PageIndex,out Page))
+            {
+                _result.ReturnMsg = "分页参数错误。";
+                return _result.ToJSON2();
+            }
+             
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                var result = new YWTOrderImgViewBLL().ImgViewStart(UserID, Page, out mResultType, out mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ResultObject = result;
+                    _result.ReturnMsg = "Success";
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/ImgViewStart", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+        public string ImgViewStartItem(string OrderID, string UserID)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                var result = new YWTOrderImgViewBLL().ImgViewStartItem(UserID, OrderID, out mResultType, out mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ResultObject = result;
+                    _result.ReturnMsg = "Success";
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/ImgViewStart", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        #endregion
+
+        #region 效果查询，过程还原
+        public string ImgViewEnd(string UserID, string PageIndex)
+        {
+            AjaxContentOR _result = new AjaxContentOR();
+
+            int Page = 0;
+            if (!int.TryParse(PageIndex, out Page))
+            {
+                _result.ReturnMsg = "分页参数错误。";
+                return _result.ToJSON2();
+            }
+
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                var result = new YWTOrderImgViewBLL().ImgViewEnd(UserID, Page, out mResultType, out mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ResultObject = result;
+                    _result.ReturnMsg = "Success";
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/ImgViewStart", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+
+        public string ImgViewEndItem(string OrderID,string UserID)
+        {
+            AjaxContentOR _result = new AjaxContentOR(); 
+            try
+            {
+                int mResultType = 0;
+                string mResultMessage = string.Empty;
+                var result = new YWTOrderImgViewBLL().ImgViewEndItem(UserID, OrderID, out mResultType, out mResultMessage);
+                if (mResultType == 0)
+                {
+                    _result.Status = true;
+                    _result.ResultObject = result;
+                    _result.ReturnMsg = "Success";
+                }
+                else
+                {
+                    _result.ReturnMsg = mResultMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                _result.ReturnMsg = ex.Message.ToString();
+                Utils.WriteLog("YWT_Order.ashx/ImgViewStart", ex.ToString());
+            }
+            return _result.ToJSON2();
+        }
+        #endregion
 
         #region 添加 列表 一条详细
         /// <summary>

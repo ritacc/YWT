@@ -6,8 +6,7 @@ using YWT.Model.Common;
 using System.IO;
 using YWT.Common;
 using YWT.BLL.File;
-using System.Drawing;
-using System.Drawing.Drawing2D;
+
 
 namespace YWT.API
 {
@@ -81,14 +80,11 @@ namespace YWT.API
             try
             {
                 string path = _context.Server.MapPath("~/");
-
-                path += string.Format("/Upload/" + folder + "/{0}/{1}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"));
-                savePath = string.Format("/Upload/" + folder + "/{0}/{1}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"));
+                DateTime _Current=DateTime.Now;
+                path += string.Format("/Upload/" + folder + "/{0}/{1}", _Current.ToString("yyyy"), _Current.ToString("MM"));
+                savePath = string.Format("/Upload/" + folder + "/{0}/{1}", _Current.ToString("yyyy"), _Current.ToString("MM"));
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-
 
                 string fileName = Path.GetFileName(_context.Request.Files[0].FileName);
                 string end = fileName.Substring(fileName.Length - 4).ToLower();
@@ -114,23 +110,7 @@ namespace YWT.API
             return _result;
         }
 
-        public static Bitmap ResizeImage(Bitmap bmp, int newW, int newH)
-        {
-            try
-            {
-                Bitmap b = new Bitmap(newW, newH);
-                Graphics g = Graphics.FromImage(b);
-                // 插值算法的质量    
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.DrawImage(bmp, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
-                g.Dispose();
-                return b;
-            }
-            catch
-            {
-                return null;
-            }
-        }
+       
 
         public bool IsReusable
         {

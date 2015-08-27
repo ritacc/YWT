@@ -182,6 +182,26 @@ SET @Inerface_ID=@@IDENTITY
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'登录用户ID')
 INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'cm 当前月 m1 一个月前, m2 两个月彰，m3三个月前')
 
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'imgviewstart',N'现场拍照。')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'登录用户ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'分页从0开始，下拉刷新+1')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'imgviewstartitem',N'现场拍照-加载图片')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维单ID OrderID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'登录用户ID')
+
+--效果查询，过程还原
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'imgviewend',N'效果查询，过程还原。')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'登录用户ID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'分页从0开始，下拉刷新+1')
+
+INSERT INTO YWT_Inerface (IFile,IACTION,IDescription) VALUES(@IFile,N'imgviewenditem',N'效果查询，过程还原-加载图片')
+SET @Inerface_ID=@@IDENTITY 
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q0',N'运维单ID OrderID')
+INSERT INTO YWT_Inerface_PARA (Inerface_ID,PNAME,PDescription) VALUES(@Inerface_ID,N'q1',N'登录用户ID')
 GO
 
 /*

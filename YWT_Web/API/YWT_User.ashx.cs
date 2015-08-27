@@ -346,14 +346,12 @@ namespace YWT.API
         private string login(string UserName, string password, string IMEI, string OS, string Manufacturer)
         {
             AjaxContentOR _result = new AjaxContentOR();
-
             int mResultType = 0;
             string mResultMessage = string.Empty;
             YWTUser_ForLoginOR _user = new YWTUserBLL().LoginCheck(UserName, DES.Encrypt(password), IMEI, OS, Manufacturer, out   mResultType, out   mResultMessage);
             if (!(mResultType == 0))
             {
                 _result.ReturnMsg = mResultMessage;
-
             }
             else
             {

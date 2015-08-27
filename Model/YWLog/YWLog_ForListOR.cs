@@ -8,6 +8,7 @@ namespace YWT.Model.YWLog
 {
    public class YWLog_ForListOR
     {
+       public long AutoID { get; set; }
        /// <summary>
 		/// 
 		/// </summary>
@@ -90,6 +91,9 @@ namespace YWT.Model.YWLog
 
             RealName = row["RealName"].ToString();
             UserImg = row["UserImg"].ToString();
+
+            if (row["AutoID"] != DBNull.Value)
+                AutoID = Convert.ToInt32(row["AutoID"]);
 		}
     }
 }

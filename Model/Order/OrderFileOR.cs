@@ -27,6 +27,11 @@ namespace YWT.Model.Order
 		/// 文件名及存储路径
 		/// </summary>
 		public string FileName { get; set; }
+
+        /// <summary>
+        /// 运维单上传文件，缩略图路径。
+        /// </summary>
+        public string FileIcon { get; set; }
 		/// <summary>
 		/// 创建人
 		/// </summary>
@@ -56,6 +61,9 @@ namespace YWT.Model.Order
 			FileType=row["FileType"].ToString().Trim();
 			// 文件名
 			FileName=row["FileName"].ToString().Trim();
+
+            FileIcon = row["FileIcon"].ToString().Trim();
+            
 			// 创建人
 			Creator=row["Creator"].ToString().Trim();
 			// 

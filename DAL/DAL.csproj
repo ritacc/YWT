@@ -55,6 +55,7 @@
     <Compile Include="InterfaceDA.cs" />
     <Compile Include="Msg\MsgDA.cs" />
     <Compile Include="Order\YWTOrderDA.cs" />
+    <Compile Include="Order\YWTOrderImgViewDA.cs" />
     <Compile Include="Order\YWTOrderPlatformDA.cs" />
     <Compile Include="Other\OnlineApprovalDA.cs">
       <SubType>

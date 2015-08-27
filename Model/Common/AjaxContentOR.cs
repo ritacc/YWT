@@ -31,4 +31,20 @@ namespace YWT.Model.Common
         /// </summary>
         public Object ResultObject { get; set; }
     }
+
+    public class AjaxContentFileOR:AjaxContentOR
+    {
+        public AjaxContentFileOR()
+        {
+            Status = false;
+            ReturnMsg = "失败";
+        }
+        
+
+        /// <summary>
+        /// 返回信息
+        /// </summary>
+        public string ReturnMsgIcon { get; set; }
+        
+    }
 }

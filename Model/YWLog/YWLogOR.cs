@@ -15,6 +15,8 @@ namespace YWT.Model.Log
 		/// 
 		/// </summary>
 		public string LogID { get; set; }
+        public long AutoID { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -77,7 +79,10 @@ namespace YWT.Model.Log
 			// 
 			if(row["LogStatus"]!= DBNull.Value)
                 LogStatus=Convert.ToInt32(row["LogStatus"]);
-			// 
+            if (row["AutoID"] != DBNull.Value)
+                AutoID = Convert.ToInt32(row["AutoID"]);
+            
+
 			if(row["ReplyNumber"]!= DBNull.Value)
                 ReplyNumber=Convert.ToInt64(row["ReplyNumber"].ToString());
 			// 

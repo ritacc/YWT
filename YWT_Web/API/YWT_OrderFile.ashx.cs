@@ -6,6 +6,9 @@ using YWT.Model.Common;
 using System.IO;
 using YWT.Common;
 using YWT.BLL.File;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+
 namespace YWT.API  
 {
     /// <summary>
@@ -18,32 +21,13 @@ namespace YWT.API
         public void ProcessRequest(HttpContext context)
         {
             _context = context;
-            AjaxContentOR _result = new AjaxContentOR();
+            AjaxContentFileOR _result = new AjaxContentFileOR();
             context.Response.ContentType = "text/plain";
             try
-            {
-                //string from = context.Request.QueryString["from"];
-                //string action = context.Request["action"];  //运维下单时，不传此参数。 daodafile : 到达目的地文件  wanchenfile: 完成文件
-                //string q0 = context.Request["q0"].TrimDangerousCharacter(); //运维单ID
-                //string Creator = context.Request["q1"].TrimDangerousCharacter();//操作人ID。
-
+            { 
                 if (context.Request.Files.Count > 0)
                 {
                     _result = UpFile();
-                    //if (_result.Status)
-                    //{
-                    //    if (!string.IsNullOrEmpty(action) && action != "orderfile") //为空或orderfile 不执行直接保存
-                    //    {
-                    //        int mResultType = 0;
-                    //        string mResultMessage = "";
-                    //        new UPFileBLL().UPFile_Save(action.ToLower(), q0, Creator, _result.ReturnMsg, out mResultType, out mResultMessage);
-                    //        if (mResultType != 0)
-                    //        {
-                    //            _result.Status = false;
-                    //            _result.ReturnMsg = mResultMessage;
-                    //        }
-                    //    }
-                    //}
                 }
                 else
                 {
@@ -61,45 +45,88 @@ namespace YWT.API
         }
 
 
-        private AjaxContentOR UpFile()
+        private AjaxContentFileOR UpFile()
         {
-            AjaxContentOR _result = new AjaxContentOR();
-            string savePath = "";
+            AjaxContentFileOR _result = new AjaxContentFileOR();
+            string saveDBPath = "";
             try
             {
                 string path = _context.Server.MapPath("~/");
-
-                path += string.Format("/Upload/Order/{0}/{1}/{2}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"), DateTime.Now.ToString("yyyy-MM-dd"));
-                savePath = string.Format("/Upload/Order/{0}/{1}/{2}", DateTime.Now.ToString("yyyy"), DateTime.Now.ToString("yyyy-MM"), DateTime.Now.ToString("yyyy-MM-dd"));
+                DateTime _Current = DateTime.Now;
+                path += string.Format("Upload\\Order\\{0}\\{1}\\{2}", _Current.ToString("yyyy"), _Current.ToString("MM"), _Current.ToString("dd"));
+                saveDBPath = string.Format("Upload/Order/{0}/{1}/{2}", _Current.ToString("yyyy"), _Current.ToString("MM"), _Current.ToString("dd"));
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-
 
                 string fileName = Path.GetFileName(_context.Request.Files[0].FileName);
                 string end = fileName.Substring(fileName.Length - 4).ToLower();
 
-                string newPath = Guid.NewGuid().ToString();
+                string newName = Guid.NewGuid().ToString() ;
+                //saveDBPath = saveDBPath + "/" + newPath + end;
+                
+               
+                //ICON
+                string ReturnMsgIcon_DBPath = saveDBPath + "/" + newName + "icon" + end;//多加ICON
+                string ReturnMsgIcon_SavePath = path + "\\" + newName + "icon" + end;//多加ICON
+                
+                //保存到文件夹
+                string SavePath = path + "\\" + newName + end;
                 if (_context.Request.Files["filename"] != null)
                 {
-                    _context.Request.Files["filename"].SaveAs(path + "\\" + newPath + end);
+                    _context.Request.Files["filename"].SaveAs(SavePath);
                 }
                 else if (_context.Request.Files.Count > 0)
                 {
-                    _context.Request.Files[0].SaveAs(path + "\\" + newPath + end);
+                    _context.Request.Files[0].SaveAs(SavePath);
                 }
+
+                _result.ReturnMsg = saveDBPath + "/" + newName + end;
+                _result.ReturnMsgIcon = ReturnMsgIcon_DBPath;
+                //保存小图标
+                ResizeImage(SavePath, ReturnMsgIcon_SavePath);
                 _result.Status = true;
-                _result.ReturnMsg = savePath + "/" + newPath + end;
             }
             catch (Exception ex)
             {
+                Utils.WriteLog("", ex.Message + "************"+ _result.ReturnMsg);
                 _result.Status = false;
                 _result.ReturnMsg = ex.Message;
             }
             return _result;
         }
+        public void ResizeImage( string SourcePath,string newPath)
+        {
+            Bitmap bmp = new Bitmap(SourcePath);
 
+            if (bmp.Width > 100)
+            {
+
+                double rate = 100.00d / bmp.Width;
+
+                int newW = 100;
+                double newH = bmp.Height * rate;
+                try
+                {
+                    using (Bitmap b = new Bitmap(newW, Convert.ToInt32(newH)))
+                    {
+                        Graphics g = Graphics.FromImage(b);
+                        // 插值算法的质量    
+                        g.InterpolationMode = InterpolationMode.Low;
+                        g.DrawImage(bmp, new Rectangle(0, 0, Convert.ToInt32(newW), Convert.ToInt32(newH)), new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
+                        g.Dispose();
+                        b.Save(newPath);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                bmp.Save(newPath);
+            }
+        }
         public bool IsReusable
         {
             get

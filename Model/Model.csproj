@@ -51,6 +51,8 @@
     <Compile Include="OrderSimple\OrderFileOR.cs" />
     <Compile Include="OrderSimple\OrderFlowOR.cs" />
     <Compile Include="OrderSimple\OrderTaskUserOR.cs" />
+    <Compile Include="Order\ImgView\OrderImgViewItemOR.cs" />
+    <Compile Include="Order\ImgView\OrderImgViewOR.cs" />
     <Compile Include="Order\OrderAssessOR.cs" />
     <Compile Include="Order\OrderFileOR.cs" />
     <Compile Include="Order\OrderFlowOR.cs" />

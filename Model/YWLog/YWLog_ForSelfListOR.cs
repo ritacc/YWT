@@ -49,8 +49,8 @@ namespace YWT.Model.YWLog
 		/// </summary>
 		public DateTime Create_Date { get; set; }
 
-        
 
+        public long AutoID { get; set; }
 		/// <summary>
 		/// YWLog构造函数
 		/// </summary>
@@ -80,7 +80,8 @@ namespace YWT.Model.YWLog
 			// 
 			if(row["Create_Date"]!= DBNull.Value)
                 Create_Date=Convert.ToDateTime(row["Create_Date"]);
-
+            if (row["AutoID"] != DBNull.Value)
+                AutoID = Convert.ToInt32(row["AutoID"]);
             
 		}
     }

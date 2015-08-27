@@ -65,15 +65,19 @@ namespace YWT.DAL.Order
                 List<OrderFileOR> OrderFile = orderAdmin.OrderFile;
                 foreach (OrderFileOR _OrderFile in OrderFile)
                 {
-                    string sqlOrderFile = @"SP_YWTOrder_File_Save";
-                    SqlParameter[] parametersOrderFile = new SqlParameter[]
+                    if (!string.IsNullOrEmpty(_OrderFile.FileName) && _OrderFile.FileName.Length > 40)
                     {
-                        new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, order.Order_ID),
-                        new SqlParameter("@OrderFileType", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "OrderFileType", DataRowVersion.Default, _OrderFile.FileType),
-                        new SqlParameter("@ImagePath", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default, _OrderFile.FileName),
-                        new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, order.Creator)
-                    };
-                    _cmds.Add(new CommandInfo(sqlOrderFile, parametersOrderFile));
+                        string sqlOrderFile = @"SP_YWTOrder_File_Save";
+                        SqlParameter[] parametersOrderFile = new SqlParameter[]
+                        {
+                            new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, order.Order_ID),
+                            new SqlParameter("@OrderFileType", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "OrderFileType", DataRowVersion.Default, _OrderFile.FileType),
+                            new SqlParameter("@ImagePath", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default, _OrderFile.FileName),
+                            new SqlParameter("@FileIcon", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "FileIcon", DataRowVersion.Default, _OrderFile.FileIcon),
+                            new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default, order.Creator)
+                        };
+                        _cmds.Add(new CommandInfo(sqlOrderFile, parametersOrderFile));
+                    }
                 }
             }
             DbHelperSQL.ExecuteProcedures(_cmds, out   mResultType, out   mResultMessage);
@@ -223,14 +227,18 @@ namespace YWT.DAL.Order
             {                 
                 foreach (var item in _lsitFiles)
                 {
-                    SqlParameter[] parameterFiles = new SqlParameter[]
-			        {
-                        new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
-                        new SqlParameter("@OrderFileType", SqlDbType.Int, 50, ParameterDirection.Input, false, 0, 0, "OrderFileType", DataRowVersion.Default, Order_Status),
-                        new SqlParameter("@ImagePath", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default,item.FileName),
-                        new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default,Create_User)
-			        };
-                    _cmds.Add(new CommandInfo() { CommandText =  "SP_YWTOrder_File_Save", Parameters = parameterFiles });
+                    if (!string.IsNullOrEmpty(item.FileName) && item.FileName.Length > 40)
+                    {
+                        SqlParameter[] parameterFiles = new SqlParameter[]
+			            {
+                            new SqlParameter("@Order_ID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Order_ID", DataRowVersion.Default, Order_ID),
+                            new SqlParameter("@OrderFileType", SqlDbType.Int, 50, ParameterDirection.Input, false, 0, 0, "OrderFileType", DataRowVersion.Default, Order_Status),
+                            new SqlParameter("@ImagePath", SqlDbType.VarChar, 200, ParameterDirection.Input, false, 0, 0, "ImagePath", DataRowVersion.Default,item.FileName),
+                            new SqlParameter("@FileIcon", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "FileIcon", DataRowVersion.Default, item.FileIcon),
+                            new SqlParameter("@Creator", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "Creator", DataRowVersion.Default,Create_User)
+			            };
+                        _cmds.Add(new CommandInfo() { CommandText = "SP_YWTOrder_File_Save", Parameters = parameterFiles });
+                    }
                 }
             }
            
