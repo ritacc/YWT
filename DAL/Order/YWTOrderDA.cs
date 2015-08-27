@@ -308,7 +308,7 @@ namespace YWT.DAL.Order
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@UserID", SqlDbType.Int, 8, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, UserID)
+                new SqlParameter("@UserID", SqlDbType.VarChar, 36, ParameterDirection.Input, false, 0, 0, "UserID", DataRowVersion.Default, UserID)
             };
 
             DataSet ds = DbHelperSQL.ExecuteProcedure("SP_YWTOrder_IntegralScore_MonthView", parameters, out    mResultType, out   mResultMessage);
